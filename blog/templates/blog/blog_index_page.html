@@ -1,0 +1,140 @@
+{% extends 'bookings/base.html' %} {% load wagtailimages_tags %} 
+
+
+{% block title%} Blog - FreeBetCodes {% endblock title %} 
+
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)">
+  <div class="container text-center py-5">
+    <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px">
+       BLOG
+    </span>
+    <h1 class="display-5 fw-bold text-white mb-3">FreeBetCodes Blog</h1>
+    <p class="text-secondary fs-5">{{ page.intro }}</p>
+    <!--
+            page.intro: displays the intro text set in Wagtail admin
+            page is automatically passed to every Wagtail template
+        -->
+  </div>
+</section>
+
+<!-- Category Filter Buttons -->
+<div class="text-center mb-5">
+    <a href="/blog/"
+       class="btn btn-sm me-2 mb-2 
+       {% if not selected_category %}btn-primary{% else %}btn-outline-primary{% endif %}">
+        <!--
+            if not selected_category: highlights All Posts button
+            when no category is selected
+        -->
+</br>    
+        <p>All Posts</p>
+    </a>
+    {% for category in categories %}
+        <a href="/blog/?category={{ category.slug }}"
+           class="btn btn-sm me-2 mb-2
+           {% if selected_category == category.slug %}btn-primary{% else %}btn-outline-primary{% endif %}">
+            <!--
+                ?category={{ category.slug }}: adds category filter to URL
+                active button gets btn-primary, others get btn-outline-primary
+            -->
+            {{ category.name }}
+        </a>
+    {% endfor %}
+</div>
+
+<!-- Blog Posts -->
+<section class="py-5">
+  <div class="container">
+    {% if blog_posts %}
+    <div class="row g-4">
+      {% for post in blog_posts %}
+      <div class="col-12 col-sm-6 col-lg-4">
+        <!--
+                        col-12: full width on mobile
+                        col-sm-6: 2 cards per row on tablets
+                        col-lg-4: 3 cards per row on desktop
+                    -->
+        <div class="card border-0 shadow-sm h-100">
+          <!--
+                            h-100: all cards same height in a row
+                        -->
+
+          {% image post.specific.banner_image fill-400x200 as blog_image %}
+          <!--
+                            wagtailimages_tags gives us the image tag
+                            post.specific: gets the actual BlogDetailPage object
+                            fill-400x200: resizes and crops image to 400x200px
+                            as blog_image: saves it to a variable
+                        -->
+          {% if blog_image %}
+          <img
+            src="{{ blog_image.url }}"
+            class="card-img-top"
+            alt="{{ post.title }}"
+            style="height: 200px; object-fit: cover" />
+          <!--
+                                object-fit: cover: image fills space without stretching
+                            -->
+          {% else %}
+          <!-- Placeholder if no image is set -->
+          <div
+            class="bg-primary d-flex align-items-center justify-content-center"
+            style="height: 200px">
+            <span style="font-size: 3rem">📝</span>
+          </div>
+          {% endif %}
+
+          <div class="card-body d-flex flex-column p-4">
+            <!--
+                                d-flex flex-column: stacks card content vertically
+                                allows mt-auto on button to push it to bottom
+                            -->
+            <p class="text-muted small mb-2">
+              {{ post.specific.date }}
+              <!-- post.specific.date: the date the post was created -->
+            </p>
+
+              <!-- Category badges on card -->
+              {% for category in post.specific.categories.all %}
+                  <a href="/blog/?category={{ category.slug }}"
+                    class="badge bg-primary text-decoration-none me-1 mb-2"
+                    style="font-size: 0.75rem;">
+                      {{ category.name }}
+                  </a>
+              {% endfor %}
+            
+            <h5 class="fw-bold mb-2">{{ post.title }}</h5>
+            <p class="text-muted small mb-3">
+              {{ post.specific.intro }}
+              <!-- intro: the short summary of the post -->
+            </p>
+            <a href="{{ post.url }}" class="btn btn-primary btn-sm mt-auto">
+              <!--
+                                    post.url: Wagtail automatically generates
+                                    the correct URL for each page
+                                    mt-auto: pushes button to bottom of card
+                                -->
+              Read More →
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <!-- Shown when no blog posts exist yet -->
+    <div class="text-center py-5">
+      <div style="font-size: 3rem">📝</div>
+      <h4 class="fw-bold mt-3" style="color: #1a1a2e">No posts yet</h4>
+      <p class="text-muted">Check back soon for betting tips and updates!</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock content %}

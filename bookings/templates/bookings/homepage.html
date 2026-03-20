@@ -1,0 +1,268 @@
+{% extends 'bookings/base.html' %}
+{% load wagtailimages_tags %}
+{% load static %}
+{% block title %}FreeBetCodes - Daily Booking Codes{% endblock %}
+{% block content %}
+    <!-- Hero Section with Background Image -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content container d-flex flex-column justify-content-center align-items-center text-center py-5"
+             style="min-height: 70vh">
+            <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px;">DAILY BOOKING CODES</span>
+            <h1 class="display-4 fw-bold text-white mb-3">
+                Win Big With Today's
+                <br>
+                <span style="color: #0d6efd;">Best Booking Codes</span>
+            </h1>
+            <p class="text-white fs-5 mb-4">Fresh codes updated daily across all major betting platforms</p>
+
+            <div class="d-flex gap-3 flex-wrap justify-content-center">
+            <a href="#booking-section" class="btn btn-primary btn-lg px-5 py-3">View Today's Codes</a>
+            <a href="#booking-section" class="btn btn-success btn-lg px-5 py-3">Join Our Telegram Channel <i class="fa-brands fa-telegram"></i></a>
+            </div>
+
+        </div>
+    </section>
+    <!-- Booking Codes Table Section -->
+    <section class="py-5" id="booking-section">
+        <div class="container-fluid px-3 px-md-5">
+            <!--
+            container-fluid: takes full width of the screen
+            px-3 px-md-5: padding on sides so table doesn't touch screen edges
+            This gives us more control over centering than container
+-->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold" style="color: #1a1a2e;">Today's Booking Codes</h2>
+                <p class="text-muted">All codes are verified and ready to load</p>
+            </div>
+            <div class="row justify-content-center">
+                <!--
+                row justify-content-center: Bootstrap's most reliable
+                way to center content horizontally
+            -->
+                <div class="col-12 col-md-10 col-lg-8">
+                    <!--
+                    col-12: full width on mobile
+                    col-md-10: 10/12 width on tablets
+                    col-lg-8: 8/12 width on desktop - this centers the table
+                -->
+                    <div class="table-responsive shadow-sm rounded">
+                        <table class="table table-bordered table-hover mb-0 text-center"
+                               id="booking-table">
+                            <thead>
+                                <tr>
+                                    <th class="py-3">Date</th>
+                                    <th class="py-3">Betting Company</th>
+                                    <th class="py-3">Booking Code</th>
+                                    <th class="py-3">Accumulated Odds</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if booking_codes %}
+                                    {% for code in booking_codes %}
+                                        <tr>
+                                            <td>{{ code.date }}</td>
+                                            <td class="company-cell">
+                                                {% if code.company.logo %}
+                                                    <img src="{{ code.company.logo.url }}"
+                                                         height="35"
+                                                         alt="{{ code.company.name }}"
+                                                         style="object-fit: contain">
+                                                {% else %}
+                                                    <div class="company-btn">{{ code.company.name }}</div>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <span class="booking-code-badge">📖 {{ code.booking_code }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="odds-value">{{ code.accumulated_odds }}</span>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted py-4">No booking codes available yet. Check back soon!</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <!-- Pagination Controls -->
+                        {% if booking_codes.has_other_pages %}
+                            <!--
+    has_other_pages: returns True if there is more than one page
+    no point showing pagination if everything fits on one page
+-->
+                            <div class="d-flex justify-content-center mt-4">
+                                <nav aria-label="Booking codes pagination">
+                                    <ul class="pagination">
+                                        <!--
+                pagination: Bootstrap's pagination component
+                displays page numbers as a horizontal list
+-->
+                                        <!-- Previous Button -->
+                                        {% if booking_codes.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link"
+                                                   href="?page={{ booking_codes.previous_page_number }}">
+                                                    <!--
+                            previous_page_number: automatically calculated
+                            by Django's paginator
+                        -->
+                                                    &laquo; Prev
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <!--
+                        disabled: Bootstrap class that greys out
+                        the button when there's no previous page
+                    -->
+                                                <span class="page-link">&laquo; Prev</span>
+                                            </li>
+                                        {% endif %}
+                                        <!-- Page Numbers -->
+                                        {% for num in booking_codes.paginator.page_range %}
+                                            <!--
+                page_range: a list of all page numbers e.g [1, 2, 3, 4]
+                we loop through them to create numbered buttons
+            -->
+                                            {% if booking_codes.number == num %}
+                                                <li class="page-item active">
+                                                    <!--
+                            active: Bootstrap class that highlights
+                            the current page number in blue
+                        -->
+                                                    <span class="page-link">{{ num }}</span>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <!-- Next Button -->
+                                        {% if booking_codes.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ booking_codes.next_page_number }}">
+                                                    <!--
+                            next_page_number: automatically calculated
+                            by Django's paginator
+                        -->
+                                                    Next &raquo;
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <span class="page-link">Next &raquo;</span>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Paragraph Section -->
+    <section class="py-4" style="background-color: #e9f5ff;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 text-center">
+                    <h4 class="fw-bold mb-3" style="color: #1a1a2e;">About FreeBetCodes</h4>
+                    <p class="text-muted">
+                        FreeBetCodes is your trusted daily source for verified booking codes
+                        across all major betting platforms including Sportybet, Bet9ja, 1xBet
+                        and more. Our team curates high-value accumulators every day so you
+                        never miss a winning opportunity. All codes are tested before
+                        publishing. Bet responsibly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Latest Blog Posts Section -->
+    <section class="py-5" style="background-color: #e9f5ff;">
+        <div class="container">
+            <div class="text-center mb-4">
+                <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px;">📝 LATEST FROM THE BLOG</span>
+                <h2 class="fw-bold" style="color: #1a1a2e;">Betting Tips & Updates</h2>
+                <p class="text-muted">Stay informed with our latest articles</p>
+            </div>
+            {% if latest_posts %}
+                <div class="row g-4">
+                    {% for post in latest_posts %}
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                {% if post.banner_image %}
+                                    {% image post.banner_image fill-400x200 as post_image %}
+                                    <img src="{{ post_image.url }}"
+                                         class="card-img-top"
+                                         alt="{{ post.title }}"
+                                         style="height: 200px;
+                                                object-fit: cover">
+                                {% else %}
+                                    <div class="bg-primary d-flex align-items-center justify-content-center"
+                                         style="height: 200px">
+                                        <span style="font-size: 3rem;">📝</span>
+                                    </div>
+                                {% endif %}
+                                <div class="card-body d-flex flex-column p-4">
+                                    <p class="text-muted small mb-2">{{ post.first_published_at|date:"M d, Y" }}</p>
+                                    <h5 class="fw-bold mb-2">{{ post.title }}</h5>
+                                    <p class="text-muted small mb-3">{{ post.intro }}</p>
+                                    <a href="{{ post.url }}" class="btn btn-primary btn-sm mt-auto">Read More →</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="text-center mt-5">
+                    <a href="/blog/" class="btn btn-outline-primary px-5 py-2">View All Posts →</a>
+                </div>
+            {% else %}
+                <div class="text-center py-4">
+                    <div style="font-size: 3rem;">📝</div>
+                    <h5 class="fw-bold mt-3" style="color: #1a1a2e;">No posts yet</h5>
+                    <p class="text-muted">Check back soon for betting tips!</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <script>
+    const rows = document.querySelectorAll('#booking-table tbody tr');
+
+    rows.forEach(row => {
+        const oddsCell = row.querySelectorAll('td')[3];
+        if (!oddsCell) return;
+
+        const oddsSpan = oddsCell.querySelector('.odds-value');
+        if (!oddsSpan) return;
+
+        const finalValue = parseFloat(oddsSpan.textContent.trim());
+        if (isNaN(finalValue)) return;
+
+        let animation;
+
+        row.addEventListener('mouseenter', () => {
+            let current = 1;
+            clearInterval(animation);
+            animation = setInterval(() => {
+                current += finalValue / 20;
+                if (current >= finalValue) {
+                    current = finalValue;
+                    clearInterval(animation);
+                }
+                oddsSpan.textContent = current.toFixed(2);
+            }, 30);
+        });
+
+        row.addEventListener('mouseleave', () => {
+            clearInterval(animation);
+            oddsSpan.textContent = finalValue.toFixed(2);
+        });
+    });
+    </script>
+{% endblock content %}

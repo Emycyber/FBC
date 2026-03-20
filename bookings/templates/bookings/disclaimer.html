@@ -1,0 +1,88 @@
+{% extends 'bookings/base.html' %} {% block title %}Disclaimer - BetCodes
+{%endblock title %} {% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)">
+  <div class="container text-center py-5">
+    <span class="badge bg-danger mb-3 px-3 py-2" style="letter-spacing: 1px">
+      ⚠️ DISCLAIMER
+    </span>
+    <h1 class="display-5 fw-bold text-white mb-3">Disclaimer</h1>
+    <p class="text-secondary fs-5">
+      Please read this carefully before using our service
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8">
+        <!-- Age Warning -->
+        <div
+          class="alert alert-danger d-flex align-items-center mb-4"
+          role="alert">
+          <!--
+                        alert-danger: red alert box for strong warnings
+                        d-flex align-items-center: aligns icon and text vertically
+                    -->
+          <span style="font-size: 1.5rem" class="me-3">🔞</span>
+          <div>
+            <strong>18+ Only.</strong> This website is strictly for users aged
+            18 and above. If you are under 18, please leave this site
+            immediately.
+          </div>
+        </div>
+
+        <!-- Disclaimer Cards -->
+        <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+          <h5 class="fw-bold mb-3" style="color: #1a1a2e">
+            No Guarantee of Winnings
+          </h5>
+          <p class="text-muted mb-0">
+            BetCodes provides booking codes for informational and entertainment
+            purposes only. We do not guarantee that any code will result in a
+            win. Sports betting outcomes are unpredictable and past performance
+            does not guarantee future results.
+          </p>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+          <h5 class="fw-bold mb-3" style="color: #1a1a2e">Bet Responsibly</h5>
+          <p class="text-muted mb-0">
+            Never bet more than you can afford to lose. Gambling should be
+            treated as entertainment, not as a source of income. If you or
+            someone you know has a gambling problem, please seek help from a
+            professional organization immediately.
+          </p>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+          <h5 class="fw-bold mb-3" style="color: #1a1a2e">
+            Third Party Platforms
+          </h5>
+          <p class="text-muted mb-0">
+            BetCodes is not affiliated with Sportybet, Bet9ja, 1xBet, BetKing or
+            any other betting company. We simply curate and share booking codes.
+            Any issues with loading codes should be directed to the respective
+            betting platform.
+          </p>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 p-md-5">
+          <h5 class="fw-bold mb-3" style="color: #1a1a2e">
+            Limitation of Liability
+          </h5>
+          <p class="text-muted mb-0">
+            BetCodes shall not be held liable for any financial losses incurred
+            as a result of using codes published on this website. By using this
+            site you agree to take full responsibility for your own betting
+            decisions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

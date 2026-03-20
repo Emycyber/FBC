@@ -1,0 +1,34 @@
+/* Hero Section with Background Image */
+.hero-section {
+  background-image: url("../images/hero.jpg");
+  /* url path is relative to the CSS file location */
+  background-size: cover;
+  /* cover: image fills the entire hero area without stretching */
+  background-position: center;
+  /* center: focuses on the middle of the image */
+  background-repeat: no-repeat;
+  /* no-repeat: prevents image from tiling */
+  min-height: 70vh;
+  /* takes up 70% of screen height */
+  position: relative;
+  /* needed for the overlay to work */
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  /* semi-transparent black overlay on top of the image */
+  /* makes text readable over the background image */
+  position: absolute;
+  /* covers the entire hero section */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hero-content {
+  position: relative;
+  /* sits on top of the overlay */
+  z-index: 1;
+  /* z-index: ensures content appears above the overlay */
+}

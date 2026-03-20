@@ -1,0 +1,276 @@
+{% extends 'bookings/base.html' %}
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% block title %}{{ page.title }} - FreeBetCodes{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-5">
+        <p class="text-secondary small mb-2">{{ page.date }}</p>
+        <h1 class="display-5 fw-bold text-white mb-3">{{ page.title }}</h1>
+        <p class="text-secondary fs-5">{{ page.intro }}</p>
+
+        <!-- Categories -->
+{% if page.categories.all %}
+    <div class="mt-3">
+        {% for category in page.categories.all %}
+            <a href="/blog/?category={{ category.slug }}"
+               class="badge bg-primary text-decoration-none me-1 px-3 py-2">
+                <!--
+                    badge: Bootstrap pill label
+                    text-decoration-none: removes underline from link
+                    clicking a category badge filters the blog by that category
+                -->
+                {{ category.name }}
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}
+    </div>
+</section>
+
+
+
+<!-- Blog Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+
+                <!-- Banner Image -->
+                {% if page.banner_image %}
+                    {% image page.banner_image width-800 as banner %}
+                    <!--
+                        Each Django/Wagtail template tag MUST be on its own line
+                        splitting them across lines breaks them completely
+                    -->
+                    <img src="{{ banner.url }}"
+                         alt="{{ page.title }}"
+                         class="img-fluid rounded shadow-sm mb-4 w-100"
+                         style="max-height: 400px; object-fit: cover;">
+                {% endif %}
+
+                <!-- Post Body (StreamField) -->
+                <div class="blog-content">
+                    {% for block in page.body %}
+                    <!--
+                        Looping through each StreamField block
+                        Each block has a block_type and a value
+                    -->
+
+                        {% if block.block_type == 'heading' %}
+                            <h3 class="fw-bold mt-4 mb-3" style="color: #1a1a2e;">
+                                {{ block.value }}
+                            </h3>
+
+                        {% elif block.block_type == 'paragraph' %}
+                            <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                                {{ block.value }}
+                                <!--
+                                    Wagtail renders RichTextBlock as HTML automatically
+                                    no extra filter needed when looping StreamField blocks
+                                -->
+                            </div>
+
+                        {% elif block.block_type == 'image' %}
+                            <div class="text-center my-4">
+                                {% image block.value width-800 as post_image %}
+                                <!--
+                                    block.value is the image object itself
+                                    width-800 resizes to 800px wide
+                                -->
+                                <img src="{{ post_image.url }}"
+                                     alt="Blog image"
+                                     class="img-fluid rounded shadow-sm w-100"
+                                     style="max-height: 500px; object-fit: cover;">
+                            </div>
+
+                        {% elif block.block_type == 'quote' %}
+                            <blockquote class="blockquote border-start border-primary border-4 ps-4 my-4">
+                                <p class="fst-italic text-muted fs-5">
+                                    "{{ block.value }}"
+                                </p>
+                            </blockquote>
+
+                        {% elif block.block_type == 'raw_html' %}
+                            {{ block.value }}
+
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+
+                <!-- Social Share Buttons -->
+<div class="card border-0 shadow-sm p-4 mt-4">
+    <h6 class="fw-bold mb-3" style="color: #1a1a2e;">
+        📢 Share This Post
+    </h6>
+    <div class="d-flex flex-wrap gap-2">
+        <!--
+            d-flex: places buttons side by side
+            flex-wrap: wraps to next line on small screens
+            gap-2: space between each button
+        -->
+
+        <!-- WhatsApp Share -->
+        <a href="https://wa.me/?text={{ page.title|urlencode }}%20{{ page.full_url|urlencode }}"
+           target="_blank"
+           class="btn btn-success btn-sm px-3">
+            <!--
+                wa.me/?text=: WhatsApp's official share URL
+                page.title|urlencode: encodes the title for use in a URL
+                e.g spaces become %20
+                page.full_url: Wagtail's built in full URL of the page
+                target="_blank": opens in a new tab
+            -->
+            💬 WhatsApp
+        </a>
+
+        <!-- Twitter/X Share -->
+        <a href="https://twitter.com/intent/tweet?text={{ page.title|urlencode }}&url={{ page.full_url|urlencode }}"
+           target="_blank"
+           class="btn btn-dark btn-sm px-3">
+            <!--
+                twitter.com/intent/tweet: Twitter's official share URL
+                text=: the tweet text (post title)
+                url=: the link to share
+            -->
+            𝕏 Twitter
+        </a>
+
+        <!-- Facebook Share -->
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.full_url|urlencode }}"
+           target="_blank"
+           class="btn btn-primary btn-sm px-3">
+            <!--
+                facebook.com/sharer/sharer.php: Facebook's official share URL
+                u=: the URL to share
+            -->
+            👤 Facebook
+        </a>
+
+        <!-- Copy Link Button -->
+        <button onclick="copyLink()"
+                class="btn btn-outline-secondary btn-sm px-3"
+                id="copy-btn">
+            <!--
+                onclick="copyLink()": calls our JavaScript function
+                when the button is clicked
+            -->
+            🔗 Copy Link
+        </button>
+
+
+        <!-- Related Posts -->
+{% if related_posts %}
+<div class="mt-5">
+    <h5 class="fw-bold mb-4" style="color: #1a1a2e;">
+        📚 Related Posts
+    </h5>
+    <div class="row g-3">
+        {% for post in related_posts %}
+        <div class="col-12 col-sm-6 col-lg-4">
+            <!--
+                col-12: full width on mobile
+                col-sm-6: 2 cards per row on tablets
+                col-lg-4: 3 cards per row on desktop
+            -->
+            <div class="card border-0 shadow-sm h-100">
+                <!--
+                    h-100: equal height cards in a row
+                -->
+
+                <!-- Post Image -->
+                {% if post.banner_image %}
+                    {% image post.banner_image fill-400x200 as related_image %}
+                    <!--
+                        fill-400x200: crops to exact size
+                        keeps all card images consistent
+                    -->
+                    <img src="{{ related_image.url }}"
+                         class="card-img-top"
+                         alt="{{ post.title }}"
+                         style="height: 150px; object-fit: cover;">
+                {% else %}
+                    <div class="bg-primary d-flex align-items-center justify-content-center"
+                         style="height: 150px;">
+                        <span style="font-size: 2rem;">📝</span>
+                    </div>
+                {% endif %}
+
+                <div class="card-body d-flex flex-column p-3">
+                    <p class="text-muted small mb-1">
+                        {{ post.first_published_at|date:"M d, Y" }}
+                    </p>
+                    <h6 class="fw-bold mb-2">{{ post.title }}</h6>
+                    <p class="text-muted small mb-3">
+                        {{ post.intro|truncatechars:80 }}
+                        <!--
+                            truncatechars:80: cuts intro text at 80 characters
+                            and adds "..." to keep cards neat and uniform
+                        -->
+                    </p>
+                    <a href="{{ post.url }}"
+                       class="btn btn-outline-primary btn-sm mt-auto">
+                        Read More →
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+    </div>
+</div>
+
+<!-- Back Button -->
+<div class="mt-4 mb-2">
+    <a href="javascript:history.back()" class="btn btn-outline-primary">
+        ← Back to Blog
+    </a>
+</div>
+
+                <!-- Back Button -->
+                <div class="mt-4 mb-2">
+                    <a href="javascript:history.back()" class="btn btn-outline-primary">
+                        ← Back to Blog
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% block extra_js %}
+<script>
+    function copyLink() {
+        // copies the current page URL to the clipboard
+        navigator.clipboard.writeText(window.location.href)
+        .then(() => {
+            // .then(): runs after the copy is successful
+            const btn = document.getElementById('copy-btn');
+            btn.textContent = '✅ Copied!';
+            // changes button text to show success
+
+            btn.classList.remove('btn-outline-secondary');
+            btn.classList.add('btn-success');
+            // changes button color to green to confirm copy
+
+            setTimeout(() => {
+                // setTimeout: resets the button after 2 seconds
+                btn.textContent = '🔗 Copy Link';
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-outline-secondary');
+            }, 2000);
+            // 2000 milliseconds = 2 seconds
+        });
+    }
+</script>
+{% endblock extra_js %}
+
+{% endblock content %}

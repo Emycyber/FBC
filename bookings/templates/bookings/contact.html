@@ -1,0 +1,112 @@
+{% extends 'bookings/base.html' %} {% block title %}Contact Us -
+FreeBetCodes{%endblock title %} {% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)">
+  <div class="container text-center py-5">
+    <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px">
+      📬 CONTACT US
+    </span>
+    <h1 class="display-5 fw-bold text-white mb-3">Get In Touch</h1>
+    <p class="text-secondary fs-5">We'd love to hear from you</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <!-- Email -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <!--
+                    col-12: full width on mobile
+                    col-sm-6: two cards per row on tablets
+                    col-lg-3: four cards per row on desktop
+                -->
+        <div class="card border-0 shadow-sm p-4 text-center h-100">
+          <!--
+                        h-100: all cards same height in a row
+                    -->
+          <div style="font-size: 2.5rem">📧</div>
+          <h6 class="fw-bold mt-3 mb-2">Email Us</h6>
+          <p class="text-muted small mb-3">
+            Send us an email and we'll respond within 24 hours
+          </p>
+          <a
+            href="mailto:info@freebetcodes.com"
+            class="btn btn-outline-primary btn-sm mt-auto">
+            <!--
+                            mt-auto: pushes button to bottom of card
+                            regardless of how much text is above it
+                        -->
+            info@freebetcodes.com
+          </a>
+        </div>
+      </div>
+
+      <!-- Phone -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm p-4 text-center h-100">
+          <div style="font-size: 2.5rem">📞</div>
+          <h6 class="fw-bold mt-3 mb-2">Call Us</h6>
+          <p class="text-muted small mb-3">
+            Available Monday to Friday, 9am to 6pm WAT
+          </p>
+          <a
+            href="tel:+2348000000000"
+            class="btn btn-outline-primary btn-sm mt-auto">
+            +234 800 000 0000
+          </a>
+        </div>
+      </div>
+
+      <!-- WhatsApp -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm p-4 text-center h-100">
+          <div style="font-size: 2.5rem">💬</div>
+          <h6 class="fw-bold mt-3 mb-2">WhatsApp</h6>
+          <p class="text-muted small mb-3">
+            Chat with us directly on WhatsApp for faster responses
+          </p>
+          <a
+            href="https://wa.me/2348000000000"
+            class="btn btn-success btn-sm mt-auto"
+            target="_blank">
+            <!--
+                            target="_blank": opens WhatsApp in a new tab
+                            https://wa.me/ is WhatsApp's official click-to-chat link
+                        -->
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm p-4 text-center h-100">
+          <div style="font-size: 2.5rem">📱</div>
+          <h6 class="fw-bold mt-3 mb-2">Follow Us</h6>
+          <p class="text-muted small mb-3">
+            Stay updated with daily codes on our social pages
+          </p>
+          <div class="d-flex flex-column gap-2 mt-auto">
+            <!--
+                            flex-column: stacks social buttons vertically
+                            gap-2: space between each button
+                        -->
+            <a href="#" class="btn btn-outline-primary btn-sm" target="_blank">
+              𝕏 Twitter / X
+            </a>
+            <a href="#" class="btn btn-outline-danger btn-sm" target="_blank">
+              📸 Instagram
+            </a>
+            <a href="#" class="btn btn-outline-primary btn-sm" target="_blank">
+              👤 Facebook
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

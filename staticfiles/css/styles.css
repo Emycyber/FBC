@@ -1,0 +1,108 @@
+/* GENERAL */
+
+body {
+  font-family: "Poppins", sans-serif;
+  /* Poppins gives a clean modern look to the whole site */
+}
+
+.navbar {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  /* Subtle shadow separates navbar from page content */
+}
+
+.nav-link {
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+  /* transition makes the hover effect smooth instead of instant */
+}
+
+.nav-link:hover {
+  background-color: rgba(13, 110, 253, 0.08);
+  color: #0d6efd !important;
+  /* Light blue tint on hover matching Bootstrap primary color */
+}
+
+.brand-text span {
+  color: #0d6efd;
+  /* Makes part of the brand name blue for a two-tone logo effect */
+}
+
+footer {
+  background-color: #1a1a2e;
+  /* Dark navy footer for strong visual contrast */
+}
+
+/* Hero Section with Background Image */
+.hero-section {
+  background-image: url("../images/hero.jpg");
+  /* url path is relative to the CSS file location */
+  background-size: cover;
+  /* cover: image fills the entire hero area without stretching */
+  background-position: center;
+  /* center: focuses on the middle of the image */
+  background-repeat: no-repeat;
+  /* no-repeat: prevents image from tiling */
+  min-height: 70vh;
+  /* takes up 70% of screen height */
+  position: relative;
+  /* needed for the overlay to work */
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  /* semi-transparent black overlay on top of the image */
+  /* makes text readable over the background image */
+  position: absolute;
+  /* covers the entire hero section */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.hero-content {
+  position: relative;
+  /* sits on top of the overlay */
+  z-index: 1;
+  /* z-index: ensures content appears above the overlay */
+}
+
+/* Company Button in Table */
+.company-btn {
+  background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%) !important;
+  /* gradient from light red to deeper red for a premium look */
+  color: #ffffff !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  /* bold text for company name */
+  font-size: 1rem !important;
+  /* bigger than default table text */
+  letter-spacing: 1px;
+  text-transform: uppercase !important;
+  /* uppercase makes company names look strong and bold */
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 10px 8px !important;
+  /* generous padding so button almost fills the cell */
+  width: 100% !important;
+  /* width 100%: stretches button to full width of the cell */
+  display: block !important;
+  /* block: allows width 100% to take effect */
+  text-align: center !important;
+  box-shadow: 0 3px 8px rgba(204, 0, 0, 0.3);
+  /* red tinted shadow matching button color */
+  transition: all 0.2s ease;
+  /* smooth hover animation */
+  cursor: default;
+  /* default cursor since it's not a clickable link */
+}
+
+.company-btn:hover {
+  background: linear-gradient(135deg, #ff6666 0%, #ee0000 100%) !important;
+  /* slightly lighter red on hover */
+  box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4) !important;
+  /* stronger shadow on hover for a lifted effect */
+  transform: translateY(-1px);
+  /* slight upward movement on hover */
+}
