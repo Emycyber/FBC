@@ -165,6 +165,7 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     CSRF_TRUSTED_ORIGINS = [
+        'https://fbc-production.up.railway.app',
         'https://surecodes24.com',
         'https://www.surecodes24.com',
     ]
