@@ -167,7 +167,11 @@ WAGTAIL_SITE_NAME = 'SureCodes24'
 WAGTAILADMIN_BASE_URL = 'https://surecodes24.com'
 
 
-
+CSRF_TRUSTED_ORIGINS = [
+        'https://fbc-production.up.railway.app',
+        'https://surecodes24.com',
+        'https://www.surecodes24.com',
+    ]
 
 
 if not DEBUG:
@@ -180,8 +184,4 @@ if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     # SECURE_PROXY_SSL_HEADER: tells Django that Railway's proxy
     # is handling HTTPS so Django doesn't need to redirect itself
-    CSRF_TRUSTED_ORIGINS = [
-        'https://fbc-production.up.railway.app',
-        'https://surecodes24.com',
-        'https://www.surecodes24.com',
-    ]
+    
