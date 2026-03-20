@@ -161,9 +161,14 @@ WAGTAILADMIN_BASE_URL = 'https://surecodes24.com'
 
 if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = False
+    # False: Railway already handles SSL/HTTPS itself
+    # setting this to True causes infinite redirect loop on Railway
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # SECURE_PROXY_SSL_HEADER: tells Django that Railway's proxy
+    # is handling HTTPS so Django doesn't need to redirect itself
     CSRF_TRUSTED_ORIGINS = [
         'https://fbc-production.up.railway.app',
         'https://surecodes24.com',
