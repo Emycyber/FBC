@@ -166,6 +166,7 @@ WAGTAIL_SITE_NAME = 'SureCodes24'
 WAGTAILADMIN_BASE_URL = 'https://surecodes24.com'
 
 
+
 CSRF_TRUSTED_ORIGINS = [
         'https://fbc-production.up.railway.app',
         'https://surecodes24.com',
