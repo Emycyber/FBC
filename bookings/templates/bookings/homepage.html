@@ -15,12 +15,10 @@
                 <span style="color: #0d6efd;">Best Booking Codes</span>
             </h1>
             <p class="text-white fs-5 mb-4">Fresh codes updated daily across all major betting platforms</p>
-
             <div class="d-flex gap-3 flex-wrap justify-content-center">
-            <a href="#booking-section" class="btn btn-primary btn-lg px-5 py-3">View Today's Codes</a>
-            <a href="#booking-section" class="btn btn-success btn-lg px-5 py-3">Join Our Telegram Channel <i class="fa-brands fa-telegram"></i></a>
+                <a href="#booking-section" class="btn btn-primary btn-lg px-5 py-3">View Today's Codes</a>
+                <a href="#booking-section" class="btn btn-success btn-lg px-5 py-3">Join Our Telegram Channel <i class="fa-brands fa-telegram"></i></a>
             </div>
-
         </div>
     </section>
     <!-- Booking Codes Table Section -->
@@ -53,8 +51,11 @@
                                 <tr>
                                     <th class="py-3">Date</th>
                                     <th class="py-3">Betting Company</th>
-                                    <th class="py-3">Booking Code</th>
-                                    <th class="py-3">Odds</th>
+                                    <th class="py-3">Booking Code & Odds</th>
+                                    <!--
+            merged into one column header
+            no separate odds column anymore
+        -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,15 +75,26 @@
                                             </td>
                                             <td>
                                                 <span class="booking-code-badge">📖 {{ code.booking_code }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="odds-value">{{ code.accumulated_odds }}</span>
+                                                <br>
+                                                <small class="text-muted mt-1 d-inline-block">Odds:</small>
+                                                <span class="odds-value mt-1 d-inline-block">{{ code.accumulated_odds }}</span>
+                                                <!--
+        removed ⚡ emoji from inside odds-value span
+        parseFloat only works on pure numbers
+        "⚡ 25.50" cannot be converted but "25.50" can
+    -->
                                             </td>
                                         </tr>
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <td colspan="4" class="text-center text-muted py-4">No booking codes available yet. Check back soon!</td>
+                                        <td colspan="3" class="text-center text-muted py-4">
+                                            <!--
+                    colspan changed from 4 to 3
+                    since we now have 3 columns instead of 4
+                -->
+                                            No booking codes available yet. Check back soon!
+                                        </td>
                                     </tr>
                                 {% endif %}
                             </tbody>
@@ -234,35 +246,39 @@
     <script>
     const rows = document.querySelectorAll('#booking-table tbody tr');
 
-    rows.forEach(row => {
-        const oddsCell = row.querySelectorAll('td')[3];
-        if (!oddsCell) return;
+rows.forEach(row => {
+    const oddsCell = row.querySelectorAll('td')[2];
+    if (!oddsCell) return;
 
-        const oddsSpan = oddsCell.querySelector('.odds-value');
-        if (!oddsSpan) return;
+    const oddsSpan = oddsCell.querySelector('.odds-value');
+    if (!oddsSpan) return;
 
-        const finalValue = parseFloat(oddsSpan.textContent.trim());
-        if (isNaN(finalValue)) return;
+    const finalValue = parseFloat(oddsSpan.textContent.replace(/[^0-9.]/g, '').trim());
+    // replace(/[^0-9.]/g, ''): removes everything that is NOT
+    // a number or decimal point before parsing
+    // this handles any emoji or text that might be in the span
+    
+    if (isNaN(finalValue)) return;
 
-        let animation;
+    let animation;
 
-        row.addEventListener('mouseenter', () => {
-            let current = 1;
-            clearInterval(animation);
-            animation = setInterval(() => {
-                current += finalValue / 20;
-                if (current >= finalValue) {
-                    current = finalValue;
-                    clearInterval(animation);
-                }
-                oddsSpan.textContent = current.toFixed(2);
-            }, 30);
-        });
-
-        row.addEventListener('mouseleave', () => {
-            clearInterval(animation);
-            oddsSpan.textContent = finalValue.toFixed(2);
-        });
+    row.addEventListener('mouseenter', () => {
+        let current = 1;
+        clearInterval(animation);
+        animation = setInterval(() => {
+            current += finalValue / 20;
+            if (current >= finalValue) {
+                current = finalValue;
+                clearInterval(animation);
+            }
+            oddsSpan.textContent = current.toFixed(2);
+        }, 30);
     });
+
+    row.addEventListener('mouseleave', () => {
+        clearInterval(animation);
+        oddsSpan.textContent = finalValue.toFixed(2);
+    });
+});
     </script>
 {% endblock content %}
