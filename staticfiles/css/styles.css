@@ -68,41 +68,163 @@ footer {
   /* z-index: ensures content appears above the overlay */
 }
 
-/* Company Button in Table */
-.company-btn {
-  background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%) !important;
-  /* gradient from light red to deeper red for a premium look */
-  color: #ffffff !important;
-  font-family: "Poppins", sans-serif !important;
-  font-weight: 700 !important;
-  /* bold text for company name */
-  font-size: 1rem !important;
-  /* bigger than default table text */
-  letter-spacing: 1px;
-  text-transform: uppercase !important;
-  /* uppercase makes company names look strong and bold */
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 10px 8px !important;
-  /* generous padding so button almost fills the cell */
-  width: 100% !important;
-  /* width 100%: stretches button to full width of the cell */
-  display: block !important;
-  /* block: allows width 100% to take effect */
-  text-align: center !important;
-  box-shadow: 0 3px 8px rgba(204, 0, 0, 0.3);
-  /* red tinted shadow matching button color */
-  transition: all 0.2s ease;
-  /* smooth hover animation */
-  cursor: default;
-  /* default cursor since it's not a clickable link */
+/* ===== TABLE ===== */
+#booking-table {
+  border: 1px solid #1a3a2a !important;
+  border-collapse: collapse !important;
+  font-size: 0.7rem !important;
+  background-color: #0d1f14 !important;
+  /* very dark green background matching the image */
 }
 
-.company-btn:hover {
-  background: linear-gradient(135deg, #ff6666 0%, #ee0000 100%) !important;
-  /* slightly lighter red on hover */
-  box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4) !important;
-  /* stronger shadow on hover for a lifted effect */
-  transform: translateY(-1px);
-  /* slight upward movement on hover */
+#booking-table th {
+  background-color: #0d1f14 !important;
+  /* dark green header */
+  color: #4caf7d !important;
+  /* bright green text for headers matching the image */
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  /* wide letter spacing matches the sporty header style */
+  padding: 14px 16px !important;
+  border-bottom: 1px solid #1a3a2a !important;
+  border-right: 1px solid #1a3a2a !important;
+  vertical-align: middle !important;
+}
+
+#booking-table td {
+  background-color: #111f16 !important;
+  /* slightly lighter dark green for body rows */
+  color: #e0e0e0 !important;
+  /* light grey text matching the image */
+  padding: 14px 16px !important;
+  border-bottom: 1px solid #1a3a2a !important;
+  border-right: 1px solid #1a3a2a !important;
+  /* subtle dark green borders between cells */
+  vertical-align: middle !important;
+}
+
+/* Zebra striping - alternating row colors */
+#booking-table tbody tr:nth-child(even) td {
+  background-color: #0d1a10 !important;
+  /* slightly darker green for even rows */
+}
+
+/* Hover effect */
+#booking-table tbody tr:hover td {
+  background-color: #162b1e !important;
+  /* slightly lighter on hover */
+  transition: background-color 0.2s ease;
+}
+
+/* Company Column */
+#booking-table .company-cell {
+  background-color: #111f16 !important;
+  padding: 8px 12px !important;
+}
+
+/* Company Button */
+#booking-table .company-btn {
+  background-color: #1a3a2a !important;
+  /* dark green button matching theme */
+  color: #4caf7d !important;
+  /* bright green text */
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  border: 1px solid #4caf7d !important;
+  /* green border around button */
+  border-radius: 4px !important;
+  padding: 5px 12px !important;
+  display: inline-block !important;
+  text-align: center !important;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+#booking-table .company-btn:hover {
+  background-color: #4caf7d !important;
+  color: #0d1f14 !important;
+  /* inverts colors on hover for a slick effect */
+}
+
+/* Booking Code Badge */
+#booking-table .booking-code-badge {
+  background-color: #1a3a2a !important;
+  color: #4caf7d !important;
+  /* green text on dark green background matching tip buttons in image */
+  font-family: "Courier New", monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 2px !important;
+  padding: 5px 12px !important;
+  border-radius: 4px !important;
+  border: 1px solid #4caf7d !important;
+  /* green border matching the tip buttons in the image */
+  display: inline-block !important;
+}
+
+/* Odds Value */
+.odds-value {
+  color: #f0a500 !important;
+  /* golden yellow for odds exactly matching the image */
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Date Cell */
+#booking-table td:first-child {
+  color: #a0b8a8 !important;
+  /* slightly muted green-grey for dates matching the image */
+  font-size: 0.8rem !important;
+}
+
+/* Pagination matching dark theme */
+.pagination .page-link {
+  background-color: #0d1f14 !important;
+  color: #4caf7d !important;
+  border: 1px solid #1a3a2a !important;
+  margin: 0 2px;
+  border-radius: 4px !important;
+  font-weight: 500;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #4caf7d !important;
+  color: #0d1f14 !important;
+  border-color: #4caf7d !important;
+  font-weight: 700;
+}
+
+.pagination .page-link:hover {
+  background-color: #1a3a2a !important;
+  color: #4caf7d !important;
+  border-color: #4caf7d !important;
+}
+
+/* Pagination */
+
+/* Pagination */
+.pagination .page-link {
+  color: #4caf7d !important;
+  /* dark navy matching site theme */
+  border: 1.5px solid #1a1a2e !important;
+  margin: 0 2px;
+  border-radius: 6px !important;
+  /* rounded page buttons */
+  font-weight: 500;
+}
+
+.pagination .page-item.active .page-link {
+  background: linear-gradient(135deg, #4caf7d 0%, #4caf7d 100%) !important;
+  /* dark navy gradient for active page matching table header */
+  color: #ffffff !important;
+  border-color: #1a1a2e !important;
+}
+
+/* HERO BUTTON */
+.hero-btn {
+  background-color: #e0f5c8;
 }
