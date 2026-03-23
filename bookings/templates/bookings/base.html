@@ -110,10 +110,25 @@
 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+<!--
+    rel="icon": tells browser this is the tab icon
+    type="image/x-icon": favicon file type
+-->
+
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+<!--
+    sizes: browser picks the best size for the display
+-->
+
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+<!--
+    apple-touch-icon: icon shown when someone saves your
+    site to their iPhone or iPad home screen
+-->
 
 
     <meta name="google-site-verification" content="cuw15vW2zEwAMh8EGmHyd3DGmtAzVPg5z5OS-q-QvVE" />
