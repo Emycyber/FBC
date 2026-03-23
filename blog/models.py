@@ -40,8 +40,6 @@ class BlogCategory(models.Model):
 
 
 class BlogIndexPage(Page):
-    template = 'blog/blog_detail_page.html'
-
     # Main blog listing page e.g surecodes24.com/blog/
     # Shows all published blog posts as cards
 
@@ -78,7 +76,7 @@ class BlogIndexPage(Page):
 
 
 class BlogDetailPage(Page):
-    template = 'blog/blog_detail_page.html'
+    # Individual blog post page e.g surecodes24.com/blog/my-post/
 
     date = models.DateField(
         auto_now_add=True
@@ -112,25 +110,34 @@ class BlogDetailPage(Page):
         )),
         # heading: single line text for section headings
 
-       ('paragraph', blocks.RichTextBlock(
-    features=[
-        'h2', 'h3', 'h4',
-        # correct heading feature names for Wagtail
-        # h1 is excluded on purpose - h1 should only be
-        # the page title, not inside content
-        'bold', 'italic',
-        'underline',
-        'strikethrough',
-        'ol', 'ul',
-        'hr',
-        'link',
-        'image',
-        'embed',
-        'blockquote',
-        'code',
-    ],
-    help_text='Add your main text content here'
-)),
+        ('paragraph', blocks.RichTextBlock(
+            features=[
+                'h2', 'h3', 'h4',
+                # heading levels
+                'bold', 'italic',
+                # basic formatting
+                'underline',
+                # underline text
+                'strikethrough',
+                # strikethrough text
+                'ol', 'ul',
+                # ordered and unordered lists
+                'hr',
+                # horizontal divider line
+                'link',
+                # hyperlinks
+                'image',
+                # insert images inline within paragraph
+                'embed',
+                # embed YouTube videos and other media
+                'blockquote',
+                # styled blockquote
+                'code',
+                # inline code formatting
+            ],
+            help_text='Add your main text content here'
+        )),
+        # paragraph: full rich text editor with all formatting tools
 
         ('image', ImageChooserBlock(
             help_text='Insert a full width standalone image'
@@ -172,10 +179,16 @@ class BlogDetailPage(Page):
         FieldPanel('body'),
     ]
 
-    def get_context(self, request):
-        context = super().get_context(request)
+def get_context(self, request):
+    context = super().get_context(request)
 
-        related_posts = BlogDetailPage.objects.live().exclude(
-            pk=self.pk
-            # exclude current post from related posts
-        ).filter
+    related_posts = (
+        BlogDetailPage.objects
+        .live()
+        .exclude(pk=self.pk)                  # exclude current page
+        .order_by('-first_published_at')      # newest first
+        [:3]                                  # limit to 3
+    )
+
+    context['related_posts'] = related_posts
+    return context
