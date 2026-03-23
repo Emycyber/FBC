@@ -40,6 +40,8 @@ class BlogCategory(models.Model):
 
 
 class BlogIndexPage(Page):
+    template = 'blog/blog_detail_page.html'
+
     # Main blog listing page e.g surecodes24.com/blog/
     # Shows all published blog posts as cards
 
@@ -76,7 +78,7 @@ class BlogIndexPage(Page):
 
 
 class BlogDetailPage(Page):
-    # Individual blog post page e.g surecodes24.com/blog/my-post/
+    template = 'blog/blog_detail_page.html'
 
     date = models.DateField(
         auto_now_add=True
