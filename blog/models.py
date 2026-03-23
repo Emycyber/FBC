@@ -110,34 +110,25 @@ class BlogDetailPage(Page):
         )),
         # heading: single line text for section headings
 
-        ('paragraph', blocks.RichTextBlock(
-            features=[
-                'h1', 'h2', 'h3', 'h4',
-                # heading levels
-                'bold', 'italic',
-                # basic formatting
-                'underline',
-                # underline text
-                'strikethrough',
-                # strikethrough text
-                'ol', 'ul',
-                # ordered and unordered lists
-                'hr',
-                # horizontal divider line
-                'link',
-                # hyperlinks
-                'image',
-                # insert images inline within paragraph
-                'embed',
-                # embed YouTube videos and other media
-                'blockquote',
-                # styled blockquote
-                'code',
-                # inline code formatting
-            ],
-            help_text='Add your main text content here'
-        )),
-        # paragraph: full rich text editor with all formatting tools
+       ('paragraph', blocks.RichTextBlock(
+    features=[
+        'h2', 'h3', 'h4',
+        # correct heading feature names for Wagtail
+        # h1 is excluded on purpose - h1 should only be
+        # the page title, not inside content
+        'bold', 'italic',
+        'underline',
+        'strikethrough',
+        'ol', 'ul',
+        'hr',
+        'link',
+        'image',
+        'embed',
+        'blockquote',
+        'code',
+    ],
+    help_text='Add your main text content here'
+)),
 
         ('image', ImageChooserBlock(
             help_text='Insert a full width standalone image'
