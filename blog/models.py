@@ -68,49 +68,48 @@ class BlogDetailPage(Page):
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
 
     body = StreamField([
-        ('heading', blocks.CharBlock(
-            form_classname='title',
-            help_text='Add a heading or subheading'
-        )),
-        ('paragraph', blocks.RichTextBlock(
-            features=['bold', 'italic', 'link', 'ol', 'ul', 'hr'],
-            help_text='Add your main text content here'
-        )),
-        ('image', ImageChooserBlock(
-            help_text='Insert an image anywhere in the post'
-        )),
-        ('quote', blocks.BlockQuoteBlock(
-            help_text='Add a highlighted quote or key point'
-        )),
-    ], use_json_field=True)
-
-    search_fields = Page.search_fields + [
-        index.SearchField('intro'),
-        index.SearchField('body'),
-    ]
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro'),
-        FieldPanel('banner_image'),
-        MultiFieldPanel([
-            FieldPanel('categories'),
-        ], heading='Categories'),
-        FieldPanel('body'),
-    ]
-
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        related_posts = BlogDetailPage.objects.live().exclude(
-            pk=self.pk
-        ).filter(
-            categories__in=self.categories.all()
-        ).distinct().order_by('-first_published_at')[:3]
-
-        if not related_posts:
-            related_posts = BlogDetailPage.objects.live().exclude(
-                pk=self.pk
-            ).order_by('-first_published_at')[:3]
-
-        context['related_posts'] = related_posts
-        return context
+    ('heading', blocks.CharBlock(
+        form_classname='title',
+        help_text='Add a heading or subheading'
+    )),
+    ('paragraph', blocks.RichTextBlock(
+        features=[
+            'h1', 'h2', 'h3', 'h4',
+            # heading levels like WordPress
+            'bold', 'italic',
+            # basic formatting
+            'underline',
+            # underline text
+            'strikethrough',
+            # strikethrough text
+            'ol', 'ul',
+            # ordered and unordered lists
+            'hr',
+            # horizontal divider
+            'link',
+            # hyperlinks
+            'image',
+            # insert images inline
+            'embed',
+            # embed YouTube videos etc
+            'blockquote',
+            # blockquote formatting
+            'code',
+            # inline code
+        ],
+        help_text='Add your main text content here'
+    )),
+    ('image', ImageChooserBlock(
+        help_text='Insert a full width image'
+    )),
+    ('quote', blocks.BlockQuoteBlock(
+        help_text='Add a highlighted quote'
+    )),
+    ('embed', blocks.URLBlock(
+        help_text='Paste a YouTube or video URL to embed'
+    )),
+    ('raw_html', blocks.RawHTMLBlock(
+        help_text='Add custom HTML if needed',
+        required=False
+    )),
+], use_json_field=True)
