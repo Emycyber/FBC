@@ -64,3 +64,29 @@ class BookingCode(models.Model):
         def get_context(self, request):
             context = super().get_context(request)
             return context
+
+
+class FooterLink(models.Model):
+    # Each FooterLink is one link shown in the footer
+    
+    title = models.CharField(max_length=200)
+    # The link text e.g "Soccervista"
+    
+    url = models.URLField()
+    # The actual URL e.g "https://soccervista.com"
+    
+    order = models.IntegerField(default=0)
+    # Controls the order links appear in the footer
+    # lower number = appears first
+    
+    is_active = models.BooleanField(default=True)
+    # allows you to hide a link without deleting it
+    
+    class Meta:
+        ordering = ['order']
+        # shows links in order number sequence
+        verbose_name = 'Footer Link'
+        verbose_name_plural = 'Footer Links'
+    
+    def __str__(self):
+        return self.title

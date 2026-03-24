@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import BookingCode, BettingCompany
+from .models import BookingCode, BettingCompany, FooterLink
 
 # Register your models here.
 
@@ -27,3 +27,14 @@ class BookingCodeAdmin(admin.ModelAdmin):
     search_fields = ['company__name', 'booking_code']
     # company__name: searches through the related BettingCompany name
     ordering = ['-date']
+    
+    
+
+@admin.register(FooterLink)
+class FooterLinkAdmin(admin.ModelAdmin):
+    list_display = ['title', 'url', 'order', 'is_active']
+    # shows all fields in admin list view
+    list_editable = ['order', 'is_active']
+    # list_editable: allows editing order and active status
+    # directly from the list view without opening each link
+    ordering = ['order']

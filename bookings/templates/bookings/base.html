@@ -315,6 +315,46 @@
           </div>
         </div>
 
+
+        <!-- Footer Links Row -->
+{% if footer_links %}
+<div class="row mt-4">
+    <div class="col-12">
+        <hr style="border-color: rgba(255,255,255,0.1);">
+        <div class="d-flex flex-wrap gap-1 align-items-center">
+            <!--
+                d-flex flex-wrap: places links side by side
+                and wraps to next line when screen is too small
+                gap-1: small space between links
+            -->
+            <span class="text-secondary small me-2 fw-bold">Links:</span>
+            <!--
+                "Links:" label at the start matching the screenshot
+            -->
+            {% for link in footer_links %}
+                <a href="{{ link.url }}"
+                   target="_blank"
+                   class="text-secondary text-decoration-none small footer-link"
+                   style="white-space: nowrap;">
+                    <!--
+                        target="_blank": opens link in new tab
+                        white-space nowrap: prevents link text from breaking
+                    -->
+                    {{ link.title }}
+                    {% if not forloop.last %}
+                        <span class="text-secondary mx-1">|</span>
+                    {% endif %}
+                    <!--
+                        forloop.last: checks if this is the last link
+                        adds | separator between links but not after the last one
+                    -->
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
         <!-- Bottom Bar -->
         <hr style="border-color: rgba(255, 255, 255, 0.1)" class="mt-4" />
         <!--
