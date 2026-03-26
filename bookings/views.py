@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import BookingCode, BettingCompany
+from .models import BookingCode, BettingCompany, FooterLink, Partner
 from datetime import date
 from blog.models import BlogDetailPage
 from django.core.paginator import Paginator
@@ -46,9 +46,6 @@ def homepage(request):
     
     latest_posts = BlogDetailPage.objects.live().order_by('-first_published_at')[:3]
     
-    
-    
-
     
     context = {
         'booking_codes': booking_codes,
