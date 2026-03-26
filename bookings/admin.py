@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import BookingCode, BettingCompany, FooterLink
+from .models import BookingCode, BettingCompany, FooterLink, Partner
 
 # Register your models here.
 
@@ -38,3 +38,9 @@ class FooterLinkAdmin(admin.ModelAdmin):
     # list_editable: allows editing order and active status
     # directly from the list view without opening each link
     ordering = ['order']
+    
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ['name', 'url', 'order', 'is_active']
+    list_editable = ['order', 'is_active']
+    ordering = ['order']    

@@ -5,7 +5,10 @@ from . import views
 
 urlpatterns = [
     path('', views.homepage, name='homepage'),
-    # '' means the root URL e.g yourdomain.com/
-    # views.homepage is the function to call when this URL is visited
-    # name='homepage' lets you reference this URL as {% url 'homepage' %} in templates
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('disclaimer/', views.disclaimer, name='disclaimer'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('partners/', views.partners, name='partners'),
+    # ← add this
 ]

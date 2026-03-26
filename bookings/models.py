@@ -90,3 +90,31 @@ class FooterLink(models.Model):
     
     def __str__(self):
         return self.title
+    
+    
+    
+    class Partner(models.Model):
+        name = models.CharField(max_length=200)
+        # Partner website name e.g "Soccervista"
+
+        url = models.URLField()
+        # Partner website URL e.g "https://soccervista.com"
+
+
+        order = models.IntegerField(
+            default=0,
+            help_text='Controls display order, lower number appears first'
+        )
+
+        is_active = models.BooleanField(
+            default=True,
+            help_text='Uncheck to hide partner without deleting'
+        )
+
+        class Meta:
+            ordering = ['order', 'name']
+            verbose_name = 'Partner'
+            verbose_name_plural = 'Partners'
+
+        def __str__(self):
+            return self.name

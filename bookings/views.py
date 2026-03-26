@@ -100,9 +100,14 @@ def privacy_policy(request):
     
     
     
-    
-    
+def partners(request):
+    partners = Partner.objects.filter(is_active=True)
+    # filter(is_active=True): only shows active partners
+    # ordered by 'order' field as defined in Meta class
 
-# Paginator: Django's built in pagination class
-
+    context = {
+        'partners': partners,
+        'today_year': date.today().year,
+    }
+    return render(request, 'bookings/partners.html', context)
 

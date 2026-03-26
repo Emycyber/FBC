@@ -1,0 +1,107 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+
+{% block title %}Partners - SureCodes24{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-5">
+        <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px;">
+            🤝 PARTNERS
+        </span>
+        <h1 class="display-5 fw-bold text-white mb-3">Our Partners</h1>
+        <p class="text-secondary fs-5">
+            Trusted websites in the football prediction and betting niche
+        </p>
+    </div>
+</section>
+
+<!-- Partners Grid -->
+<section class="py-5">
+    <div class="container">
+
+        {% if partners %}
+            <div class="row g-4">
+                {% for partner in partners %}
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <!--
+                            col-12: full width on mobile
+                            col-sm-6: 2 cards per row on tablets
+                            col-lg-4: 3 cards per row on desktop
+                        -->
+                        <div class="card border-0 shadow-sm h-100">
+                            <!--
+                                h-100: equal height cards in a row
+                            -->
+
+                            <!-- Partner Logo -->
+                            {% if partner.logo %}
+                                <div class="text-center pt-4">
+                                    <img src="{{ partner.logo.url }}"
+                                         alt="{{ partner.name }}"
+                                         height="60"
+                                         style="object-fit: contain;">
+                                    <!--
+                                        height 60: consistent logo height
+                                        object-fit contain: shows full logo
+                                    -->
+                                </div>
+                            {% else %}
+                                <!-- Placeholder if no logo -->
+                                <div class="d-flex align-items-center justify-content-center pt-4">
+                                    <div style="width: 60px; height: 60px; 
+                                                background: linear-gradient(135deg, #1a1a2e, #0d6efd);
+                                                border-radius: 12px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;">
+                                        <span style="font-size: 1.5rem;">🌐</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="card-body d-flex flex-column p-4 text-center">
+                                <!--
+                                    text-center: centers all card content
+                                    d-flex flex-column: stacks content vertically
+                                -->
+                                <h5 class="fw-bold mb-2" style="color: #1a1a2e;">
+                                    {{ partner.name }}
+                                </h5>
+
+                                {% if partner.description %}
+                                    <p class="text-muted small mb-3">
+                                        {{ partner.description }}
+                                    </p>
+                                {% endif %}
+
+                                <a href="{{ partner.url }}"
+                                   target="_blank"
+                                   class="btn btn-outline-primary btn-sm mt-auto px-4">
+                                    <!--
+                                        target="_blank": opens partner site in new tab
+                                        mt-auto: pushes button to bottom of card
+                                    -->
+                                    Visit Site →
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <!-- Shown when no partners exist yet -->
+            <div class="text-center py-5">
+                <div style="font-size: 3rem;">🤝</div>
+                <h4 class="fw-bold mt-3" style="color: #1a1a2e;">No partners yet</h4>
+                <p class="text-muted">Check back soon!</p>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock content %}
