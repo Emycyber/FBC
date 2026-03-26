@@ -228,3 +228,69 @@ footer {
 .hero-btn {
   background-color: #e0f5c8;
 }
+
+/* Blog Content Images - Mobile Responsive */
+.blog-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  /* 
+        max-width 100%: image never wider than its container
+        height auto: maintains aspect ratio when width shrinks
+        these two together prevent images from overflowing
+        on small mobile screens
+    */
+  display: block !important;
+  /* block: removes inline spacing under images */
+  border-radius: 8px;
+  /* slight rounding on image corners */
+  margin: 10px auto !important;
+  /* auto: centers the image horizontally */
+}
+
+/* Wagtail rich text images specifically */
+.blog-content .richtext-image {
+  max-width: 100% !important;
+  height: auto !important;
+  /* 
+        Wagtail adds richtext-image class to images
+        inserted via the rich text editor
+    */
+}
+
+.blog-content .richtext-image.full-width {
+  width: 100% !important;
+  /* full width images stretch to container width */
+}
+
+.blog-content .richtext-image.left {
+  float: left !important;
+  margin-right: 15px !important;
+  margin-bottom: 10px !important;
+  max-width: 50% !important;
+  /* left aligned images float left on desktop */
+}
+
+.blog-content .richtext-image.right {
+  float: right !important;
+  margin-left: 15px !important;
+  margin-bottom: 10px !important;
+  max-width: 50% !important;
+  /* right aligned images float right on desktop */
+}
+
+/* On mobile, stop floating and go full width */
+@media (max-width: 576px) {
+  .blog-content .richtext-image.left,
+  .blog-content .richtext-image.right {
+    float: none !important;
+    max-width: 100% !important;
+    margin: 10px auto !important;
+    display: block !important;
+    /*
+            max-width 576px: targets mobile screens
+            removes float on mobile so images
+            stack vertically instead of floating
+            beside text which looks bad on small screens
+        */
+  }
+}
