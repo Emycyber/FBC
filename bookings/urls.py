@@ -10,5 +10,6 @@ urlpatterns = [
     path('disclaimer/', views.disclaimer, name='disclaimer'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('partners/', views.partners, name='partners'),
+    path('pricing/', views.pricing, name='pricing'),
     # ← add this
 ]

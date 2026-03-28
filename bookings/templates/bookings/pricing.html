@@ -1,0 +1,386 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+
+{% block title %}VIP Pricing - SureCodes24{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-5">
+        <span class="badge bg-warning mb-3 px-3 py-2"
+              style="letter-spacing: 1px; color: #1a1a2e;">
+            👑 VIP MEMBERSHIP
+        </span>
+        <h1 class="display-5 fw-bold text-white mb-3">
+            Choose Your Plan
+        </h1>
+        <p class="text-secondary fs-5">
+            Get exclusive access to premium daily booking codes
+        </p>
+    </div>
+</section>
+
+<!-- Trust Badges -->
+<section style="background-color: #f8f9fa;" class="py-3">
+    <div class="container">
+        <div class="row justify-content-center g-3 text-center">
+            <div class="col-6 col-md-3">
+                <p class="mb-0 small fw-semibold">
+                    ✅ Daily Verified Codes
+                </p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="mb-0 small fw-semibold">
+                    ⚡ Instant Activation
+                </p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="mb-0 small fw-semibold">
+                    💬 WhatsApp Support
+                </p>
+            </div>
+            <div class="col-6 col-md-3">
+                <p class="mb-0 small fw-semibold">
+                    🔒 Secure & Private
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Plans -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center g-4">
+
+            <!-- Plan 1: Safe Odds -->
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="card border-0 shadow h-100"
+                     style="border-top: 4px solid #0d6efd !important;">
+                    <!--
+                        border-top: colored top border
+                        visually differentiates the two plans
+                    -->
+                    <div class="card-body p-4 p-md-5">
+
+                        <!-- Plan Header -->
+                        <div class="text-center mb-4">
+                            <div style="font-size: 2.5rem;">🛡️</div>
+                            <h3 class="fw-bold mt-2" style="color: #1a1a2e;">
+                                Safe Odds Plan
+                            </h3>
+                            <p class="text-muted small">
+                                Perfect for careful bettors
+                            </p>
+                        </div>
+
+                        <!-- Odds Range -->
+                        <div class="text-center p-3 rounded mb-4"
+                             style="background-color: #e9f5ff;">
+                            <p class="text-muted small mb-1">Daily Odds Range</p>
+                            <h2 class="fw-bold mb-0" style="color: #0d6efd;">
+                                1.6 — 2.5
+                            </h2>
+                            <p class="text-muted small mb-0">odds per day</p>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="list-unstyled mb-4">
+                            <!--
+                                list-unstyled: removes default bullet points
+                            -->
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Daily booking codes between <strong>1.6 to 2.5 odds</strong></span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Lower risk accumulator selections</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Carefully researched matches from top leagues</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Codes sent daily via WhatsApp</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Weekly and monthly subscription options</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>24/7 WhatsApp support</span>
+                            </li>
+                        </ul>
+
+                        <!-- Subscription Options -->
+                        <div class="row g-2 mb-4">
+                            <div class="col-6">
+                                <div class="card border-primary text-center p-3">
+                                    <p class="text-muted small mb-1">Weekly</p>
+                                    <h5 class="fw-bold mb-0" style="color: #0d6efd;">
+                                        7 Days
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card border-primary text-center p-3">
+                                    <p class="text-muted small mb-1">Monthly</p>
+                                    <h5 class="fw-bold mb-0" style="color: #0d6efd;">
+                                        30 Days
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="d-grid">
+                            <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20subscribe%20to%20the%20Safe%20Odds%20Plan%20on%20SureCodes24."
+                               target="_blank"
+                               class="btn btn-primary btn-lg py-3">
+                                <!--
+                                    ?text=: pre-filled WhatsApp message
+                                    user doesn't need to type anything
+                                -->
+                                💬 Subscribe Now
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan 2: High Odds -->
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="card border-0 shadow h-100 position-relative"
+                     style="border-top: 4px solid #ffc107 !important;">
+                    <!--
+                        position-relative: needed for the
+                        POPULAR badge positioning
+                    -->
+
+                    <!-- Popular Badge -->
+                    <div class="position-absolute top-0 start-50 translate-middle">
+                        <!--
+                            position-absolute: takes badge out of normal flow
+                            top-0 start-50 translate-middle: centers it
+                            at the very top of the card
+                        -->
+                        <span class="badge bg-warning px-3 py-2"
+                              style="color: #1a1a2e; font-size: 0.8rem;">
+                            🔥 MOST POPULAR
+                        </span>
+                    </div>
+
+                    <div class="card-body p-4 p-md-5 mt-2">
+
+                        <!-- Plan Header -->
+                        <div class="text-center mb-4">
+                            <div style="font-size: 2.5rem;">🚀</div>
+                            <h3 class="fw-bold mt-2" style="color: #1a1a2e;">
+                                High Odds Plan
+                            </h3>
+                            <p class="text-muted small">
+                                For punters who want bigger returns
+                            </p>
+                        </div>
+
+                        <!-- Odds Range -->
+                        <div class="text-center p-3 rounded mb-4"
+                             style="background-color: #fff8e1;">
+                            <p class="text-muted small mb-1">Daily Odds Range</p>
+                            <h2 class="fw-bold mb-0" style="color: #ffc107;">
+                                2.0 — 3.0
+                            </h2>
+                            <p class="text-muted small mb-0">odds per day</p>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Daily booking codes between <strong>2.0 to 3.0 odds</strong></span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Higher returns on winning bets</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Expert analysed selections from top leagues</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Codes sent daily via WhatsApp</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>Weekly and monthly subscription options</span>
+                            </li>
+                            <li class="mb-3 d-flex align-items-start gap-2">
+                                <span style="color: #198754; font-size: 1.1rem;">✅</span>
+                                <span>24/7 WhatsApp support</span>
+                            </li>
+                        </ul>
+
+                        <!-- Subscription Options -->
+                        <div class="row g-2 mb-4">
+                            <div class="col-6">
+                                <div class="card text-center p-3"
+                                     style="border-color: #ffc107 !important; border: 1px solid;">
+                                    <p class="text-muted small mb-1">Weekly</p>
+                                    <h5 class="fw-bold mb-0" style="color: #ffc107;">
+                                        7 Days
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card text-center p-3"
+                                     style="border-color: #ffc107 !important; border: 1px solid;">
+                                    <p class="text-muted small mb-1">Monthly</p>
+                                    <h5 class="fw-bold mb-0" style="color: #ffc107;">
+                                        30 Days
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="d-grid">
+                            <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20subscribe%20to%20the%20High%20Odds%20Plan%20on%20SureCodes24."
+                               target="_blank"
+                               class="btn btn-warning btn-lg py-3"
+                               style="color: #1a1a2e; font-weight: 700;">
+                                💬 Subscribe Now
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+
+                <h3 class="fw-bold text-center mb-5" style="color: #1a1a2e;">
+                    ❓ Frequently Asked Questions
+                </h3>
+
+                <!-- FAQ Items -->
+                <div class="accordion" id="faqAccordion">
+                    <!--
+                        accordion: Bootstrap collapsible FAQ component
+                        clicking a question expands its answer
+                    -->
+
+                    <div class="accordion-item border-0 shadow-sm mb-3 rounded">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button rounded fw-semibold"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq1">
+                                How do I receive my codes after subscribing?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                After your subscription is activated, codes are sent
+                                directly to your WhatsApp every day before 10am.
+                                You can also access them on our VIP page after logging in.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 shadow-sm mb-3 rounded">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed rounded fw-semibold"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq2">
+                                How do I pay for my subscription?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                Contact us on WhatsApp and we will provide you with
+                                payment details. We accept bank transfers and mobile
+                                money payments. Activation is instant after payment confirmation.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 shadow-sm mb-3 rounded">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed rounded fw-semibold"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq3">
+                                What betting platforms do the codes work on?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                Our codes work on all major betting platforms including
+                                Sportybet, Bet9ja, 1xBet, BetKing, MSport and more.
+                                Each code specifies which platform it is for.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item border-0 shadow-sm mb-3 rounded">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed rounded fw-semibold"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq4">
+                                Can I switch plans after subscribing?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted">
+                                Yes! Contact us on WhatsApp and we will help you
+                                switch to a different plan when your current
+                                subscription expires.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="py-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center">
+        <h3 class="fw-bold text-white mb-3">
+            Ready to Start Winning? 🏆
+        </h3>
+        <p class="text-secondary mb-4">
+            Join hundreds of members already winning with SureCodes24
+        </p>
+        <a href="https://wa.me/2348104094348?text=Hi!%20I%20want%20to%20subscribe%20to%20SureCodes24%20VIP."
+           target="_blank"
+           class="btn btn-warning btn-lg px-5 py-3"
+           style="color: #1a1a2e; font-weight: 700;">
+            💬 Contact Us on WhatsApp
+        </a>
+    </div>
+</section>
+
+{% endblock content %}
