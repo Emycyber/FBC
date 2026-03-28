@@ -108,3 +108,9 @@ def partners(request):
     }
     return render(request, 'bookings/partners.html', context)
 
+
+def pricing(request):
+    context = {
+        'today_year': date.today().year,
+    }
+    return render(request, 'bookings/pricing.html', context)

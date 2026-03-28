@@ -78,10 +78,4 @@ def register_success(request):
         'today_year': __import__('datetime').date.today().year
     })
     
-
-def pricing(request):
-    context = {
-        'today_year': date.today().year,
-    }
-    return render(request, 'bookings/pricing.html', context)
     
