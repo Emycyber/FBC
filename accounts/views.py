@@ -11,31 +11,14 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # save the user to database
-
             plan = form.cleaned_data.get('plan')
-            # get selected plan from form
-
             Subscription.objects.create(
-                user=user,
-                plan=plan,
-                is_active=False
-                # subscription starts inactive
-                # admin activates after payment confirmation
-            )
-
-            messages.success(
-                request,
-                'Account created! Your subscription will be activated '
-                'after payment confirmation. Please contact us to complete payment.'
-                
-            )
-            return redirect('login')
-    else:
-        form = RegisterForm()
-
-    return render(request, 'accounts/register.html', {'form': form})
-
+            user=user,
+            plan=plan,
+            is_active=False
+    )
+    return redirect('register_success')
+    # redirect to a success page instead of showing a message
 
 def user_login(request):
     if request.method == 'POST':
@@ -77,5 +60,10 @@ def vip(request):
 
     return render(request, 'accounts/vip.html', {
         'subscription': subscription,
+        'today_year': __import__('datetime').date.today().year
+    })
+    
+def register_success(request):
+    return render(request, 'accounts/register_success.html', {
         'today_year': __import__('datetime').date.today().year
     })

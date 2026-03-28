@@ -1,0 +1,59 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}Registration Successful - SureCodes24{% endblock %}
+
+{% block content %}
+
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 90vh;">
+    <div class="container py-5">
+        <div class="row justify-content-center align-items-center" style="min-height: 90vh;">
+            <div class="col-12 col-md-6 col-lg-5 text-center">
+                <div class="card border-0 shadow p-4 p-md-5">
+
+                    <!-- Success Icon -->
+                    <div style="font-size: 3rem;">🎉</div>
+
+                    <h4 class="fw-bold mt-3" style="color: #1a1a2e;">
+                        Registration Successful!
+                    </h4>
+
+                    <p class="text-muted mt-2">
+                        Your account has been created successfully.
+                        To activate your subscription, contact us on
+                        WhatsApp and we'll get you set up instantly!
+                    </p>
+
+                    <!-- Plan reminder -->
+                    <div class="alert alert-info small mt-3">
+                        💡 After contacting us and completing payment,
+                        your VIP access will be activated within minutes.
+                    </div>
+
+                    <!-- WhatsApp Button -->
+                    <div class="d-grid gap-2 mt-3">
+                        <a href="https://wa.me/2348000000000?text=Hi!%20I%20just%20registered%20on%20SureCodes24%20and%20I%20want%20to%20activate%20my%20subscription."
+                           target="_blank"
+                           class="btn btn-success btn-lg py-2">
+                            <!--
+                                wa.me/: WhatsApp click to chat link
+                                ?text=: pre-filled message so user
+                                doesn't have to type anything
+                                %20 is URL encoded space
+                            -->
+                            💬 Contact Us on WhatsApp
+                        </a>
+                        <a href="{% url 'login' %}" class="btn btn-outline-primary py-2">
+                            🔐 Go to Login
+                        </a>
+                        <a href="{% url 'homepage' %}" class="btn btn-outline-secondary py-2">
+                            ← Back to Homepage
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
