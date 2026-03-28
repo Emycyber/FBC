@@ -32,6 +32,9 @@ urlpatterns = [
     path('', include('bookings.urls')),
     # All bookings app URLs including homepage,
     # about, contact, disclaimer, privacy policy, partners
+    
+    path('accounts/', include('accounts.urls')),
+
 
     path('', include(wagtail_urls)),
     # Wagtail handles blog and CMS pages

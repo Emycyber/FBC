@@ -1,0 +1,59 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}No Subscription - SureCodes24{% endblock %}
+
+{% block content %}
+
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 90vh;">
+    <div class="container py-5">
+        <div class="row justify-content-center align-items-center" style="min-height: 90vh;">
+            <div class="col-12 col-md-6 col-lg-5 text-center">
+                <div class="card border-0 shadow p-4 p-md-5">
+                    <div style="font-size: 3rem;">🔒</div>
+                    <h4 class="fw-bold mt-3" style="color: #1a1a2e;">
+                        VIP Access Required
+                    </h4>
+                    <p class="text-muted">
+                        You don't have an active subscription.
+                        Subscribe to access exclusive VIP booking codes!
+                    </p>
+
+                    <!-- Plan Options -->
+                    <div class="row g-2 my-3">
+                        <div class="col-6">
+                            <div class="card border-primary p-3 text-center">
+                                <div style="font-size: 1.5rem;">📅</div>
+                                <h6 class="fw-bold mt-1 mb-0" style="color: #1a1a2e;">Weekly</h6>
+                                <p class="text-muted small mb-0">7 days access</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-success p-3 text-center">
+                                <div style="font-size: 1.5rem;">🗓️</div>
+                                <h6 class="fw-bold mt-1 mb-0" style="color: #1a1a2e;">Monthly</h6>
+                                <p class="text-muted small mb-0">30 days access</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-muted small mb-3">
+                        Contact us on WhatsApp to subscribe and get activated instantly!
+                    </p>
+
+                    <div class="d-grid gap-2">
+                        <a href="https://wa.me/2348000000000"
+                           target="_blank"
+                           class="btn btn-success py-2">
+                            💬 Subscribe via WhatsApp
+                        </a>
+                        <a href="{% url 'homepage' %}" class="btn btn-outline-secondary">
+                            ← Back to Homepage
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

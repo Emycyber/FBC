@@ -1,0 +1,73 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}Login - SureCodes24{% endblock %}
+
+{% block content %}
+
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 90vh;">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-6 col-lg-4">
+                <div class="card border-0 shadow p-4 p-md-5">
+
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <div style="font-size: 2.5rem;">🔐</div>
+                        <h4 class="fw-bold mt-2" style="color: #1a1a2e;">Welcome Back</h4>
+                        <p class="text-muted small mb-0">Login to access your VIP codes</p>
+                    </div>
+
+                    <!-- Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger alert-dismissible fade show small">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Login Form -->
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Username</label>
+                            <input type="text"
+                                   class="form-control"
+                                   name="username"
+                                   placeholder="Enter your username"
+                                   required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Password</label>
+                            <input type="password"
+                                   class="form-control"
+                                   name="password"
+                                   placeholder="Enter your password"
+                                   required>
+                        </div>
+
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-primary btn-lg py-2" type="submit">
+                                Login 🔐
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Register Link -->
+                    <p class="text-center text-muted small mt-4 mb-0">
+                        Don't have an account?
+                        <a href="{% url 'register' %}" class="text-primary fw-bold text-decoration-none">
+                            Register here
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

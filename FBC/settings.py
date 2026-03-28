@@ -65,6 +65,9 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'django.contrib.sitemaps',
+    'accounts',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -201,3 +204,6 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': env('CLOUDINARY_API_SECRET'),
 }
     
+    
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"    

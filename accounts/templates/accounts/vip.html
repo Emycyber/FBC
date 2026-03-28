@@ -1,0 +1,105 @@
+{% extends 'bookings/base.html' %}
+
+{% block title %}VIP Codes - SureCodes24{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 40vh;">
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center py-5"
+         style="min-height: 40vh;">
+        <span class="badge bg-warning mb-3 px-3 py-2" style="letter-spacing: 1px; color: #1a1a2e;">
+            👑 VIP MEMBER
+        </span>
+        <h1 class="display-5 fw-bold text-white mb-3">
+            Welcome, {{ request.user.username }}!
+        </h1>
+        <p class="text-secondary fs-5">
+            Your subscription is active until
+            <strong class="text-warning">
+                {{ subscription.end_date|date:"M d, Y" }}
+            </strong>
+        </p>
+
+        <!-- Subscription Badge -->
+        <span class="badge bg-success px-3 py-2 mt-2">
+            ✅ {{ subscription.get_plan_display }} Plan Active
+            <!--
+                get_plan_display: returns human readable plan name
+                e.g 'weekly' becomes 'Weekly - 7 Days'
+            -->
+        </span>
+    </div>
+</section>
+
+<!-- VIP Content -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <h2 class="fw-bold" style="color: #1a1a2e;">👑 VIP Exclusive Codes</h2>
+            <p class="text-muted">Premium verified codes for VIP members only</p>
+        </div>
+
+        <!-- VIP codes will go here -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm p-4 text-center">
+                    <div style="font-size: 3rem;">🏆</div>
+                    <h4 class="fw-bold mt-3" style="color: #1a1a2e;">
+                        VIP Codes Coming Soon
+                    </h4>
+                    <p class="text-muted">
+                        Premium booking codes will appear here daily.
+                        Check back every day for new high-value codes!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Subscription Info -->
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm p-4">
+                    <h6 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        📋 Your Subscription Details
+                    </h6>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Plan</p>
+                            <p class="fw-bold mb-0">
+                                {{ subscription.get_plan_display }}
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Status</p>
+                            <span class="badge bg-success">Active</span>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Start Date</p>
+                            <p class="fw-bold mb-0">
+                                {{ subscription.start_date|date:"M d, Y" }}
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <p class="text-muted small mb-1">Expiry Date</p>
+                            <p class="fw-bold mb-0" style="color: #dc3545;">
+                                {{ subscription.end_date|date:"M d, Y" }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4">
+                Logout
+            </a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}

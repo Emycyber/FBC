@@ -1,0 +1,77 @@
+{% extends 'bookings/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register - SureCodes24{% endblock %}
+
+{% block content %}
+
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 90vh;">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+                <div class="card border-0 shadow p-4 p-md-5">
+
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <div style="font-size: 2.5rem;">🏆</div>
+                        <h4 class="fw-bold mt-2" style="color: #1a1a2e;">Create Account</h4>
+                        <p class="text-muted small mb-0">
+                            Join SureCodes24 and access VIP codes
+                        </p>
+                    </div>
+
+                    <!-- Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show small">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Register Form -->
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <!-- Plan Info Cards -->
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <div class="card border-primary p-3 text-center">
+                                    <div style="font-size: 1.5rem;">📅</div>
+                                    <h6 class="fw-bold mt-1 mb-0" style="color: #1a1a2e;">Weekly</h6>
+                                    <p class="text-muted small mb-0">7 days access</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card border-success p-3 text-center">
+                                    <div style="font-size: 1.5rem;">🗓️</div>
+                                    <h6 class="fw-bold mt-1 mb-0" style="color: #1a1a2e;">Monthly</h6>
+                                    <p class="text-muted small mb-0">30 days access</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-3">
+                            <button class="btn btn-primary btn-lg py-2" type="submit">
+                                Create Account 🚀
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Login Link -->
+                    <p class="text-center text-muted small mt-4 mb-0">
+                        Already have an account?
+                        <a href="{% url 'login' %}" class="text-primary fw-bold text-decoration-none">
+                            Login here
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
