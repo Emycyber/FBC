@@ -6,6 +6,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from bookings.sitemaps import StaticViewSitemap, WagtailSitemap
+from django.contrib.sitemaps.views import sitemap
 
 
 sitemaps = {
@@ -36,5 +37,5 @@ urlpatterns = [
     # Wagtail handles blog and CMS pages
     # must be LAST so it acts as a fallback
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
