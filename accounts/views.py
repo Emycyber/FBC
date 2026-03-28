@@ -13,12 +13,22 @@ def register(request):
             user = form.save()
             plan = form.cleaned_data.get('plan')
             Subscription.objects.create(
-            user=user,
-            plan=plan,
-            is_active=False
-    )
-    return redirect('register_success')
-    # redirect to a success page instead of showing a message
+                user=user,
+                plan=plan,
+                is_active=False
+            )
+            return redirect('register_success')
+            # ✅ indented correctly inside if form.is_valid()
+            # only redirects AFTER successful form submission
+    else:
+        form = RegisterForm()
+        # ✅ else: creates empty form for GET requests
+        # this was missing! without it the form variable
+        # doesn't exist when page is first visited
+
+    return render(request, 'accounts/register.html', {'form': form})
+    # ✅ renders the registration form for GET requests
+    # and for POST requests where form is invalid
 
 def user_login(request):
     if request.method == 'POST':
