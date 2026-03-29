@@ -80,7 +80,7 @@
                              style="background-color: #e9f5ff;">
                             <p class="text-muted small mb-1">Daily Odds Range</p>
                             <h2 class="fw-bold mb-0" style="color: #0d6efd;">
-                                1.6 — 2.5
+                            1.8 — 2.5
                             </h2>
                             <p class="text-muted small mb-0">odds per day</p>
                         </div>
@@ -92,7 +92,7 @@
                             -->
                             <li class="mb-3 d-flex align-items-start gap-2">
                                 <span style="color: #198754; font-size: 1.1rem;">✅</span>
-                                <span>Daily booking codes between <strong>1.6 to 2.5 odds</strong></span>
+                                <span>Daily booking codes between <strong>1.8 to 2.5 odds</strong></span>
                             </li>
                             <li class="mb-3 d-flex align-items-start gap-2">
                                 <span style="color: #198754; font-size: 1.1rem;">✅</span>
@@ -138,7 +138,7 @@
 
                         <!-- CTA Button -->
                         <div class="d-grid">
-                            <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20subscribe%20to%20the%20Safe%20Odds%20Plan%20on%20SureCodes24."
+                            <a href="{% url 'register' %}"
                                target="_blank"
                                class="btn btn-primary btn-lg py-3">
                                 <!--
@@ -152,7 +152,7 @@
                     </div>
                 </div>
             </div>
-
+{% comment %} 
             <!-- Plan 2: High Odds -->
             <div class="col-12 col-md-6 col-lg-5">
                 <div class="card border-0 shadow h-100 position-relative"
@@ -250,7 +250,7 @@
 
                         <!-- CTA Button -->
                         <div class="d-grid">
-                            <a href="https://wa.me/2348000000000?text=Hi!%20I%20want%20to%20subscribe%20to%20the%20High%20Odds%20Plan%20on%20SureCodes24."
+                            <a href="{% url 'register' %}"
                                target="_blank"
                                class="btn btn-warning btn-lg py-3"
                                style="color: #1a1a2e; font-weight: 700;">
@@ -260,7 +260,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
 
         </div>
     </div>

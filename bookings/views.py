@@ -114,3 +114,4 @@ def pricing(request):
         'today_year': date.today().year,
     }
     return render(request, 'bookings/pricing.html', context)
+

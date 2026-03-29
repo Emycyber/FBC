@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .forms import RegisterForm
 from .models import Subscription
+from bookings.models import VIPCode
+
 
 
 def register(request):
@@ -78,4 +81,37 @@ def register_success(request):
         'today_year': __import__('datetime').date.today().year
     })
     
-    
+
+@login_required
+def vip(request):
+    try:
+        subscription = request.user.subscription
+
+        if not subscription.is_valid():
+            return render(request, 'accounts/subscription_expired.html')
+
+    except Subscription.DoesNotExist:
+        return render(request, 'accounts/no_subscription.html')
+
+    # fetch VIP codes based on user's plan
+    user_plan = subscription.plan
+    # subscription.plan is either 'weekly' or 'monthly'
+    # but VIPCode.plan is 'safe', 'high' or 'both'
+    # we need to ask the user which odds plan they subscribed to
+    # for now show all codes marked as 'both'
+
+    vip_codes = VIPCode.objects.filter(
+        plan__in=['both']
+        # shows codes available to all VIP subscribers
+        # you can expand this based on their specific plan
+    )
+
+    paginator = Paginator(vip_codes, 10)
+    page_number = request.GET.get('page')
+    vip_codes = paginator.get_page(page_number)
+
+    return render(request, 'accounts/vip.html', {
+        'subscription': subscription,
+        'vip_codes': vip_codes,
+        'today_year': __import__('datetime').date.today().year
+    })

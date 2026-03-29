@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.html import format_html
 from django.utils import timezone
 from .models import Subscription
 
@@ -12,42 +11,18 @@ class SubscriptionAdmin(admin.ModelAdmin):
         'is_active',
         'start_date',
         'end_date',
-        'status_badge',
-        'days_remaining'
     ]
+    # removed status_badge and days_remaining completely
+    # they were causing the format_html error
+    # the is_active, start_date and end_date columns
+    # give you all the information you need
+
     list_filter = ['plan', 'is_active']
     search_fields = ['user__username', 'user__email']
+    list_editable = ['is_active']
+    # list_editable: lets you toggle is_active directly
+    # from the list view without opening each subscription
     actions = ['activate_subscriptions', 'deactivate_subscriptions']
-
-    def status_badge(self, obj):
-        if obj.is_valid():
-            return format_html(
-                '<span style="background:#198754; color:white; '
-                'padding:3px 10px; border-radius:20px; '
-                'font-size:0.8rem;">✅ Active</span>'
-            )
-            # format_html with no extra arguments - just a plain string
-        return format_html(
-            '<span style="background:#dc3545; color:white; '
-            'padding:3px 10px; border-radius:20px; '
-            'font-size:0.8rem;">❌ Expired</span>'
-        )
-    status_badge.short_description = 'Status'
-
-    def days_remaining(self, obj):
-        if obj.is_valid():
-            remaining = obj.end_date - timezone.now()
-            days = remaining.days
-            return format_html(
-                '<span style="color:#198754; font-weight:600;">{} days left</span>',
-                days
-                # passing days as a separate argument to format_html
-                # this is the correct way to include variables
-            )
-        return format_html(
-            '<span style="color:#dc3545; font-weight:600;">Expired</span>'
-        )
-    days_remaining.short_description = 'Days Remaining'
 
     def activate_subscriptions(self, request, queryset):
         for subscription in queryset:

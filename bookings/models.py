@@ -118,3 +118,42 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.name
+    
+class VIPCode(models.Model):
+    # Premium booking codes only for VIP subscribers
+    # Separate from the free codes on homepage
+
+    date = models.DateField()
+
+    company = models.ForeignKey(
+        BettingCompany,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
+    booking_code = models.CharField(max_length=200)
+
+    accumulated_odds = models.DecimalField(max_digits=10, decimal_places=2)
+
+    PLAN_CHOICES = [
+        ('safe', 'Safe Odds (1.6 - 2.5)'),
+        ('high', 'High Odds (2.0 - 3.0)'),
+        ('both', 'Both Plans'),
+        # both: visible to all VIP subscribers
+    ]
+
+    plan = models.CharField(
+        max_length=10,
+        choices=PLAN_CHOICES,
+        default='both',
+        help_text='Which subscription plan can see this code'
+    )
+
+    class Meta:
+        ordering = ['-date']
+        verbose_name = 'VIP Code'
+        verbose_name_plural = 'VIP Codes'
+
+    def __str__(self):
+        return f"{self.company} - {self.booking_code} ({self.date})"

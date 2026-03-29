@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import BookingCode, BettingCompany, FooterLink, Partner
+from .models import BookingCode, BettingCompany, FooterLink, Partner, VIPCode
+ 
+
 
 # Register your models here.
 
@@ -44,3 +46,11 @@ class PartnerAdmin(admin.ModelAdmin):
     list_display = ['name', 'url', 'order', 'is_active']
     list_editable = ['order', 'is_active']
     ordering = ['order']    
+    
+    
+@admin.register(VIPCode)
+class VIPCodeAdmin(admin.ModelAdmin):
+    list_display = ['date', 'company', 'booking_code', 'accumulated_odds', 'plan']
+    list_filter = ['plan', 'date', 'company']
+    search_fields = ['company__name', 'booking_code']
+    ordering = ['-date']
