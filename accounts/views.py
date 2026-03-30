@@ -93,18 +93,10 @@ def vip(request):
     except Subscription.DoesNotExist:
         return render(request, 'accounts/no_subscription.html')
 
-    # fetch VIP codes based on user's plan
-    user_plan = subscription.plan
-    # subscription.plan is either 'weekly' or 'monthly'
-    # but VIPCode.plan is 'safe', 'high' or 'both'
-    # we need to ask the user which odds plan they subscribed to
-    # for now show all codes marked as 'both'
-
-    vip_codes = VIPCode.objects.filter(
-        plan__in=['both']
-        # shows codes available to all VIP subscribers
-        # you can expand this based on their specific plan
-    )
+    vip_codes = VIPCode.objects.all()
+    # ✅ removed filter(plan__in=['both'])
+    # since plan field no longer exists
+    # now shows ALL vip codes to all subscribers
 
     paginator = Paginator(vip_codes, 10)
     page_number = request.GET.get('page')

@@ -50,7 +50,8 @@ class PartnerAdmin(admin.ModelAdmin):
     
 @admin.register(VIPCode)
 class VIPCodeAdmin(admin.ModelAdmin):
-    list_display = ['date', 'company', 'booking_code', 'accumulated_odds', 'plan']
-    list_filter = ['plan', 'date', 'company']
+    list_display = ['date', 'company', 'booking_code', 'accumulated_odds', 'result']
+    list_filter = ['result', 'date', 'company']
+    list_editable = ['result']
     search_fields = ['company__name', 'booking_code']
     ordering = ['-date']

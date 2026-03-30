@@ -1,201 +1,159 @@
 {% extends 'bookings/base.html' %}
 {% load static %}
-
 {% block title %}VIP Codes - SureCodes24{% endblock %}
-
 {% block content %}
-
-<!-- Hero -->
-<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 35vh;">
-    <div class="container d-flex flex-column justify-content-center align-items-center text-center py-5"
-         style="min-height: 35vh;">
-        <span class="badge bg-warning mb-3 px-3 py-2"
-              style="letter-spacing: 1px; color: #1a1a2e;">
-            👑 VIP MEMBER
-        </span>
-        <h1 class="display-5 fw-bold text-white mb-2">
-            Welcome, {{ request.user.username }}!
-        </h1>
-        <p class="text-secondary">
-            Subscription active until
-            <strong class="text-warning">
-                {{ subscription.end_date|date:"M d, Y" }}
-            </strong>
-        </p>
-        <span class="badge bg-success px-3 py-2">
-            ✅ {{ subscription.get_plan_display }} — Active
-        </span>
-    </div>
-</section>
-
-<!-- VIP Codes Table -->
-<section class="py-5">
-    <div class="container">
-
-        <div class="text-center mb-4">
-            <h2 class="fw-bold" style="color: #1a1a2e;">
-                👑 Today's Premium Codes
-            </h2>
-            <p class="text-muted">
-                Exclusive high value codes for VIP members only
+    <!-- Hero -->
+    <section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                    min-height: 35vh">
+        <div class="container d-flex flex-column justify-content-center align-items-center text-center py-5"
+             style="min-height: 35vh">
+            <span class="badge bg-warning mb-3 px-3 py-2"
+                  style="letter-spacing: 1px;
+                         color: #1a1a2e">👑 VIP MEMBER</span>
+            <h1 class="display-5 fw-bold text-white mb-2">Welcome, {{ request.user.username }}!</h1>
+            <p class="text-secondary">
+                Subscription active until
+                <strong class="text-warning">{{ subscription.end_date|date:"M d, Y" }}</strong>
             </p>
+            <span class="badge bg-success px-3 py-2">✅ {{ subscription.get_plan_display }} — Active</span>
         </div>
-
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-
-                <div class="table-responsive shadow rounded">
-                    <table class="table table-hover mb-0 text-center"
-                           id="vip-table">
-                        <thead>
-                            <tr>
-                                <th class="py-3">📅 Date</th>
-                                <th class="py-3">🏢 Company</th>
-                                <th class="py-3">🎟️ Booking Code & Odds</th>
-                                <th class="py-3">📊 Plan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if vip_codes %}
-                                {% for code in vip_codes %}
+    </section>
+    <!-- VIP Codes Table -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold" style="color: #1a1a2e;">👑 Today's Premium Codes</h2>
+                <p class="text-muted">Exclusive high value codes for VIP members only</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="table-responsive shadow rounded">
+                        <table class="table table-hover mb-0 text-center" id="vip-table">
+                            <thead>
+                                <tr>
+                                    <th class="py-3">Date</th>
+                                    <th class="py-3">Company</th>
+                                    <th class="py-3">Booking Code & Odds</th>
+                                    <th class="py-3">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if vip_codes %}
+                                    {% for code in vip_codes %}
+                                        <tr>
+                                            <td class="py-3">{{ code.date }}</td>
+                                            <td class="py-3">
+                                                {% if code.company.logo %}
+                                                    <img src="{{ code.company.logo.url }}"
+                                                         height="35"
+                                                         alt="{{ code.company.name }}"
+                                                         style="object-fit: contain">
+                                                {% else %}
+                                                    <div class="company-btn">{{ code.company.name }}</div>
+                                                {% endif %}
+                                            </td>
+                                            <td class="py-3">
+                                                <span class="booking-code-badge">{{ code.booking_code }}</span>
+                                                <br>
+                                                <span class="odds-value mt-1 d-inline-block">{{ code.accumulated_odds }}</span>
+                                            </td>
+                                            <td class="py-3">
+                                                {% if code.result == 'won' %}
+                                                    <span class="fw-bold" style="color: #198754; font-size: 0.95rem;">✅ WON</span>
+                                                    <!--
+            green text for won results
+            #198754 is Bootstrap's success green
+        -->
+                                                {% elif code.result == 'lost' %}
+                                                    <span class="fw-bold" style="color: #dc3545; font-size: 0.95rem;">❌ LOST</span>
+                                                    <!--
+            red text for lost results
+            #dc3545 is Bootstrap's danger red
+        -->
+                                                {% else %}
+                                                    <span class="fw-bold" style="color: #fd7e14; font-size: 0.95rem;">⏳ PENDING</span>
+                                                    <!--
+            orange text for pending results
+            shown until admin updates after the game
+        -->
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
                                     <tr>
-                                        <td class="py-3">{{ code.date }}</td>
-                                        <td class="py-3">
-                                            {% if code.company.logo %}
-                                                <img src="{{ code.company.logo.url }}"
-                                                     height="35"
-                                                     alt="{{ code.company.name }}"
-                                                     style="object-fit: contain;">
-                                            {% else %}
-                                                <div class="company-btn">
-                                                    {{ code.company.name }}
-                                                </div>
-                                            {% endif %}
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="booking-code-badge">
-                                                👑 {{ code.booking_code }}
-                                            </span>
-                                            <br>
-                                            <span class="odds-value mt-1 d-inline-block">
-                                                {{ code.accumulated_odds }}
-                                            </span>
-                                        </td>
-                                        <td class="py-3">
-                                            {% if code.plan == 'safe' %}
-                                                <span class="badge bg-primary px-3 py-2">
-                                                    🛡️ Safe Odds
-                                                </span>
-                                            {% elif code.plan == 'high' %}
-                                                <span class="badge bg-warning px-3 py-2"
-                                                      style="color: #1a1a2e;">
-                                                    🚀 High Odds
-                                                </span>
-                                            {% else %}
-                                                <span class="badge bg-success px-3 py-2">
-                                                    ✅ All Plans
-                                                </span>
-                                            {% endif %}
+                                        <td colspan="4" class="text-center text-muted py-5">
+                                            <div style="font-size: 2rem;">⏳</div>
+                                            <p class="mt-2 mb-0">
+                                                No VIP codes yet for today.
+                                                Check back soon!
+                                            </p>
                                         </td>
                                     </tr>
-                                {% endfor %}
-                            {% else %}
-                                <tr>
-                                    <td colspan="4" class="text-center text-muted py-5">
-                                        <div style="font-size: 2rem;">⏳</div>
-                                        <p class="mt-2 mb-0">
-                                            No VIP codes yet for today.
-                                            Check back soon!
-                                        </p>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pagination -->
-                {% if vip_codes.has_other_pages %}
-                    <div class="d-flex justify-content-center mt-4">
-                        <nav>
-                            <ul class="pagination">
-                                {% if vip_codes.has_previous %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?page={{ vip_codes.previous_page_number }}">
-                                            &laquo; Prev
-                                        </a>
-                                    </li>
                                 {% endif %}
-                                {% for num in vip_codes.paginator.page_range %}
-                                    <li class="page-item {% if vip_codes.number == num %}active{% endif %}">
-                                        <a class="page-link" href="?page={{ num }}">
-                                            {{ num }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                                {% if vip_codes.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link"
-                                           href="?page={{ vip_codes.next_page_number }}">
-                                            Next &raquo;
-                                        </a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </nav>
+                            </tbody>
+                        </table>
                     </div>
-                {% endif %}
-
+                    <!-- Pagination -->
+                    {% if vip_codes.has_other_pages %}
+                        <div class="d-flex justify-content-center mt-4">
+                            <nav>
+                                <ul class="pagination">
+                                    {% if vip_codes.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ vip_codes.previous_page_number }}">&laquo; Prev</a>
+                                        </li>
+                                    {% endif %}
+                                    {% for num in vip_codes.paginator.page_range %}
+                                        <li class="page-item {% if vip_codes.number == num %}active{% endif %}">
+                                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                        </li>
+                                    {% endfor %}
+                                    {% if vip_codes.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ vip_codes.next_page_number }}">Next &raquo;</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Subscription Info -->
-<section class="py-4" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-6">
-                <div class="card border-0 shadow-sm p-4">
-                    <h6 class="fw-bold mb-3" style="color: #1a1a2e;">
-                        📋 Your Subscription Details
-                    </h6>
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <p class="text-muted small mb-1">Plan</p>
-                            <p class="fw-bold mb-0">
-                                {{ subscription.get_plan_display }}
-                            </p>
-                        </div>
-                        <div class="col-6">
-                            <p class="text-muted small mb-1">Status</p>
-                            <span class="badge bg-success">✅ Active</span>
-                        </div>
-                        <div class="col-6">
-                            <p class="text-muted small mb-1">Start Date</p>
-                            <p class="fw-bold mb-0">
-                                {{ subscription.start_date|date:"M d, Y" }}
-                            </p>
-                        </div>
-                        <div class="col-6">
-                            <p class="text-muted small mb-1">Expiry Date</p>
-                            <p class="fw-bold mb-0" style="color: #dc3545;">
-                                {{ subscription.end_date|date:"M d, Y" }}
-                            </p>
+    </section>
+    <!-- Subscription Info -->
+    <section class="py-4" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6">
+                    <div class="card border-0 shadow-sm p-4">
+                        <h6 class="fw-bold mb-3" style="color: #1a1a2e;">📋 Your Subscription Details</h6>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <p class="text-muted small mb-1">Plan</p>
+                                <p class="fw-bold mb-0">{{ subscription.get_plan_display }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-muted small mb-1">Status</p>
+                                <span class="badge bg-success">✅ Active</span>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-muted small mb-1">Start Date</p>
+                                <p class="fw-bold mb-0">{{ subscription.start_date|date:"M d, Y" }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-muted small mb-1">Expiry Date</p>
+                                <p class="fw-bold mb-0" style="color: #dc3545;">{{ subscription.end_date|date:"M d, Y" }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+    <!-- Logout -->
+    <div class="text-center py-4">
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4">Logout</a>
     </div>
-</section>
-
-<!-- Logout -->
-<div class="text-center py-4">
-    <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4">
-        Logout
-    </a>
-</div>
-
 {% endblock content %}

@@ -120,9 +120,6 @@ class Partner(models.Model):
         return self.name
     
 class VIPCode(models.Model):
-    # Premium booking codes only for VIP subscribers
-    # Separate from the free codes on homepage
-
     date = models.DateField()
 
     company = models.ForeignKey(
@@ -133,21 +130,24 @@ class VIPCode(models.Model):
     )
 
     booking_code = models.CharField(max_length=200)
-
     accumulated_odds = models.DecimalField(max_digits=10, decimal_places=2)
 
-    PLAN_CHOICES = [
-        ('safe', 'Safe Odds (1.6 - 2.5)'),
-        ('high', 'High Odds (2.0 - 3.0)'),
-        ('both', 'Both Plans'),
-        # both: visible to all VIP subscribers
+    # Result choices
+    PENDING = 'pending'
+    WON = 'won'
+    LOST = 'lost'
+
+    RESULT_CHOICES = [
+        (PENDING, 'Pending'),
+        (WON, 'Won'),
+        (LOST, 'Lost'),
     ]
 
-    plan = models.CharField(
+    result = models.CharField(
         max_length=10,
-        choices=PLAN_CHOICES,
-        default='both',
-        help_text='Which subscription plan can see this code'
+        choices=RESULT_CHOICES,
+        default=PENDING,
+        # starts as pending, admin updates after game
     )
 
     class Meta:

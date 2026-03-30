@@ -297,32 +297,39 @@ footer {
 
 /* VIP Table */
 #vip-table {
-  border: 1.5px solid #ffc107 !important;
+  border: 1px solid #1a3a2a !important;
   border-collapse: collapse !important;
-  font-size: 0.85rem !important;
-  background-color: #1a1a2e !important;
+  font-size: 0.7rem !important;
+  background-color: #0d1f14 !important;
 }
 
 #vip-table th {
-  background: linear-gradient(135deg, #1a1a2e 0%, #ffc107 200%) !important;
-  color: #ffc107 !important;
+  background-color: #0d1f14 !important;
+  /* dark green header */
+  color: #4caf7d !important;
+  /* bright green text for headers matching the image */
   font-weight: 600 !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
+  letter-spacing: 1.5px !important;
+  /* wide letter spacing matches the sporty header style */
   padding: 14px 16px !important;
-  border-bottom: 2px solid #ffc107 !important;
+  border-bottom: 1px solid #1a3a2a !important;
+  border-right: 1px solid #1a3a2a !important;
   vertical-align: middle !important;
 }
 
 #vip-table td {
   background-color: #111f16 !important;
+  /* slightly lighter dark green for body rows */
   color: #e0e0e0 !important;
-  padding: 12px 16px !important;
+  /* light grey text matching the image */
+  padding: 14px 16px !important;
   border-bottom: 1px solid #1a3a2a !important;
+  border-right: 1px solid #1a3a2a !important;
+  /* subtle dark green borders between cells */
   vertical-align: middle !important;
 }
 
 #vip-table tbody tr:hover td {
-  background-color: #162b1e !important;
-  transition: background-color 0.2s ease;
+  background-color: #0d1a10 !important;
 }
