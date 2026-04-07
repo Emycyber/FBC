@@ -1,7 +1,9 @@
 {% extends 'bookings/base.html' %}
 {% load static %}
 
-{% block title %}Free Football Predictions - SureCodes24{% endblock %}
+{% block title %}
+Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
+{% endblock %}
 
 {% block content %}
 

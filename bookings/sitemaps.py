@@ -4,11 +4,7 @@ from wagtail.models import Page
 
 
 class StaticViewSitemap(Sitemap):
-    # Sitemap for your static Django pages
-    priority = 0.8
     changefreq = 'weekly'
-    # changefreq: tells Google how often pages change
-    # weekly: Google checks these pages once a week
 
     def items(self):
         return [
@@ -18,20 +14,55 @@ class StaticViewSitemap(Sitemap):
             'disclaimer',
             'privacy_policy',
             'partners',
+            'pricing',
+            'predictions',
         ]
-        # list of URL names from your bookings/urls.py
 
     def location(self, item):
         return reverse(item)
-        # reverse(): converts URL name to actual URL
-        # e.g 'about' becomes '/about/'
+
+    def priority(self, item):
+        # different priority for each page type
+        # tells Google which pages are most important
+        priorities = {
+            'homepage': 1.0,
+            # homepage is most important page
+            'predictions': 0.9,
+            # predictions changes daily so high priority
+            'pricing': 0.9,
+            # pricing page important for conversions
+            'about': 0.6,
+            'contact': 0.6,
+            'partners': 0.5,
+            'disclaimer': 0.3,
+            'privacy_policy': 0.3,
+            # legal pages least important for SEO
+        }
+        return priorities.get(item, 0.5)
+        # default 0.5 if page not in dictionary
+
+    def changefreq(self, item):
+        # different update frequency for each page
+        frequencies = {
+            'homepage': 'daily',
+            # homepage updates daily with new codes
+            'predictions': 'daily',
+            # predictions change every day
+            'pricing': 'monthly',
+            # pricing rarely changes
+            'about': 'monthly',
+            'contact': 'monthly',
+            'partners': 'weekly',
+            'disclaimer': 'yearly',
+            'privacy_policy': 'yearly',
+        }
+        return frequencies.get(item, 'weekly')
 
 
 class WagtailSitemap(Sitemap):
-    # Sitemap for your Wagtail blog pages
-    priority = 0.9
-    changefreq = 'daily'
-    # daily: blog posts change more frequently
+    # Sitemap for Wagtail blog pages
+    priority = 0.8
+    changefreq = 'weekly'
 
     def items(self):
         return Page.objects.live().public()
