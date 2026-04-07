@@ -1,6 +1,7 @@
 from django.contrib import admin
+from django.urls import reverse
 from django.utils.html import format_html
-from .models import BookingCode, BettingCompany, FooterLink, Partner, VIPCode
+from .models import BookingCode, BettingCompany, FooterLink, Partner, VIPCode, Prediction
  
 
 
@@ -55,3 +56,32 @@ class VIPCodeAdmin(admin.ModelAdmin):
     list_editable = ['result']
     search_fields = ['company__name', 'booking_code']
     ordering = ['-date']
+    
+    
+
+@admin.register(Prediction)
+class PredictionAdmin(admin.ModelAdmin):
+    list_display = [
+        'date',
+        'league',
+        'home_team',
+        'away_team',
+        'tip',
+        'odds',
+        'result',
+        'is_vip'
+    ]
+    list_filter = ['result', 'is_vip', 'date', 'league']
+    list_editable = ['result', 'is_vip']
+    # list_editable: update result and vip status
+    # directly from the list view
+    search_fields = ['home_team', 'away_team', 'league']
+    ordering = ['-date', 'match_time']
+    
+    
+
+class APIFootballAdminLink(admin.ModelAdmin):
+    pass
+
+# Add custom link to admin index
+admin.site.index_template = 'admin/custom_index.html'

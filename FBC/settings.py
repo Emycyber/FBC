@@ -207,3 +207,14 @@ CLOUDINARY_STORAGE = {
     
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"    
+
+FOOTBALL_API_KEY = env('FOOTBALL_API_KEY')
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        # LocMemCache: stores cache in server memory
+        # simple and requires no extra setup
+        # resets when server restarts
+    }
+}

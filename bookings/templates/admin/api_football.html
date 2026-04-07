@@ -1,0 +1,249 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %}API Football - SureCodes24 Admin{% endblock %}
+
+{% block content %}
+
+<div style="padding: 20px;">
+
+    <div style="display: flex; justify-content: space-between;
+                align-items: center; margin-bottom: 20px;">
+        <h1 style="margin: 0;">⚽ API Football</h1>
+        <span style="background: #1a1a2e; color: white; padding: 5px 15px;
+                     border-radius: 20px; font-size: 0.9rem;">
+            {{ total_fixtures }} fixtures found
+        </span>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div style="padding: 10px 15px; margin-bottom: 15px; border-radius: 6px;
+                        background: {% if message.tags == 'success' %}#d4edda{% else %}#fff3cd{% endif %};
+                        color: {% if message.tags == 'success' %}#155724{% else %}#856404{% endif %};">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Date Navigation -->
+    <div style="display: flex; justify-content: space-between; align-items: center;
+                background: #f8f9fa; padding: 12px 20px; border-radius: 8px;
+                margin-bottom: 20px;">
+        <a href="?date={{ yesterday }}"
+           style="text-decoration: none; color: #0d6efd; font-weight: 600;">
+            ← Yesterday
+        </a>
+        <strong>{{ selected_date|date:"l, M d Y" }}</strong>
+        <a href="?date={{ tomorrow }}"
+           style="text-decoration: none; color: #0d6efd; font-weight: 600;">
+            Tomorrow →
+        </a>
+    </div>
+
+    {% if fixtures_by_league %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 20px;">
+                <button type="submit"
+                        style="background: #1a1a2e; color: white; padding: 10px 30px;
+                               border: none; border-radius: 6px; font-size: 1rem;
+                               cursor: pointer; font-weight: 600;">
+                    💾 Save Selected Predictions
+                </button>
+                <span style="color: #6c757d; font-size: 0.85rem; margin-left: 10px;">
+                    Check boxes next to matches you want to publish
+                </span>
+            </div>
+
+            {% for league_name, league_data in fixtures_by_league.items %}
+
+                <div style="margin-bottom: 25px; border: 1px solid #dee2e6;
+                            border-radius: 8px; overflow: hidden;">
+
+                    <!-- League Header -->
+                    <div style="background: #1a1a2e; padding: 12px 20px;
+                                display: flex; align-items: center; gap: 12px;">
+                        {% if league_data.logo %}
+                            <img src="{{ league_data.logo }}"
+                                 height="28"
+                                 style="object-fit: contain;">
+                        {% endif %}
+                        <h3 style="color: white; margin: 0; font-size: 1rem;">
+                            {{ league_name }}
+                        </h3>
+                    </div>
+
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 10px; text-align: left; font-size: 0.8rem; color: #6c757d; width: 40px;">✓</th>
+                                <th style="padding: 10px; text-align: left; font-size: 0.8rem; color: #6c757d; width: 70px;">TIME</th>
+                                <th style="padding: 10px; text-align: left; font-size: 0.8rem; color: #6c757d;">MATCH</th>
+                                <th style="padding: 10px; text-align: left; font-size: 0.8rem; color: #6c757d; width: 180px;">TIP</th>
+                                <th style="padding: 10px; text-align: left; font-size: 0.8rem; color: #6c757d; width: 80px;">ODDS</th>
+                                <th style="padding: 10px; text-align: center; font-size: 0.8rem; color: #6c757d; width: 70px;">VIP</th>
+                                <th style="padding: 10px; text-align: left; font-size: 0.8rem; color: #6c757d; width: 90px;">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for match in league_data.fixtures %}
+
+                                {% with mid=match.id home=match.homeTeam away=match.awayTeam %}
+                                <!--
+                                    football-data.org uses:
+                                    match.id: match ID
+                                    match.homeTeam: home team object
+                                    match.awayTeam: away team object
+                                    match.homeTeam.shortName: team name
+                                    match.homeTeam.crest: team logo URL
+                                -->
+
+                                {% with match_key=home.shortName|add:"_"|add:away.shortName %}
+
+                                <tr style="border-top: 1px solid #dee2e6;
+                                           {% if match_key in saved_matches %}background: #f0fff0;{% endif %}">
+
+                                    <!-- Checkbox -->
+                                    <td style="padding: 12px 10px;">
+                                        <input type="checkbox"
+                                               name="matches"
+                                               value="{{ mid }}"
+                                               style="width: 18px; height: 18px; cursor: pointer;">
+                                    </td>
+
+                                    <!-- Time -->
+                                    <td style="padding: 12px 10px; color: #6c757d; font-size: 0.9rem;">
+                                        {{ match.utcDate|slice:"11:16" }}
+                                        <!--
+                                            utcDate: match date in UTC format
+                                            slice:"11:16" extracts time e.g "20:00"
+                                        -->
+                                    </td>
+
+                                    <!-- Teams -->
+                                    <td style="padding: 12px 10px;">
+                                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                                            {% if home.crest %}
+                                                <img src="{{ home.crest }}"
+                                                     height="22"
+                                                     style="object-fit: contain;">
+                                            {% endif %}
+                                            <span style="font-weight: 600; font-size: 0.9rem;">
+                                                {{ home.shortName }}
+                                            </span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            {% if away.crest %}
+                                                <img src="{{ away.crest }}"
+                                                     height="22"
+                                                     style="object-fit: contain;">
+                                            {% endif %}
+                                            <span style="font-weight: 600; font-size: 0.9rem;">
+                                                {{ away.shortName }}
+                                            </span>
+                                        </div>
+
+                                        <!-- Hidden fields -->
+                                        <input type="hidden" name="home_{{ mid }}" value="{{ home.shortName }}">
+                                        <input type="hidden" name="away_{{ mid }}" value="{{ away.shortName }}">
+                                        <input type="hidden" name="league_{{ mid }}" value="{{ league_name }}">
+                                        <input type="hidden" name="league_logo_{{ mid }}" value="{{ league_data.logo }}">
+                                        <input type="hidden" name="home_logo_{{ mid }}" value="{{ home.crest }}">
+                                        <input type="hidden" name="away_logo_{{ mid }}" value="{{ away.crest }}">
+                                        <input type="hidden" name="time_{{ mid }}" value="{{ match.utcDate|slice:'11:16' }}">
+                                    </td>
+
+                                    <!-- Tip Dropdown -->
+                                    <td style="padding: 12px 10px;">
+                                        <select name="tip_{{ mid }}"
+                                                style="padding: 5px 8px; border: 1px solid #dee2e6;
+                                                       border-radius: 4px; font-size: 0.85rem; width: 100%;">
+                                            <option value="Home Win">Home Win</option>
+                                            <option value="Away Win">Away Win</option>
+                                            <option value="Draw">Draw</option>
+                                            <option value="Over 1.5">Over 1.5</option>
+                                            <option value="Over 2.5">Over 2.5</option>
+                                            <option value="Under 2.5">Under 2.5</option>
+                                            <option value="BTTS">BTTS</option>
+                                            <option value="BTTS No">BTTS No</option>
+                                            <option value="1X">1X</option>
+                                            <option value="X2">X2</option>
+                                            <option value="12">12</option>
+                                            <option value="DNB Home">DNB Home</option>
+                                            <option value="DNB Away">DNB Away</option>
+                                            <option value="Over 0.5 HT">Over 0.5 HT</option>
+                                        </select>
+                                    </td>
+
+                                    <!-- Odds -->
+                                    <td style="padding: 12px 10px;">
+                                        <input type="number"
+                                               name="odds_{{ mid }}"
+                                               value="1.50"
+                                               step="0.01"
+                                               min="1.01"
+                                               style="width: 70px; padding: 5px 8px;
+                                                      border: 1px solid #dee2e6;
+                                                      border-radius: 4px; font-size: 0.85rem;">
+                                    </td>
+
+                                    <!-- VIP -->
+                                    <td style="padding: 12px 10px; text-align: center;">
+                                        <input type="checkbox"
+                                               name="vip_{{ mid }}"
+                                               style="width: 18px; height: 18px; cursor: pointer;">
+                                    </td>
+
+                                    <!-- Status -->
+                                    <td style="padding: 12px 10px;">
+                                        {% if match_key in saved_matches %}
+                                            <span style="background: #d4edda; color: #155724;
+                                                         padding: 3px 10px; border-radius: 20px;
+                                                         font-size: 0.8rem;">
+                                                ✅ Saved
+                                            </span>
+                                        {% else %}
+                                            <span style="background: #f8f9fa; color: #6c757d;
+                                                         padding: 3px 10px; border-radius: 20px;
+                                                         font-size: 0.8rem;">
+                                                Not saved
+                                            </span>
+                                        {% endif %}
+                                    </td>
+
+                                </tr>
+
+                                {% endwith %}
+                                {% endwith %}
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            {% endfor %}
+
+            <div style="margin-top: 20px; margin-bottom: 30px;">
+                <button type="submit"
+                        style="background: #1a1a2e; color: white; padding: 10px 30px;
+                               border: none; border-radius: 6px; font-size: 1rem;
+                               cursor: pointer; font-weight: 600;">
+                    💾 Save Selected Predictions
+                </button>
+            </div>
+
+        </form>
+
+    {% else %}
+        <div style="text-align: center; padding: 60px; color: #6c757d;">
+            <div style="font-size: 3rem;">⚽</div>
+            <h3 style="margin-top: 15px;">No fixtures found for {{ selected_date|date:"M d, Y" }}</h3>
+            <p>Try a different date!</p>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

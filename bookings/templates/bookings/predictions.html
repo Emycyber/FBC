@@ -1,0 +1,168 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+
+{% block title %}Free Football Predictions - SureCodes24{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-4">
+        <h1 class="display-6 fw-bold text-white mb-2">
+            ⚽ Free Football Predictions
+        </h1>
+        <p class="text-secondary">
+            Daily predictions across top leagues worldwide
+        </p>
+    </div>
+</section>
+
+<!-- Date Navigation -->
+<section style="background-color: #f8f9fa;" class="py-3">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <a href="?date={{ yesterday }}"
+               class="btn btn-outline-primary btn-sm px-3">
+                ← Yesterday
+            </a>
+            <h6 class="fw-bold mb-0" style="color: #1a1a2e;">
+                {{ selected_date|date:"l, M d Y" }}
+            </h6>
+            <a href="?date={{ tomorrow }}"
+               class="btn btn-outline-primary btn-sm px-3">
+                Tomorrow →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Predictions -->
+<section class="py-4">
+    <div class="container">
+
+        {% if leagues %}
+            {% for league_name, league in leagues.items %}
+
+                <!-- League Header -->
+                <div class="card border-0 shadow-sm mb-3">
+                    <div class="card-header d-flex align-items-center gap-3 py-3"
+                         style="background: #1a1a2e;">
+                        {% if league.logo %}
+                            <img src="{{ league.logo }}"
+                                 height="30"
+                                 alt="{{ league.name }}"
+                                 style="object-fit: contain;">
+                        {% endif %}
+                        <h6 class="fw-bold text-white mb-0">
+                            {{ league.name }}
+                        </h6>
+                    </div>
+
+                    <!-- Predictions Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead style="background-color: #f8f9fa;">
+                                <tr>
+                                    <th class="text-muted small py-2">Time</th>
+                                    <th class="text-muted small py-2">Match</th>
+                                    <th class="text-center text-muted small py-2">Tip</th>
+                                    <th class="text-center text-muted small py-2">Odds</th>
+                                    <th class="text-center text-muted small py-2">Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for prediction in league.predictions %}
+                                    <tr class="align-middle">
+
+                                        <!-- Time -->
+                                        <td class="text-muted small py-3">
+                                            {{ prediction.match_time|time:"H:i" }}
+                                        </td>
+
+                                        <!-- Teams with logos -->
+                                        <td class="py-3">
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                {% if prediction.home_team_logo %}
+                                                    <img src="{{ prediction.home_team_logo }}"
+                                                         height="20"
+                                                         alt="{{ prediction.home_team }}"
+                                                         style="object-fit: contain;">
+                                                {% endif %}
+                                                <span class="fw-semibold small">
+                                                    {{ prediction.home_team }}
+                                                </span>
+                                            </div>
+                                            <div class="d-flex align-items-center gap-2">
+                                                {% if prediction.away_team_logo %}
+                                                    <img src="{{ prediction.away_team_logo }}"
+                                                         height="20"
+                                                         alt="{{ prediction.away_team }}"
+                                                         style="object-fit: contain;">
+                                                {% endif %}
+                                                <span class="fw-semibold small">
+                                                    {{ prediction.away_team }}
+                                                </span>
+                                            </div>
+                                        </td>
+
+                                        <!-- Tip -->
+                                        <td class="text-center py-3">
+                                            <span class="badge bg-primary px-3 py-2">
+                                                {{ prediction.tip }}
+                                            </span>
+                                        </td>
+
+                                        <!-- Odds -->
+                                        <td class="text-center py-3">
+                                            <span class="fw-bold"
+                                                  style="color: #198754;">
+                                                {{ prediction.odds }}
+                                            </span>
+                                        </td>
+
+                                        <!-- Result -->
+                                        <td class="text-center py-3">
+                                            {% if prediction.result == 'won' %}
+                                                <span class="fw-bold"
+                                                      style="color: #198754;">
+                                                    ✅ WON
+                                                </span>
+                                            {% elif prediction.result == 'lost' %}
+                                                <span class="fw-bold"
+                                                      style="color: #dc3545;">
+                                                    ❌ LOST
+                                                </span>
+                                            {% else %}
+                                                <span class="fw-bold"
+                                                      style="color: #fd7e14;">
+                                                    ⏳ PENDING
+                                                </span>
+                                            {% endif %}
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+            <div class="text-center py-5">
+                <div style="font-size: 3rem;">⚽</div>
+                <h4 class="fw-bold mt-3" style="color: #1a1a2e;">
+                    No predictions available
+                </h4>
+                <p class="text-muted">
+                    No predictions for {{ selected_date|date:"M d, Y" }}.
+                    Check back soon or try a different date!
+                </p>
+            </div>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock content %}

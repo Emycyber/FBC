@@ -7,6 +7,8 @@ from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from bookings.sitemaps import StaticViewSitemap, WagtailSitemap
 from django.contrib.sitemaps.views import sitemap
+from bookings.api_admin_views import api_football_view
+
 
 
 sitemaps = {
@@ -17,6 +19,10 @@ sitemaps = {
 
 
 urlpatterns = [
+    
+    path('django-admin/api-football/', api_football_view, name='api_football'),
+
+    
     path('django-admin/', admin.site.urls),
     # Django admin panel
 
@@ -39,6 +45,7 @@ urlpatterns = [
     path('', include(wagtail_urls)),
     # Wagtail handles blog and CMS pages
     # must be LAST so it acts as a fallback
+    
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

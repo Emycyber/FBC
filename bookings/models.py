@@ -157,3 +157,74 @@ class VIPCode(models.Model):
 
     def __str__(self):
         return f"{self.company} - {self.booking_code} ({self.date})"
+    
+    
+class Prediction(models.Model):
+
+    # Result choices
+    PENDING = 'pending'
+    WON = 'won'
+    LOST = 'lost'
+
+    RESULT_CHOICES = [
+        (PENDING, 'Pending'),
+        (WON, 'Won'),
+        (LOST, 'Lost'),
+    ]
+
+    date = models.DateField()
+    # match date
+
+    league = models.CharField(max_length=100)
+    # e.g "Premier League", "La Liga"
+
+    league_logo = models.URLField(blank=True)
+    # URL of league logo from API Football
+
+    home_team = models.CharField(max_length=100)
+    # home team name
+
+    home_team_logo = models.URLField(blank=True)
+    # URL of home team logo from API Football
+
+    away_team = models.CharField(max_length=100)
+    # away team name
+
+    away_team_logo = models.URLField(blank=True)
+    # URL of away team logo from API Football
+
+    match_time = models.TimeField()
+    # kick off time
+
+    tip = models.CharField(
+        max_length=100,
+        help_text='e.g Over 1.5, Home Win, BTTS, X2'
+    )
+    # the prediction tip
+
+    odds = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        help_text='Odds for this prediction'
+    )
+
+    result = models.CharField(
+        max_length=10,
+        choices=RESULT_CHOICES,
+        default=PENDING,
+    )
+
+    is_vip = models.BooleanField(
+        default=False,
+        help_text='Check to show only on VIP page'
+    )
+    # is_vip: if True only VIP subscribers can see it
+    # if False shows on free predictions page
+
+    class Meta:
+        ordering = ['-date', 'match_time']
+        verbose_name = 'Prediction'
+        verbose_name_plural = 'Predictions'
+
+    def __str__(self):
+        return f"{self.home_team} vs {self.away_team} - {self.tip} ({self.date})"    

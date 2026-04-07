@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from .models import BookingCode, BettingCompany, FooterLink, Partner
+from .models import BookingCode, BettingCompany, FooterLink, Partner, VIPCode, Prediction
 from datetime import date
 from blog.models import BlogDetailPage
 from django.core.paginator import Paginator
+from .football_api import get_fixtures
+from datetime import date, timedelta
 
 
 
@@ -115,3 +117,90 @@ def pricing(request):
     }
     return render(request, 'bookings/pricing.html', context)
 
+
+
+def predictions(request):
+    # get date from URL parameter or default to today
+    date_str = request.GET.get('date', str(date.today()))
+    # e.g ?date=2026-04-06
+
+    try:
+        selected_date = date.fromisoformat(date_str)
+        # fromisoformat: converts string to date object
+    except ValueError:
+        selected_date = date.today()
+        date_str = str(selected_date)
+
+    # calculate yesterday and tomorrow for navigation buttons
+    yesterday = str(selected_date - timedelta(days=1))
+    tomorrow = str(selected_date + timedelta(days=1))
+
+    # fetch fixtures from API
+    fixtures = get_fixtures(date_str=date_str)
+    
+    # group fixtures by league
+    leagues = {}
+    for fixture in fixtures:
+        league_name = fixture['league']['name']
+        league_logo = fixture['league']['logo']
+
+        if league_name not in leagues:
+            leagues[league_name] = {
+                'name': league_name,
+                'logo': league_logo,
+                'fixtures': []
+            }
+        leagues[league_name]['fixtures'].append(fixture)
+        # groups all fixtures under their league name
+
+    context = {
+        'leagues': leagues,
+        'selected_date': selected_date,
+        'yesterday': yesterday,
+        'tomorrow': tomorrow,
+        'today_year': date.today().year,
+    }
+    return render(request, 'bookings/predictions.html', context)
+
+
+
+def predictions(request):
+    date_str = request.GET.get('date', str(date.today()))
+
+    try:
+        selected_date = date.fromisoformat(date_str)
+    except ValueError:
+        selected_date = date.today()
+        date_str = str(selected_date)
+
+    yesterday = str(selected_date - timedelta(days=1))
+    tomorrow = str(selected_date + timedelta(days=1))
+
+    # fetch only FREE predictions for selected date
+    free_predictions = Prediction.objects.filter(
+        date=selected_date,
+        is_vip=False
+        # is_vip=False: only show free predictions here
+        # VIP predictions show on VIP page
+    )
+
+    # group by league
+    leagues = {}
+    for prediction in free_predictions:
+        league_name = prediction.league
+        if league_name not in leagues:
+            leagues[league_name] = {
+                'name': league_name,
+                'logo': prediction.league_logo,
+                'predictions': []
+            }
+        leagues[league_name]['predictions'].append(prediction)
+
+    context = {
+        'leagues': leagues,
+        'selected_date': selected_date,
+        'yesterday': yesterday,
+        'tomorrow': tomorrow,
+        'today_year': date.today().year,
+    }
+    return render(request, 'bookings/predictions.html', context)

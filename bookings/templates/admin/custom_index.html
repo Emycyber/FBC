@@ -1,0 +1,19 @@
+{% extends "admin/index.html" %}
+
+{% block content %}
+<!-- API Football Button -->
+<div style="margin-bottom: 20px;">
+    <a href="/django-admin/api-football/"
+       style="display: inline-block; background: #1a1a2e; color: white;
+              padding: 12px 25px; border-radius: 8px; text-decoration: none;
+              font-weight: 600; font-size: 1rem;">
+        ⚽ API Football — Browse & Add Predictions
+    </a>
+</div>
+
+{{ block.super }}
+<!--
+    block.super: renders the original admin content
+    below our custom button
+-->
+{% endblock %}
