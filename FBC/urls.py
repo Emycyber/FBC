@@ -23,7 +23,7 @@ urlpatterns = [
     path('django-admin/api-football/', api_football_view, name='api_football'),
 
     
-    path('django-admin/', admin.site.urls),
+    path('surecodes-arit/', admin.site.urls),
     # Django admin panel
 
     path('admin/', include(wagtailadmin_urls)),

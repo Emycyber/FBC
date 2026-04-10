@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from .forms import RegisterForm
 from .models import Subscription
 from bookings.models import VIPCode
+from django_ratelimit.decorators import ratelimit
 
 
 
@@ -107,3 +108,10 @@ def vip(request):
         'vip_codes': vip_codes,
         'today_year': __import__('datetime').date.today().year
     })
+    
+
+@ratelimit(key='ip', rate='5/m', block=True)
+# 5 attempts per minute per IP address
+# block=True: blocks the request if limit exceeded
+def user_login(request):
+    ...

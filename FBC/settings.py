@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'accounts',
     'crispy_forms',
     'crispy_bootstrap5',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'axes.middleware.AxesMiddleware',
+    # must be last in middleware list
 ]
 
 ROOT_URLCONF = 'FBC.urls'
@@ -181,22 +184,53 @@ WAGTAILADMIN_BASE_URL = 'https://surecodes24.com'
 
 
 CSRF_TRUSTED_ORIGINS = [
-        'https://fbc-production.up.railway.app',
         'https://surecodes24.com',
         'https://www.surecodes24.com',
     ]
 
 
 if not DEBUG:
-    SECURE_HSTS_SECONDS = 31536000
+    # SSL
     SECURE_SSL_REDIRECT = False
-    # False: Railway already handles SSL/HTTPS itself
-    # setting this to True causes infinite redirect loop on Railway
+    # False because Cloudflare handles SSL
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # HSTS
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    # HSTS: tells browsers to always use HTTPS
+    # even if user types http://
+
+    # Cookies
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # SECURE_PROXY_SSL_HEADER: tells Django that Railway's proxy
-    # is handling HTTPS so Django doesn't need to redirect itself
+    SESSION_COOKIE_HTTPONLY = True
+    # HTTPONLY: prevents JavaScript from reading cookies
+    # protects against XSS attacks
+
+    SESSION_COOKIE_AGE = 1209600
+    # 1209600 seconds = 2 weeks
+    # logs users out after 2 weeks of inactivity
+
+    # Clickjacking protection
+    X_FRAME_OPTIONS = 'DENY'
+    # DENY: prevents your site from being embedded
+    # in iframes on other sites
+
+    # Content type sniffing protection
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    # prevents browsers from guessing content type
+
+    # XSS protection
+    SECURE_BROWSER_XSS_FILTER = True
+    # adds XSS protection header to all responses
+
+    CSRF_TRUSTED_ORIGINS = [
+        'https://surecodes24.com',
+        'https://www.surecodes24.com',
+        'https://fbc-production.up.railway.app',
+    ]
     
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': env('CLOUDINARY_CLOUD_NAME'),
@@ -218,3 +252,15 @@ CACHES = {
         # resets when server restarts
     }
 }
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+AXES_FAILURE_LIMIT = 5
+# locks account after 5 failed login attempts
+
+AXES_COOLOFF_TIME = 1
+# unlocks after 1 hour
