@@ -54,16 +54,20 @@ class BookingCode(models.Model):
     def __str__(self):
         return f"{self.company} - {self.booking_code} ({self.date})"
     
-    class HomePage(Page):
-    # Simple home page model
-    # Wagtail needs this to have a proper page tree
-    
-        class Meta:
-            verbose_name = 'Home Page'
+class HomePage(Page):
+    template = 'blog/home_page.html'
 
-        def get_context(self, request):
-            context = super().get_context(request)
-            return context
+    subpage_types = ['blog.BlogIndexPage']
+    # only BlogIndexPage can be created under HomePage
+
+    class Meta:
+        verbose_name = 'Home Page'
+
+    content_panels = Page.content_panels
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        return context
 
 
 class FooterLink(models.Model):

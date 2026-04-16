@@ -188,6 +188,8 @@ CSRF_TRUSTED_ORIGINS = [
         'https://www.surecodes24.com',
     ]
 
+CSRF_COOKIE_AGE = 31449600
+
 
 if not DEBUG:
     # SSL
@@ -264,3 +266,4 @@ AXES_FAILURE_LIMIT = 5
 
 AXES_COOLOFF_TIME = 1
 # unlocks after 1 hour
+

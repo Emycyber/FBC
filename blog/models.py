@@ -40,35 +40,26 @@ class BlogCategory(models.Model):
 
 
 class BlogIndexPage(Page):
-    # Main blog listing page e.g surecodes24.com/blog/
-    # Shows all published blog posts as cards
+    template = 'blog/blog_index_page.html'
 
-    intro = models.TextField(
-        blank=True,
-        help_text='Intro text shown at top of blog listing page'
-    )
+    subpage_types = ['blog.BlogDetailPage']
+    # only blog posts can be created under blog index
 
-    content_panels = Page.content_panels + [
-        FieldPanel('intro'),
-    ]
+    parent_page_types = ['bookings.HomePage']
+    # ✅ references bookings.HomePage not blog.HomePage
+    # since HomePage lives in bookings app
+
+    intro = models.TextField(blank=True)
+    # ... rest of the model unchanged
 
     def get_context(self, request):
         context = super().get_context(request)
-
         category_slug = request.GET.get('category')
-        # reads ?category= from URL for filtering
-
         blog_posts = self.get_children().live().order_by('-first_published_at')
-        # get_children(): all child pages under this Blog Index Page
-        # .live(): published posts only, no drafts
-        # order_by: newest posts first
-
         if category_slug:
             blog_posts = blog_posts.filter(
                 blogdetailpage__categories__slug=category_slug
             )
-            # filters posts by selected category slug
-
         context['blog_posts'] = blog_posts
         context['categories'] = BlogCategory.objects.all()
         context['selected_category'] = category_slug
@@ -76,97 +67,66 @@ class BlogIndexPage(Page):
 
 
 class BlogDetailPage(Page):
-    # Individual blog post page e.g surecodes24.com/blog/my-post/
+    template = 'blog/blog_detail_page.html'
 
-    date = models.DateField(
-        auto_now_add=True
-        # automatically sets date when post is first created
-    )
+    # restrict: no child pages can be created under a blog post
+    subpage_types = []
+    # empty list: means NO page types can be created under BlogDetailPage
+    # prevents creating posts under posts
 
-    intro = models.CharField(
-        max_length=300,
-        help_text='Short summary shown on blog listing page'
-    )
+    # restrict: BlogDetailPage can only be created under BlogIndexPage
+    parent_page_types = ['blog.BlogIndexPage']
+    # prevents creating a blog post anywhere other than under the blog index
 
+    date = models.DateField(auto_now_add=True)
+    intro = models.CharField(max_length=300)
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+',
-        help_text='Main image shown at top of post and on listing cards'
+        related_name='+'
     )
-
-    categories = ParentalManyToManyField(
-        'blog.BlogCategory',
-        blank=True,
-        help_text='Select categories for this post'
-    )
-
+    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
     body = StreamField([
         ('heading', blocks.CharBlock(
             form_classname='title',
             help_text='Add a heading or subheading'
         )),
-        # heading: single line text for section headings
-
         ('paragraph', blocks.RichTextBlock(
             features=[
                 'h2', 'h3', 'h4',
-                # heading levels
                 'bold', 'italic',
-                # basic formatting
                 'underline',
-                # underline text
                 'strikethrough',
-                # strikethrough text
                 'ol', 'ul',
-                # ordered and unordered lists
                 'hr',
-                # horizontal divider line
                 'link',
-                # hyperlinks
                 'image',
-                # insert images inline within paragraph
                 'embed',
-                # embed YouTube videos and other media
                 'blockquote',
-                # styled blockquote
                 'code',
-                # inline code formatting
             ],
             help_text='Add your main text content here'
         )),
-        # paragraph: full rich text editor with all formatting tools
-
         ('image', ImageChooserBlock(
             help_text='Insert a full width standalone image'
         )),
-        # image: picks from Wagtail image library or uploads new
-
         ('quote', blocks.BlockQuoteBlock(
             help_text='Add a highlighted pull quote'
         )),
-        # quote: styled blockquote for key statements
-
         ('embed', blocks.URLBlock(
             help_text='Paste a YouTube, Twitter or video URL to embed'
         )),
-        # embed: paste any URL to embed external content
-
         ('raw_html', blocks.RawHTMLBlock(
             help_text='Add custom HTML if needed',
             required=False
         )),
-        # raw_html: for custom HTML embeds or widgets
-
     ], use_json_field=True)
-    # use_json_field=True: required in Wagtail 4+ for StreamField
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
-        # makes intro and body searchable in Wagtail admin
     ]
 
     content_panels = Page.content_panels + [
@@ -175,20 +135,21 @@ class BlogDetailPage(Page):
         MultiFieldPanel([
             FieldPanel('categories'),
         ], heading='Categories'),
-        # MultiFieldPanel groups categories under a heading
         FieldPanel('body'),
     ]
 
-def get_context(self, request):
-    context = super().get_context(request)
+    def get_context(self, request):
+        context = super().get_context(request)
+        related_posts = BlogDetailPage.objects.live().exclude(
+            pk=self.pk
+        ).filter(
+            categories__in=self.categories.all()
+        ).distinct().order_by('-first_published_at')[:3]
 
-    related_posts = (
-        BlogDetailPage.objects
-        .live()
-        .exclude(pk=self.pk)                  # exclude current page
-        .order_by('-first_published_at')      # newest first
-        [:3]                                  # limit to 3
-    )
+        if not related_posts:
+            related_posts = BlogDetailPage.objects.live().exclude(
+                pk=self.pk
+            ).order_by('-first_published_at')[:3]
 
-    context['related_posts'] = related_posts
-    return context
+        context['related_posts'] = related_posts
+        return context
