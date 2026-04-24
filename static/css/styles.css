@@ -43,7 +43,7 @@ footer {
   /* center: focuses on the middle of the image */
   background-repeat: no-repeat;
   /* no-repeat: prevents image from tiling */
-  min-height: 70vh;
+  min-height: 50vh;
   /* takes up 70% of screen height */
   position: relative;
   /* needed for the overlay to work */

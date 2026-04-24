@@ -1,52 +1,38 @@
 {% extends 'bookings/base.html' %}
 {% load wagtailimages_tags %}
 {% load static %}
-{% block title %}SureCodes24 - Free Booking Codes{% endblock %}
+{% block title %}SureCodes24 - Free Sure Bet Codes & Booking Codes Daily{% endblock %}
 {% block content %}
     <!-- Hero Section with Background Image -->
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content container d-flex flex-column justify-content-center align-items-center text-center py-5"
              style="min-height: 70vh">
-            <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px;">FREE BET CODES</span>
+            <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px;">FREE SURE BET CODES</span>
             <h1 class="display-4 fw-bold text-white mb-3">
-                Win Big With Today's
-                <br>
-                <span style="color: #0d6efd;">Best Booking Codes</span>
+                Today's Free Sure Booking Bet Codes
             </h1>
-            <p class="text-white fs-5 mb-4">Fresh codes updated daily across all major betting platforms</p>
-            
+            <p class="text-white fs-5 mb-4">Fresh, verified codes updated daily across SportyBet, 1xBet, Bet9ja & more</p>
+
             <div class="d-flex gap-3 flex-wrap justify-content-center">
                 <a href="https://surecodes24.com/direct-win-prediction/" class="btn btn-primary btn-lg px-5 py-3">Direct Win Prediction</a>
-                <a href="{% url 'pricing' %}" class="btn btn-warning btn-lg px-5 py-3">Join VIP <i class="fa-solid fa-crown"></i></i></a>
+                <a href="{% url 'pricing' %}" class="btn btn-warning btn-lg px-5 py-3">Join VIP <i class="fa-solid fa-crown"></i></a>
                 <a href="https://t.me/surebetcodes24" class="btn btn-success btn-lg px-5 py-3">Join Our Telegram Channel <i class="fa-brands fa-telegram"></i></a>
-
             </div>
         </div>
     </section>
+
+
+
     <!-- Booking Codes Table Section -->
     <section class="py-5" id="booking-section">
         <div class="container-fluid px-3 px-md-5">
-            <!--
-            container-fluid: takes full width of the screen
-            px-3 px-md-5: padding on sides so table doesn't touch screen edges
-            This gives us more control over centering than container
--->
             <div class="text-center mb-4">
-                <h2 class="fw-bold" style="color: #1a1a2e;">Today's Booking Codes</h2>
+                <h2 class="fw-bold" style="color: #1a1a2e;">Today's Sure Bet Codes</h2>
                 <p class="text-muted">All codes are verified and ready to load</p>
             </div>
             <div class="row justify-content-center">
-                <!--
-                row justify-content-center: Bootstrap's most reliable
-                way to center content horizontally
-            -->
                 <div class="col-12 col-md-10 col-lg-8">
-                    <!--
-                    col-12: full width on mobile
-                    col-md-10: 10/12 width on tablets
-                    col-lg-8: 8/12 width on desktop - this centers the table
-                -->
                     <div class="table-responsive shadow-sm rounded">
                         <table class="table table-bordered table-hover mb-0 text-center"
                                id="booking-table">
@@ -55,10 +41,6 @@
                                     <th class="py-3">Date</th>
                                     <th class="py-3">Betting Company</th>
                                     <th class="py-3">Booking Code</th>
-                                    <!--
-            merged into one column header
-            no separate odds column anymore
-        -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,84 +52,46 @@
                                                 {% if code.company.logo %}
                                                     <img src="{{ code.company.logo.url }}"
                                                          height="35"
-                                                         alt="{{ code.company.name }}"
+                                                         alt="{{ code.company.name }} booking code"
                                                          style="object-fit: contain">
                                                 {% else %}
                                                     <div class="company-btn">{{ code.company.name }}</div>
                                                 {% endif %}
                                             </td>
                                             <td>
-                                                <span class="booking-code-badge"> {{ code.booking_code }}</span>
+                                                <span class="booking-code-badge">{{ code.booking_code }}</span>
                                                 <br>
                                                 <small class="text-muted mt-1 d-inline-block">Odds:</small>
                                                 <span class="odds-value mt-1 d-inline-block">{{ code.accumulated_odds }}</span>
-                                                <!--
-        removed ⚡ emoji from inside odds-value span
-        parseFloat only works on pure numbers
-        "⚡ 25.50" cannot be converted but "25.50" can
-    -->
                                             </td>
                                         </tr>
                                     {% endfor %}
                                 {% else %}
                                     <tr>
                                         <td colspan="3" class="text-center text-muted py-4">
-                                            <!--
-                    colspan changed from 4 to 3
-                    since we now have 3 columns instead of 4
-                -->
                                             No booking codes available yet. Check back soon!
                                         </td>
                                     </tr>
                                 {% endif %}
                             </tbody>
                         </table>
-                        <!-- Pagination Controls -->
+
                         {% if booking_codes.has_other_pages %}
-                            <!--
-    has_other_pages: returns True if there is more than one page
-    no point showing pagination if everything fits on one page
--->
                             <div class="d-flex justify-content-center mt-4">
                                 <nav aria-label="Booking codes pagination">
                                     <ul class="pagination">
-                                        <!--
-                pagination: Bootstrap's pagination component
-                displays page numbers as a horizontal list
--->
-                                        <!-- Previous Button -->
                                         {% if booking_codes.has_previous %}
                                             <li class="page-item">
-                                                <a class="page-link"
-                                                   href="?page={{ booking_codes.previous_page_number }}">
-                                                    <!--
-                            previous_page_number: automatically calculated
-                            by Django's paginator
-                        -->
-                                                    &laquo; Prev
-                                                </a>
+                                                <a class="page-link" href="?page={{ booking_codes.previous_page_number }}">&laquo; Prev</a>
                                             </li>
                                         {% else %}
                                             <li class="page-item disabled">
-                                                <!--
-                        disabled: Bootstrap class that greys out
-                        the button when there's no previous page
-                    -->
                                                 <span class="page-link">&laquo; Prev</span>
                                             </li>
                                         {% endif %}
-                                        <!-- Page Numbers -->
                                         {% for num in booking_codes.paginator.page_range %}
-                                            <!--
-                page_range: a list of all page numbers e.g [1, 2, 3, 4]
-                we loop through them to create numbered buttons
-            -->
                                             {% if booking_codes.number == num %}
                                                 <li class="page-item active">
-                                                    <!--
-                            active: Bootstrap class that highlights
-                            the current page number in blue
-                        -->
                                                     <span class="page-link">{{ num }}</span>
                                                 </li>
                                             {% else %}
@@ -156,16 +100,9 @@
                                                 </li>
                                             {% endif %}
                                         {% endfor %}
-                                        <!-- Next Button -->
                                         {% if booking_codes.has_next %}
                                             <li class="page-item">
-                                                <a class="page-link" href="?page={{ booking_codes.next_page_number }}">
-                                                    <!--
-                            next_page_number: automatically calculated
-                            by Django's paginator
-                        -->
-                                                    Next &raquo;
-                                                </a>
+                                                <a class="page-link" href="?page={{ booking_codes.next_page_number }}">Next &raquo;</a>
                                             </li>
                                         {% else %}
                                             <li class="page-item disabled">
@@ -181,25 +118,254 @@
             </div>
         </div>
     </section>
-    <!-- About Paragraph Section -->
-    <section class="py-4" style="background-color: ">
+
+    <!-- About / Long Intro Section (moved below table so users see codes first) -->
+    <section class="py-5" style="background-color: #f8f9fa;">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-md-8 col-lg-6">
-                    <h4 class="fw-bold mb-3" style="color: #1a1a2e;">About SureCodes24</h4>
-                    <p class="text-muted">
-                        SureCodes24 is your trusted daily source for free booking codes (or bet slip code)
-                        across all major betting platforms including Sportybet, Bet9ja, 1xBet, BetWinner
-                        and more. Our team picks high-value accumulators booking codes across the internet
-                        every day so you never miss a winning opportunity. All codes are tested before
-                        publishing. Bet responsibly. To be clear, we browse X, Facebook, SportyBet Code Hub, 
-                        Telegram channels etc. to get codes that we share with you. If there's a winning anywhere 
-                        we also share in it.
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4 text-center" style="color: #1a1a2e;">About SureCodes24</h2>
+                    <p>
+                        Looking for sure bet codes that actually deliver? You're in the right place. SureCodes24 publishes fresh, verified booking codes every single day across SportyBet, 1xBet, Bet9ja, BetWinner, and other major platforms. Whether you want low-odds banker codes for a safer play or high-odds accumulators for bigger wins, our daily list covers the full range — and every code is checked before it goes live on the page.
+                    </p>
+                    <p>
+                        We know how frustrating it is to load a booking code only to find it's expired, fake, or pulled from a random tweet with no track record. That's why we do the filtering for you. Our team monitors SportyBet's Code Hub, trusted Telegram channels, verified X tipsters, and Facebook betting communities, then tests codes before publishing them here. The result: a single, reliable page where you can grab today's best sure bet codes in seconds.
+                    </p>
+                    <p>
+                        This team is led by <a href="https://x.com/Emycybers">Emycyber</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <h2 class="fw-bold mb-4 text-center" style="color: #1a1a2e;">How SureCodes24 Works</h2>
+
+                    <h3 class="fw-bold mt-4 mb-3" style="color: #1a1a2e;">How to Use Our Booking Codes</h3>
+                    <p>
+                        Using a booking code is simple. Pick a code from today's list above, copy it, open your betting app (SportyBet, 1xBet, Bet9ja, or whichever platform matches), and paste it into the "Load Booking Code" or "Book a Bet" section, click on "Load". The slip will populate instantly with all the selections. From there, you can adjust your stake and place the bet — or remove selections you don't like.
+                    </p>
+
+                    <h3 class="fw-bold mt-4 mb-3" style="color: #1a1a2e;">Why Trust SureCodes24</h3>
+                    <p>Three things set us apart from the hundreds of random code-sharing accounts online:</p>
+                    <ul>
+                        <li><strong>Verification.</strong> We don't republish every code we see. Codes go through a quick sanity check — we look at the selections, the odds, and the source's track record before adding them to the site. We want you to have a good chance of winning when you play our game.</li>
+                        <li><strong>Consistency.</strong> New codes are posted daily. You don't need to refresh Twitter or beg admins in Telegram groups. Bookmark this page and check back each morning.</li>
+                        <li><strong>Transparency.</strong> We tell you exactly where codes come from. If a tipster on X shared it, we say so. If it's from SportyBet's official Code Hub, we say that too. No fake "insider" claims. If you're not cool with something do well to <a href="{% url 'contact' %}"> contact us</a></li>
+                    </ul>
+
+                    <h3 class="fw-bold mt-4 mb-3" style="color: #1a1a2e;">Low-Odds vs High-Odds Codes: Which Should You Play?</h3>
+                    <p>
+                        Our daily list includes both. Low-odds codes (1.50–3.00) are banker-style plays with a higher hit rate — good for building your bankroll steadily. High-odds codes (50.00 and above) are accumulators with bigger potential payouts but lower win probability. A balanced approach is to stake smaller amounts on high-odds codes and larger amounts on verified low-odds bankers. Never stake more than you can afford to lose, regardless of how "sure" a code looks.
+                    </p>
+
+                    <h3 class="fw-bold mt-4 mb-3" style="color: #1a1a2e;">VIP Section</h3>
+                    <p>
+                        For subscribers who want more than the free daily codes, our VIP section offers a curated selection of premium picks with deeper analysis. You can learn more on <a href="https://surecodes24.com/blog/how-our-vip-section-work/">how our VIP works</a>.
                     </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- FAQ Section with Accordion -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold" style="color: #1a1a2e;">Frequently Asked Questions</h2>
+                        <p class="text-muted">Everything you need to know about sure bet codes</p>
+                    </div>
+
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1-body">
+                                    What are sure bet codes?
+                                </button>
+                            </h3>
+                            <div id="faq1-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sure bet codes — also called booking codes or bet slip codes — are short alphanumeric codes generated by a bookmaker that lets you load a pre-built betting slip instantly. Instead of selecting each game manually, you paste the code and the full slip appears, ready to stake. "Sure" there means it should have a high chance of winning so most punters just choose to call it that.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-body">
+                                    Are the booking codes on SureCodes24 really free?
+                                </button>
+                            </h3>
+                            <div id="faq2-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes. Every code on the homepage is 100% free. No signup required, no payment. Our VIP section is optional and offers extra premium picks for subscribers, but the daily codes here are free forever.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3-body">
+                                    Which betting platforms do your codes work on?
+                                </button>
+                            </h3>
+                            <div id="faq3-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    We publish codes for SportyBet, 1xBet, Bet9ja, BetWinner, and other major bookmakers popular in Nigeria and across Africa. Each code in the table above shows which platform it belongs to — a SportyBet code won't work on 1xBet and vice versa.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4-body">
+                                    How often are new codes posted?
+                                </button>
+                            </h3>
+                            <div id="faq4-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Fresh codes are added every day, usually in the morning. We also update throughout the day when high-value codes come in from our sources.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5-body">
+                                    Can I really win with sure bet codes?
+                                </button>
+                            </h3>
+                            <div id="faq5-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No one can guarantee a win — anyone who claims 100% accuracy is lying. What we can promise is that the codes we share are verified, come from tracked sources, and represent genuine betting slips rather than random fakes. Always bet responsibly and treat betting as entertainment, not income.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq6">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6-body">
+                                    Why did my booking code expire?
+                                </button>
+                            </h3>
+                            <div id="faq6-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Most bookmakers set their booking codes to expire once the first match on the slip kicks off. That's why we recommend loading codes as soon as you see them, especially for same-day games.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq7">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7-body">
+                                    Do you offer predictions too?
+                                </button>
+                            </h3>
+                            <div id="faq7-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes. In addition to booking codes, we publish match predictions on our <a href="https://surecodes24.com/direct-win-prediction/">Direct Win Prediction page</a> and betting analysis on our <a href="/blog/">blog</a>.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header" id="faq8">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq8-body">
+                                    Is betting legal in Nigeria?
+                                </button>
+                            </h3>
+                            <div id="faq8-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Sports betting is legal and regulated in Nigeria. You must be 18 or older to place a bet. Please gamble responsibly.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Schema Markup for Google Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a sure bet code?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A sure bet code — also called a booking code or bet slip code — is a short alphanumeric code generated by a bookmaker that lets you load a pre-built betting slip instantly. Instead of selecting each game manually, you paste the code and the full slip appears, ready to stake."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the booking codes on SureCodes24 really free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every code on the homepage is 100% free. No signup required, no payment. Our VIP section is optional and offers extra premium picks for subscribers, but the daily codes here are free forever."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which betting platforms do your codes work on?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We publish codes for SportyBet, 1xBet, Bet9ja, BetWinner, and other major bookmakers popular in Nigeria and across Africa. Each code in the table above shows which platform it belongs to."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often are new codes posted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Fresh codes are added every day, usually in the morning. We also update throughout the day when high-value codes come in from our sources."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I really win with sure bet codes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No one can guarantee a win. What we can promise is that the codes we share are verified, come from tracked sources, and represent genuine betting slips rather than random fakes. Always bet responsibly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did my booking code expire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most bookmakers set their booking codes to expire once the first match on the slip kicks off. That's why we recommend loading codes as soon as you see them, especially for same-day games."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer predictions too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. In addition to booking codes, we publish match predictions on our Direct Win Prediction page and betting analysis on our blog."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is betting legal in Nigeria?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sports betting is legal and regulated in Nigeria. You must be 18 or older to place a bet. Please gamble responsibly."
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Latest Blog Posts Section -->
     <section class="py-5" style="background-color: #e9f5ff;">
         <div class="container">
@@ -218,8 +384,7 @@
                                     <img src="{{ post_image.url }}"
                                          class="card-img-top"
                                          alt="{{ post.title }}"
-                                         style="height: 200px;
-                                                object-fit: cover">
+                                         style="height: 200px; object-fit: cover">
                                 {% else %}
                                     <div class="bg-primary d-flex align-items-center justify-content-center"
                                          style="height: 200px">
@@ -248,42 +413,40 @@
             {% endif %}
         </div>
     </section>
+
     <script>
     const rows = document.querySelectorAll('#booking-table tbody tr');
 
-rows.forEach(row => {
-    const oddsCell = row.querySelectorAll('td')[2];
-    if (!oddsCell) return;
+    rows.forEach(row => {
+        const oddsCell = row.querySelectorAll('td')[2];
+        if (!oddsCell) return;
 
-    const oddsSpan = oddsCell.querySelector('.odds-value');
-    if (!oddsSpan) return;
+        const oddsSpan = oddsCell.querySelector('.odds-value');
+        if (!oddsSpan) return;
 
-    const finalValue = parseFloat(oddsSpan.textContent.replace(/[^0-9.]/g, '').trim());
-    // replace(/[^0-9.]/g, ''): removes everything that is NOT
-    // a number or decimal point before parsing
-    // this handles any emoji or text that might be in the span
-    
-    if (isNaN(finalValue)) return;
+        const finalValue = parseFloat(oddsSpan.textContent.replace(/[^0-9.]/g, '').trim());
 
-    let animation;
+        if (isNaN(finalValue)) return;
 
-    row.addEventListener('mouseenter', () => {
-        let current = 1;
-        clearInterval(animation);
-        animation = setInterval(() => {
-            current += finalValue / 20;
-            if (current >= finalValue) {
-                current = finalValue;
-                clearInterval(animation);
-            }
-            oddsSpan.textContent = current.toFixed(2);
-        }, 30);
+        let animation;
+
+        row.addEventListener('mouseenter', () => {
+            let current = 1;
+            clearInterval(animation);
+            animation = setInterval(() => {
+                current += finalValue / 20;
+                if (current >= finalValue) {
+                    current = finalValue;
+                    clearInterval(animation);
+                }
+                oddsSpan.textContent = current.toFixed(2);
+            }, 30);
+        });
+
+        row.addEventListener('mouseleave', () => {
+            clearInterval(animation);
+            oddsSpan.textContent = finalValue.toFixed(2);
+        });
     });
-
-    row.addEventListener('mouseleave', () => {
-        clearInterval(animation);
-        oddsSpan.textContent = finalValue.toFixed(2);
-    });
-});
     </script>
 {% endblock content %}
