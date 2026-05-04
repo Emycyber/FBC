@@ -13,6 +13,17 @@
   gtag('config', 'G-9Y39NZKLJP');
 </script>
 
+{% comment %} OneSignal {% endcomment %}
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "024e5d93-948f-468c-ac41-e628d4dd9987",
+    });
+  });
+</script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   

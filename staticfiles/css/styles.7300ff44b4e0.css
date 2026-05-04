@@ -35,7 +35,7 @@ footer {
 
 /* Hero Section with Background Image */
 .hero-section {
-  background-image: url("../images/hero.jpg");
+  background-image: url("../images/hero.80b065e0aa94.jpg");
   /* url path is relative to the CSS file location */
   background-size: cover;
   /* cover: image fills the entire hero area without stretching */
