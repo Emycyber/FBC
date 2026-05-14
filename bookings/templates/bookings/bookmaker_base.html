@@ -1,0 +1,203 @@
+{% extends 'bookings/base.html' %}
+{% load static %}
+
+{% block title %}{{ seo_title }}{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-5">
+        <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px;">
+            🎟️ FREE BOOKING CODES
+        </span>
+        <h1 class="display-5 fw-bold text-white mb-3">
+            {{ company_name }} Booking Codes Today
+        </h1>
+        <p class="text-secondary fs-5">
+            Free daily verified {{ company_name }} booking codes.
+            Updated every morning before 10am.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap mt-4">
+            <a href="{% url 'pricing' %}"
+               class="btn btn-warning btn-lg px-4"
+               style="color: #1a1a2e; font-weight: 700;">
+                👑 Get VIP Codes
+            </a>
+            <a href="{% url 'homepage' %}"
+               class="btn btn-outline-light btn-lg px-4">
+                View All Codes
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Booking Codes Table -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color: #1a1a2e;">
+                Today's {{ company_name }} Booking Codes
+            </h2>
+            <p class="text-muted">
+                All codes are verified and ready to load
+            </p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="table-responsive shadow-sm rounded">
+                    <table class="table table-bordered table-hover mb-0 text-center"
+                           id="booking-table">
+                        <thead>
+                            <tr>
+                                <th class="py-3">📅 Date</th>
+                                <th class="py-3">🎟️ Booking Code</th>
+                                <th class="py-3">📊 Odds</th>
+                            </tr>
+                            <!--
+                                No company column needed here
+                                since this page is already for one company
+                            -->
+                        </thead>
+                        <tbody>
+                            {% if booking_codes %}
+                                {% for code in booking_codes %}
+                                    <tr>
+                                        <td>{{ code.date }}</td>
+                                        <td>
+                                            <span class="booking-code-badge">
+                                                📖 {{ code.booking_code }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="odds-value">
+                                                {{ code.accumulated_odds }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-4">
+                                        No {{ company_name }} codes available yet.
+                                        Check back soon!
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                {% if booking_codes.has_other_pages %}
+                    <div class="d-flex justify-content-center mt-4">
+                        <nav>
+                            <ul class="pagination">
+                                {% if booking_codes.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="?page={{ booking_codes.previous_page_number }}">
+                                            &laquo; Prev
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                {% for num in booking_codes.paginator.page_range %}
+                                    <li class="page-item {% if booking_codes.number == num %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                                    </li>
+                                {% endfor %}
+                                {% if booking_codes.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           href="?page={{ booking_codes.next_page_number }}">
+                                            Next &raquo;
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="py-4" style="background-color: #e9f5ff;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm p-4">
+                    <h2 class="fw-bold mb-3" style="color: #1a1a2e; font-size: 1.3rem;">
+                        About Our {{ company_name }} Booking Codes
+                    </h2>
+                    <div class="text-muted" style="line-height: 1.8;">
+                        {% block about_text %}{% endblock %}
+                        <!--
+                            about_text: each bookmaker page fills
+                            this block with unique content for SEO
+                        -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <h3 class="fw-bold text-center mb-5" style="color: #1a1a2e;">
+                    ❓ Frequently Asked Questions
+                </h3>
+                <div class="accordion" id="faqAccordion">
+                    {% for item in faq %}
+                        <div class="accordion-item border-0 shadow-sm mb-3 rounded">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button {% if not forloop.first %}collapsed{% endif %} rounded fw-semibold"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#faq{{ forloop.counter }}">
+                                    {{ item.question }}
+                                </button>
+                            </h2>
+                            <div id="faq{{ forloop.counter }}"
+                                 class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+                                 data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-muted">
+                                    {{ item.answer }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center">
+        <h3 class="fw-bold text-white mb-3">
+            Want Higher Odds? Try VIP! 👑
+        </h3>
+        <p class="text-secondary mb-4">
+            Get exclusive VIP codes with 1.8 to 2.5 odds daily.
+            8 out of 10 days winning rate!
+        </p>
+        <a href="{% url 'pricing' %}"
+           class="btn btn-warning btn-lg px-5 py-3"
+           style="color: #1a1a2e; font-weight: 700;">
+            View VIP Plans →
+        </a>
+    </div>
+</section>
+
+{% endblock content %}

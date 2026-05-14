@@ -13,4 +13,11 @@ urlpatterns = [
     path('pricing/', views.pricing, name='pricing'),
     path('direct-win-prediction/', views.predictions, name='predictions'),
     # ← add this
+    
+    
+    path('sportybet-booking-codes/', views.sportybet, name='sportybet'),
+    path('bet9ja-booking-codes/', views.bet9ja, name='bet9ja'),
+    path('1xbet-booking-codes/', views.bet1xbet, name='1xbet'),
+    path('betwinner-booking-codes/', views.betwinner, name='betwinner'),
+    path('msport-booking-codes/', views.msport, name='msport'),
 ]

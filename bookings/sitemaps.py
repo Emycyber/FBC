@@ -16,6 +16,12 @@ class StaticViewSitemap(Sitemap):
             'partners',
             'pricing',
             'predictions',
+            'sportybet',
+            'bet9ja',
+            '1xbet',
+            'betwinner',
+            'msport',
+            # ← add all bookmaker pages
         ]
 
     def location(self, item):

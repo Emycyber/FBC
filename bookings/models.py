@@ -4,22 +4,29 @@ from wagtail.models import Page
 
 
 class BettingCompany(models.Model):
-    # A separate model to store each betting company
-    # This allows each company to have a name AND a logo
-
     name = models.CharField(max_length=100)
-    # The company name e.g "Sportybet", "Bet9ja"
-
     logo = models.ImageField(
         upload_to='company_logos/',
-        # upload_to: folder inside MEDIA_ROOT where logos are saved
-        # uploaded logos go to media/company_logos/
         null=True,
         blank=True,
-        # null=True blank=True: logo is optional
-        # company can exist without a logo
+    )
+    slug = models.SlugField(
+        max_length=100,
+        unique=True,
+        null=True,
+        blank=True,
+        help_text='URL friendly name e.g sportybet-booking-codes'
+        # slug: used to match company to its landing page URL
+        # e.g company with slug "sportybet-booking-codes"
+        # automatically appears on /sportybet-booking-codes/
     )
 
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Betting Companies'
+
+    def __str__(self):
+        return self.name
     class Meta:
         ordering = ['name']
         verbose_name_plural = 'Betting Companies'
