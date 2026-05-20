@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
+
 # Importing views from the current bookings app
 # The dot (.) means "from this same folder/app"
 
@@ -20,4 +22,9 @@ urlpatterns = [
     path('1xbet-booking-codes/', views.bet1xbet, name='1xbet'),
     path('betwinner-booking-codes/', views.betwinner, name='betwinner'),
     path('msport-booking-codes/', views.msport, name='msport'),
+    
+    path('robots.txt', TemplateView.as_view(
+        template_name='robots.txt',
+        content_type='text/plain',
+    ), name='robots'),
 ]

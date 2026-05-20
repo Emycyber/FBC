@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /django-admin/
+Disallow: /django-admin/api-football/
+
+Sitemap: https://surecodes24.com/sitemap.xml

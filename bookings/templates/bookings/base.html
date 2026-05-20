@@ -155,6 +155,16 @@
 
     <meta name="google-site-verification" content="cuw15vW2zEwAMh8EGmHyd3DGmtAzVPg5z5OS-q-QvVE" />
 
+{% block robots %}
+    <meta name="robots" content="index, follow">
+    <!--
+        default: all pages are indexed by Google
+        individual templates override this block
+        to noindex specific pages
+    -->
+{% endblock robots %}
+
+
   </head>
   <body style="background: #f8f9fa">
     <!-- Navbar -->

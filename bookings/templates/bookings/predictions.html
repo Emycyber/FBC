@@ -44,8 +44,6 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
 
         {% if leagues %}
             {% for league_name, league in leagues.items %}
-
-                <!-- League Header -->
                 <div class="card border-0 shadow-sm mb-3">
                     <div class="card-header d-flex align-items-center gap-3 py-3"
                          style="background: #1a1a2e;">
@@ -59,8 +57,6 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
                             {{ league.name }}
                         </h6>
                     </div>
-
-                    <!-- Predictions Table -->
                     <div class="table-responsive">
                         <table class="table table-hover mb-0">
                             <thead style="background-color: #f8f9fa;">
@@ -75,13 +71,9 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
                             <tbody>
                                 {% for prediction in league.predictions %}
                                     <tr class="align-middle">
-
-                                        <!-- Time -->
                                         <td class="text-muted small py-3">
                                             {{ prediction.match_time|time:"H:i" }}
                                         </td>
-
-                                        <!-- Teams with logos -->
                                         <td class="py-3">
                                             <div class="d-flex align-items-center gap-2 mb-1">
                                                 {% if prediction.home_team_logo %}
@@ -106,83 +98,38 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
                                                 </span>
                                             </div>
                                         </td>
-
-                                        <!-- Tip -->
                                         <td class="text-center py-3">
                                             <span class="badge bg-primary px-3 py-2">
                                                 {{ prediction.tip }}
                                             </span>
                                         </td>
-
-                                        <!-- Odds -->
                                         <td class="text-center py-3">
-                                            <span class="fw-bold"
-                                                  style="color: #198754;">
+                                            <span class="fw-bold" style="color: #198754;">
                                                 {{ prediction.odds }}
                                             </span>
                                         </td>
-
-                                        <!-- Result -->
                                         <td class="text-center py-3">
                                             {% if prediction.result == 'won' %}
-                                                <span class="fw-bold"
-                                                      style="color: #198754;">
+                                                <span class="fw-bold" style="color: #198754;">
                                                     ✅ WON
                                                 </span>
                                             {% elif prediction.result == 'lost' %}
-                                                <span class="fw-bold"
-                                                      style="color: #dc3545;">
+                                                <span class="fw-bold" style="color: #dc3545;">
                                                     ❌ LOST
                                                 </span>
                                             {% else %}
-                                                <span class="fw-bold"
-                                                      style="color: #fd7e14;">
+                                                <span class="fw-bold" style="color: #fd7e14;">
                                                     ⏳ PENDING
                                                 </span>
                                             {% endif %}
                                         </td>
-
                                     </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             {% endfor %}
-
-             <div class="row justify-content-center mt-4">
-                <div class="col-12 col-lg-10">
-                    <div class="card border-0 shadow-sm p-4">
-                        <h2 class="fw-bold mb-3" style="color: #1a1a2e; font-size: 1.3rem;">
-                            Direct Win Prediction
-                        </h2>
-                        <div class="text-muted" style="line-height: 1.8;">
-                            <p>The idea to bring this page to you was simply because though the free bet codes
-                            on our <a href="https://surecodes24.com/"> homepage </a> is really helpful some of us would also want 
-                            to see the games directly and maybe book them ourselves. </p>
-
-                            <p>It could be home win or away win. Nonetheless, our predictions are well researched to give you
-                                an edge and put you in greens in the long run.
-                            </p>
-
-                            <p>Predictions are updated daily by 7GMT.</p>
-                            <h3>Why Trust Us</h3>
-                            <P>We are a team of punters headed by Emem you <a href="https://x.com/Emycybers"> can connect with me on X.</a>
-                                Predicting direct win often appear simple because most of the time a stronger 
-                                team is easy to spot. But to be profitable you need a strategy, we have a special
-                                strategy to help you win more than you lose.
-                            </P>
-                            <h3>Best Strategy Here</h3>
-                            <p>A lot of people fancy the acca bets which promises a lot in return but it's hardly 
-                                a good idea if you want to win consistently and keep a good record considering your bankroll.
-                                In this section of our bet we encourage punters to bet our games as Singles. By that way you win and
-                                it's easy to not blow your account.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         {% else %}
             <div class="text-center py-5">
@@ -197,6 +144,46 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
             </div>
         {% endif %}
 
+    </div>
+</section>
+
+<!-- About Section - OUTSIDE if block so it always shows -->
+<section class="py-4" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="card border-0 shadow-sm p-4">
+                    <h2 class="fw-bold mb-3" style="color: #1a1a2e; font-size: 1.3rem;">
+                        Direct Win Prediction
+                    </h2>
+                    <div class="text-muted" style="line-height: 1.8;">
+                        <p>The idea to bring this page to you was simply because though the free bet codes
+                        on our <a href="https://surecodes24.com/">homepage</a> is really helpful some of us
+                        would also want to see the games directly and maybe book them ourselves.</p>
+
+                        <p>It could be home win or away win. Nonetheless, our predictions are well researched
+                        to give you an edge and put you in greens in the long run.</p>
+
+                        <p>Predictions are updated daily by 7GMT.</p>
+
+                        <h3>Why Trust Us</h3>
+                        <p>We are a team of punters headed by Emem you
+                            <a href="https://x.com/Emycybers">can connect with me on X.</a>
+                            Predicting direct win often appear simple because most of the time a stronger
+                            team is easy to spot. But to be profitable you need a strategy, we have a special
+                            strategy to help you win more than you lose.
+                        </p>
+
+                        <h3>Best Strategy Here</h3>
+                        <p>A lot of people fancy the acca bets which promises a lot in return but it's hardly
+                            a good idea if you want to win consistently and keep a good record considering
+                            your bankroll. In this section of our bet we encourage punters to bet our games
+                            as Singles. By that way you win and it's easy to not blow your account.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 

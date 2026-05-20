@@ -1,4 +1,9 @@
 {% extends 'bookings/base.html' %}
+
+{% block robots %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock robots %}
+
 {% load crispy_forms_tags %}
 
 {% block title %}Register - SureCodes24{% endblock %}

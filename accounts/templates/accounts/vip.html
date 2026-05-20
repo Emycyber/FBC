@@ -1,5 +1,11 @@
 {% extends 'bookings/base.html' %}
 {% load static %}
+
+{% block robots %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock robots %}
+
+
 {% block title %}VIP Codes - SureCodes24{% endblock %}
 {% block content %}
     <!-- Hero -->
