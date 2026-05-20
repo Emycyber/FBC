@@ -26,96 +26,66 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
 
     <!-- SEO Meta Tags -->
 {% if page %}
-    <!-- Title -->
-    <title>
-        {% if page.seo_title %}
-            {{ page.seo_title }}
-        {% else %}
-            <title>{% if seo_title %}{{ seo_title }}{% else %}SureCodes24{% endif %}</title>
-            <meta name="description"
-            content="{% if seo_description %}{{ seo_description }}{% else %}SureCodes24 - Free Bet Codes{% endif %}">
+    <!-- Wagtail page (blog posts, etc.) -->
+    <title>{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }} | SureCodes24{% endif %}</title>
 
-        {% endif %}
-    </title>
-    <!--
-        seo_title: custom title set in Wagtail admin Promote tab
-        falls back to page.title if no SEO title is set
-    -->
+    <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}SureCodes24 - Free Bet Codes{% endif %}">
 
-    <!-- Meta Description -->
-    {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}">
-        <!--
-            search_description: set in Wagtail admin Promote tab
-            shown as the grey text under your link in Google results
-            keep it between 150-160 characters for best results
-        -->
-    {% endif %}
+    <link rel="canonical" href="{{ page.full_url }}">
 
-    <!-- Open Graph Tags (Facebook, WhatsApp previews) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title"
-          content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
-    <meta property="og:description"
-          content="{{ page.search_description }}">
+    <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
+    <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}SureCodes24 - Free Bet Codes{% endif %}">
     <meta property="og:url" content="{{ page.full_url }}">
-    <!--
-        og: tags control how your page looks when shared on
-        Facebook, WhatsApp and other social platforms
-        They show a preview card with title, description and image
-    -->
 
     {% if page.banner_image %}
         {% load wagtailimages_tags %}
         {% image page.banner_image width-1200 as og_image %}
         <meta property="og:image" content="{{ og_image.url }}">
-        <!--
-            og:image: the image shown in social media preview cards
-            width-1200: recommended size for social sharing
-        -->
+    {% else %}
+        <meta property="og:image" content="https://surecodes24.com{% static 'images/logo.png' %}">
     {% endif %}
 
-    <!-- Twitter Card Tags -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <!--
-        summary_large_image: shows a large image preview on Twitter
-        instead of a small thumbnail
-    -->
-    <meta name="twitter:title"
-          content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
-    <meta name="twitter:description"
-          content="{{ page.search_description }}">
+    <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}SureCodes24 - Free Bet Codes{% endif %}">
 
 {% else %}
-    <!-- Default tags for non-Wagtail pages like homepage -->
+    <!-- Non-Wagtail pages (homepage, predictions, contact, etc.) -->
     <title>{% block title %}SureCodes24{% endblock %}</title>
-    <meta name="description"
-          content="SureCodes24 - Your trusted daily source for free bet codes across all major betting platforms in the world.">
-    <meta property="og:title" content="SureCodes24 - Free Bet Codes">
-    <meta property="og:description"
-          content="Fresh verified booking codes updated daily across Sportybet, Bet9ja, 1xBet and more.">
+
+    <meta name="description" content="{% block meta_description %}SureCodes24 - Your trusted daily source for free bet codes across all major betting platforms in the world.{% endblock %}">
+
+    <link rel="canonical" href="{% block canonical %}https://surecodes24.com{{ request.path }}{% endblock %}">
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://surecodes24.com">
+    <meta property="og:title" content="{% block og_title %}SureCodes24 - Free Bet Codes{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Fresh verified booking codes updated daily across Sportybet, Bet9ja, 1xBet and more.{% endblock %}">
+    <meta property="og:url" content="https://surecodes24.com{{ request.path }}">
+    <meta property="og:image" content="https://surecodes24.com{% static 'images/logo.png' %}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block og_title_twitter %}SureCodes24 - Free Bet Codes{% endblock %}">
+    <meta name="twitter:description" content="{% block og_description_twitter %}Fresh verified booking codes updated daily across Sportybet, Bet9ja, 1xBet and more.{% endblock %}">
 {% endif %}
 
-<!-- Common Meta Tags for all pages -->
-<meta name="robots" content="index, follow">
-<!--
-    robots: tells Google to index this page and follow its links
-    index: include in search results
-    follow: follow links on this page
--->
+<!-- Common Meta Tags -->
 <meta name="author" content="SureCodes24">
-<meta name="keywords"
-      content="booking codes, free bet codes, sportybet codes, bet9ja codes, 1xbet codes, betwinner codes, msport codes">
-<!--
-    keywords: not heavily used by Google anymore
-    but still good practice to include
--->
+
+<meta name="google-site-verification" content="cuw15vW2zEwAMh8EGmHyd3DGmtAzVPg5z5OS-q-QvVE" />
+
+{% block robots %}
+    <meta name="robots" content="index, follow">
+{% endblock robots %}
+
 
     <!-- Bootstrap CSS -->
     <link
@@ -128,63 +98,28 @@
       rel="stylesheet" />
 
       <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
-<!--
-    rel="icon": tells browser this is the tab icon
-    type="image/x-icon": favicon file type
--->
-
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
 <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
-<!--
-    sizes: browser picks the best size for the display
--->
-
 <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
-<!--
-    apple-touch-icon: icon shown when someone saves your
-    site to their iPhone or iPad home screen
--->
-
-
-    <meta name="google-site-verification" content="cuw15vW2zEwAMh8EGmHyd3DGmtAzVPg5z5OS-q-QvVE" />
-
-{% block robots %}
-    <meta name="robots" content="index, follow">
-    <!--
-        default: all pages are indexed by Google
-        individual templates override this block
-        to noindex specific pages
-    -->
-{% endblock robots %}
 
 
   </head>
   <body style="background: #f8f9fa">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-white sticky-top py-3">
-      <!--
-            navbar-expand-lg: collapses to hamburger on screens smaller than lg
-            sticky-top: stays at top of screen while scrolling
-            bg-white: clean white background
-        -->
       <div class="container">
         <a class="navbar-brand" href="{% url 'homepage' %}">
     <img src="{% static 'images/logo.png' %}"
          alt="SureCodes24 Logo"
          height="45"
          style="object-fit: contain;">
-    <!--
-        height 45: fits neatly in the navbar
-        object-fit contain: shows full logo without cropping
-        adjust height to your preference
-    -->
       </a>
 
         <button
@@ -196,7 +131,6 @@
           aria-expanded="false"
           aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-          <!-- Hamburger icon for mobile -->
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -244,30 +178,20 @@
         </div>
 
 
-        
+
       </div>
     </nav>
 
     <!-- Page Content -->
     {% block content %} {% endblock content %}
-    <!-- Each page fills this block with its own content -->
 
     <!-- Footer -->
     <footer class="py-5 mt-5">
       <div class="container">
         <div class="row g-4">
-          <!--
-            row: Bootstrap grid row
-            g-4: gap between columns so they don't touch each other
-          -->
 
           <!-- Column 1: Brand + Tagline -->
           <div class="col-12 col-sm-6 col-lg-3">
-            <!--
-              col-12: full width on mobile (stacks vertically)
-              col-sm-6: two columns per row on tablets
-              col-lg-3: four columns per row on desktop (12 / 4 = 3)
-            -->
             <img src="{% static 'images/logo.png' %}"
      alt="SureCodes24 Logo"
      height="50"
@@ -277,7 +201,6 @@
               Your trusted daily source for verified booking codes across all
               major betting platforms. Fresh codes every day.
             </p>
-            <!-- Tagline gives visitors a quick understanding of the site -->
           </div>
 
           <!-- Column 2: Quick Links -->
@@ -286,13 +209,8 @@
               class="fw-bold text-white mb-3 text-uppercase"
               style="letter-spacing: 1px">
               Quick Links
-              <!-- text-uppercase + letter-spacing gives a clean section header look -->
             </h6>
             <ul class="list-unstyled">
-              <!--
-                list-unstyled: removes default bullet points and padding
-                from the ul element
-              -->
               <li class="mb-2">
                 <a
                   href="{% url 'homepage' %}"
@@ -350,7 +268,6 @@
                   class="text-secondary text-decoration-none footer-link">
                   surecodes24@gmail.com
                 </a>
-                <!-- mailto: opens the user's email app when clicked -->
               </li>
               <li class="mb-2 text-secondary small">
                   <i class="fa-solid fa-phone" style="color: rgb(70, 112, 186);"></i>                <a
@@ -358,7 +275,6 @@
                   class="text-secondary text-decoration-none footer-link">
                   +234 810 409 4348
                 </a>
-                <!-- tel: opens the phone dialer on mobile when clicked -->
               </li>
               <li class="mb-2 text-secondary small"> <i class="fa-solid fa-location-dot" style="color: rgb(70, 112, 186);"></i> Lagos, Nigeria</li>
             </ul>
@@ -377,7 +293,6 @@
               responsibly and within your means.
             </p>
             <span class="badge bg-danger small">18+ Only</span>
-            <!-- Red badge to emphasize the age restriction clearly -->
           </div>
         </div>
 
@@ -388,32 +303,16 @@
     <div class="col-12">
         <hr style="border-color: rgba(255,255,255,0.1);">
         <div class="d-flex flex-wrap gap-1 align-items-center">
-            <!--
-                d-flex flex-wrap: places links side by side
-                and wraps to next line when screen is too small
-                gap-1: small space between links
-            -->
             <span class="text-secondary small me-2 fw-bold">Links:</span>
-            <!--
-                "Links:" label at the start matching the screenshot
-            -->
             {% for link in footer_links %}
                 <a href="{{ link.url }}"
                    target="_blank"
                    class="text-secondary text-decoration-none small footer-link"
                    style="white-space: nowrap;">
-                    <!--
-                        target="_blank": opens link in new tab
-                        white-space nowrap: prevents link text from breaking
-                    -->
                     {{ link.title }}
                     {% if not forloop.last %}
                         <span class="text-secondary mx-1">|</span>
                     {% endif %}
-                    <!--
-                        forloop.last: checks if this is the last link
-                        adds | separator between links but not after the last one
-                    -->
                 </a>
             {% endfor %}
         </div>
@@ -423,10 +322,6 @@
 
         <!-- Bottom Bar -->
         <hr style="border-color: rgba(255, 255, 255, 0.1)" class="mt-4" />
-        <!--
-          hr: horizontal divider line
-          low opacity white color so it's subtle on the dark background
-        -->
         <div class="text-center">
           <p class="text-secondary small mb-0">
             SureCodes24 &copy; {{ today_year }} — All rights reserved.
