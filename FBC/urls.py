@@ -7,7 +7,6 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from bookings.sitemaps import StaticViewSitemap, WagtailSitemap
-from bookings.api_admin_views import api_football_view
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -15,8 +14,6 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('django-admin/api-football/', api_football_view, name='api_football'),
-    # ✅ must come before django-admin/
 
     path('django-admin/', admin.site.urls),
     # ✅ correct django admin URL

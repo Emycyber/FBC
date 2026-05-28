@@ -47,114 +47,54 @@
 </section>
 
 <!-- Predictions -->
-<section class="py-4">
+<section class="py-3">
     <div class="container">
 
-        {% if leagues %}
-            {% for league_name, league in leagues.items %}
-                <div class="card border-0 shadow-sm mb-3">
-                    <div class="card-header d-flex align-items-center gap-3 py-3"
-                         style="background: #1a1a2e;">
-                        {% if league.logo %}
-                            <img src="{{ league.logo }}"
-                                 height="30"
-                                 alt="{{ league.name }}"
-                                 style="object-fit: contain;">
-                        {% endif %}
-                        <h6 class="fw-bold text-white mb-0">
-                            {{ league.name }}
-                        </h6>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                            <thead style="background-color: #f8f9fa;">
-                                <tr>
-                                    <th class="text-muted small py-2">Time</th>
-                                    <th class="text-muted small py-2">Match</th>
-                                    <th class="text-center text-muted small py-2">Tip</th>
-                                    <th class="text-center text-muted small py-2">Odds</th>
-                                    <th class="text-center text-muted small py-2">Result</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for prediction in league.predictions %}
-                                    <tr class="align-middle">
-                                        <td class="text-muted small py-3">
-                                            {{ prediction.match_time|time:"H:i" }}
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="table-responsive shadow-sm rounded">
+                    <table class="table table-bordered table-hover mb-0 text-center">
+                        <thead style="background: #1a1a2e;">
+                            <tr>
+                                <th class="text-black py-3"> Date</th>
+                                <th class="text-black py-3"> Match</th>
+                                <th class="text-black py-3"> Tip</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if direct_predictions %}
+                                {% for prediction in direct_predictions %}
+                                    <tr>
+                                        <td class="py-3">
+                                            {{ prediction.date|date:"M d, Y" }}
+                                        </td>
+                                        <td class="py-3 fw-semibold">
+                                            {{ prediction.match }}
                                         </td>
                                         <td class="py-3">
-                                            <div class="d-flex align-items-center gap-2 mb-1">
-                                                {% if prediction.home_team_logo %}
-                                                    <img src="{{ prediction.home_team_logo }}"
-                                                         height="20"
-                                                         alt="{{ prediction.home_team }}"
-                                                         style="object-fit: contain;">
-                                                {% endif %}
-                                                <span class="fw-semibold small">
-                                                    {{ prediction.home_team }}
-                                                </span>
-                                            </div>
-                                            <div class="d-flex align-items-center gap-2">
-                                                {% if prediction.away_team_logo %}
-                                                    <img src="{{ prediction.away_team_logo }}"
-                                                         height="20"
-                                                         alt="{{ prediction.away_team }}"
-                                                         style="object-fit: contain;">
-                                                {% endif %}
-                                                <span class="fw-semibold small">
-                                                    {{ prediction.away_team }}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td class="text-center py-3">
                                             <span class="badge bg-primary px-3 py-2">
                                                 {{ prediction.tip }}
                                             </span>
                                         </td>
-                                        <td class="text-center py-3">
-                                            <span class="fw-bold" style="color: #198754;">
-                                                {{ prediction.odds }}
-                                            </span>
-                                        </td>
-                                        <td class="text-center py-3">
-                                            {% if prediction.result == 'won' %}
-                                                <span class="fw-bold" style="color: #198754;">
-                                                    ✅ WON
-                                                </span>
-                                            {% elif prediction.result == 'lost' %}
-                                                <span class="fw-bold" style="color: #dc3545;">
-                                                    ❌ LOST
-                                                </span>
-                                            {% else %}
-                                                <span class="fw-bold" style="color: #fd7e14;">
-                                                    ⏳ PENDING
-                                                </span>
-                                            {% endif %}
-                                        </td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                            {% else %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted py-4">
+                                        No predictions for {{ selected_date|date:"M d, Y" }}.
+                                        Check back soon!
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
                 </div>
-            {% endfor %}
-
-        {% else %}
-            <div class="text-center py-5">
-                <div style="font-size: 3rem;">⚽</div>
-                <h4 class="fw-bold mt-3" style="color: #1a1a2e;">
-                    No predictions available for this date
-                </h4>
-                <p class="text-muted">
-                    No predictions for {{ selected_date|date:"M d, Y" }}.
-                    New direct win predictions are posted daily by 7AM GMT — check back soon or browse another day above.
-                </p>
-                <a href="{% url 'predictions' %}" class="btn btn-primary mt-3">View Today's Predictions →</a>
             </div>
-        {% endif %}
+        </div>
 
     </div>
 </section>
+
 
 <!-- What Is a Direct Win Prediction -->
 <section class="py-3" style="background-color: #f8f9fa;">
