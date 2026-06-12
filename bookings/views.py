@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import BookingCode, FooterLink, Partner, VIPCode, DirectWinPrediction
+from .models import BookingCode, FooterLink, Partner, VIPCode, DirectWinPrediction, BettingCompany
 from datetime import date, timedelta
 from blog.models import BlogDetailPage
 from django.core.paginator import Paginator
@@ -15,13 +15,17 @@ def homepage(request):
 
     latest_posts = BlogDetailPage.objects.live().order_by('-first_published_at')[:3]
 
+    companies = BettingCompany.objects.all()
+    # fetches all betting companies to show as cards on homepage
+
     context = {
         'booking_codes': booking_codes,
         'todays_codes': todays_codes,
         'latest_posts': latest_posts,
+        'companies': companies,
         'today_year': today.year,
         'seo_title': 'SureCodes24 - Daily Booking Codes Nigeria',
-        'seo_description': 'Get free daily verified booking codes for Sportybet, Bet9ja, 1xBet and more. High odds accumulators updated every day.',
+        'seo_description': 'Get free daily verified booking codes for Sportybet, Bet9ja, 1xBet and more.',
     }
     return render(request, 'bookings/homepage.html', context)
 

@@ -118,6 +118,66 @@
         </div>
     </section>
 
+
+<!-- Bookmaker Pages Section -->
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color: #1a1a2e;">
+                🎟️ Browse By Bookmaker
+            </h2>
+            <p class="text-muted">
+                Find booking codes for your favourite betting platform
+            </p>
+        </div>
+
+        <div class="row g-3 justify-content-center">
+            {% for company in companies %}
+                <div class="col-6 col-md-4 col-lg-2">
+                    <a href="/{{ company.slug }}/"
+                       class="text-decoration-none">
+                        <!--
+                            company.slug: e.g "sportybet-booking-codes"
+                            generates the correct URL automatically
+                            for each company
+                        -->
+                        <div class="card border-0 shadow-sm text-center p-3 h-100 bookmaker-card">
+                            {% if company.logo %}
+                                <img src="{{ company.logo.url }}"
+                                     height="40"
+                                     alt="{{ company.name }}"
+                                     style="object-fit: contain;">
+                                <!--
+                                    shows logo if uploaded in admin
+                                -->
+                            {% else %}
+                                <div style="font-size: 2rem;">🎯</div>
+                                <!--
+                                    falls back to emoji if no logo
+                                -->
+                            {% endif %}
+                            <p class="fw-bold mb-0 mt-2 small"
+                               style="color: #1a1a2e;">
+                                {{ company.name }}
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <p class="text-muted text-center">
+                    No bookmakers added yet.
+                </p>
+                <!--
+                    empty: shows this if no companies exist in database
+                -->
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+               
+        
     <!-- About / Long Intro Section (moved below table so users see codes first) -->
     <section class="py-5" style="background-color: #f8f9fa;">
         <div class="container">

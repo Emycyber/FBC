@@ -333,3 +333,18 @@ footer {
 #vip-table tbody tr:hover td {
   background-color: #0d1a10 !important;
 }
+
+/* Bookmaker Cards */
+.bookmaker-card {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 2px solid transparent !important;
+}
+
+.bookmaker-card:hover {
+  transform: translateY(-4px);
+  /* slight upward movement on hover */
+  border: 2px solid #0d6efd !important;
+  /* blue border on hover */
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.15) !important;
+}
