@@ -1,7 +1,7 @@
 {% extends 'bookings/base.html' %}
 {% load wagtailimages_tags %}
 {% load static %}
-{% block title %}SureCodes24 - Free Sure Bet Codes & Booking Codes Daily{% endblock %}
+{% block title %}SureCodes24 - Free Booking Codes {% endblock %}
 {% block content %}
     <!-- Hero Section with Background Image -->
     <section class="hero-section">
@@ -9,7 +9,7 @@
         <div class="hero-content container d-flex flex-column justify-content-center align-items-center text-center py-5"
              style="min-height: 70vh">
             <h1 class="display-4 fw-bold text-white mb-3">
-                Today's Free Sure Bet Codes
+                Today's Bet Codes
             </h1>
             <p class="text-white fs-5 mb-4">Fresh, verified codes updated daily across SportyBet, 1xBet, Bet9ja & more</p>
 
@@ -27,7 +27,7 @@
     <section class="py-5" id="booking-section">
         <div class="container-fluid px-3 px-md-5">
             <div class="text-center mb-4">
-                <h2 class="fw-bold" style="color: #1a1a2e;">Today's Sure Bet Codes</h2>
+                <h2 class="fw-bold" style="color: #1a1a2e;">Today's Bet Codes</h2>
                 <p class="text-muted">All codes are verified and ready to load</p>
             </div>
             <div class="row justify-content-center">
@@ -51,7 +51,7 @@
                                                 {% if code.company.logo %}
                                                     <img src="{{ code.company.logo.url }}"
                                                          height="35"
-                                                         alt="{{ code.company.name }} booking code"
+                                                         alt="{{ code.company.name }} logo"
                                                          style="object-fit: contain">
                                                 {% else %}
                                                     <div class="company-btn">{{ code.company.name }}</div>
@@ -128,7 +128,7 @@
                 🎟️ Browse By Bookmaker
             </h2>
             <p class="text-muted">
-                Find booking codes for your favourite betting platform
+                Select a bookmaker to view active platform slips
             </p>
         </div>
 
@@ -183,9 +183,9 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <h2 class="fw-bold mb-4 text-center" style="color: #1a1a2e;">About SureCodes24</h2>
+                    <h2 class="fw-bold mb-4 text-center" style="color: #1a1a2e;">Active Booking Codes & Daily Slip Verification</h2>
                     <p>
-                        Looking for sure bet codes that actually deliver? You're in the right place. SureCodes24 publishes fresh, verified booking codes every single day across SportyBet, 1xBet, Bet9ja, BetWinner, and other major platforms. Whether you want low-odds banker codes for a safer play or high-odds accumulators for bigger wins, our daily list covers the full range — and every code is checked before it goes live on the page.
+                        Welcome to SureCodes24. We track active booking codes across major platforms including SportyBet, 1xBet, Bet9ja, and BetWinner.
                     </p>
                     <p>
                         We know how frustrating it is to load a booking code only to find it's expired, fake, or pulled from a random tweet with no track record. That's why we do the filtering for you. Our team monitors SportyBet's Code Hub, trusted Telegram channels, verified X tipsters, and Facebook betting communities, then tests codes before publishing them here. The result: a single, reliable page where you can grab today's best sure bet codes in seconds.
@@ -232,116 +232,192 @@
         </div>
     </section>
 
-    <!-- FAQ Section with Accordion -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="text-center mb-4">
-                        <h2 class="fw-bold" style="color: #1a1a2e;">Frequently Asked Questions</h2>
-                        <p class="text-muted">Everything you need to know about sure bet codes</p>
+
+<!-- FAQ Section with Accordion -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold" style="color: #1a1a2e;">Frequently Asked Questions</h2>
+                    <p class="text-muted">Everything you need to know about Bet codes</p>
+                </div>
+
+                <div class="accordion" id="faqAccordion">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading1">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse1"
+                                    aria-expanded="false"
+                                    aria-controls="collapse1">
+                                What are bet codes?
+                            </button>
+                        </h2>
+                        <div id="collapse1"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading1"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Bet codes — also called booking codes or bet slip codes — are short
+                                alphanumeric codes generated by a bookmaker that lets you load a
+                                pre-built betting slip instantly. Instead of selecting each game
+                                manually, you paste the code and the full slip appears, ready to stake.
+                                "Sure" there means it should have a high chance of winning so most
+                                punters just choose to call it that.
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="accordion" id="faqAccordion">
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq1">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1-body">
-                                    What are sure bet codes?
-                                </button>
-                            </h3>
-                            <div id="faq1-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Sure bet codes — also called booking codes or bet slip codes — are short alphanumeric codes generated by a bookmaker that 
-                                    lets you load a pre-built betting slip instantly. Instead of selecting each game manually, you paste the code and the full slip appears, 
-                                    ready to stake. "Sure" there means it should have a high chance of winning so most punters just choose to call it that.
-                                </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading2">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse2"
+                                    aria-expanded="false"
+                                    aria-controls="collapse2">
+                                Are the booking codes on SureCodes24 really free?
+                            </button>
+                        </h2>
+                        <div id="collapse2"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading2"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes. Every code on the homepage is 100% free. No signup required,
+                                no payment. Our VIP section is optional and offers extra premium
+                                picks for subscribers, but the daily codes here are free forever.
                             </div>
                         </div>
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq2">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2-body">
-                                    Are the booking codes on SureCodes24 really free?
-                                </button>
-                            </h3>
-                            <div id="faq2-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes. Every code on the homepage is 100% free. No signup required, no payment. Our VIP section is optional and offers extra premium picks for subscribers, but the daily codes here are free forever.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq3">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3-body">
-                                    Which betting platforms do your codes work on?
-                                </button>
-                            </h3>
-                            <div id="faq3-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    We publish codes for SportyBet, 1xBet, Bet9ja, BetWinner, and other major bookmakers popular in Africa and across the world. Each code in the table above shows which platform it belongs to — a SportyBet code won't work on 1xBet and vice versa.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq4">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4-body">
-                                    How often are new codes posted?
-                                </button>
-                            </h3>
-                            <div id="faq4-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Fresh codes are added every day, usually in the morning. We also update throughout the day when high-value codes come in from our sources.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq5">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5-body">
-                                    Can I really win with sure bet codes?
-                                </button>
-                            </h3>
-                            <div id="faq5-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    No one can guarantee a win — anyone who claims 100% accuracy is lying. What we can promise is that the codes we share are verified, come from tracked sources, and represent genuine betting slips rather than random fakes. Always bet responsibly and treat betting as entertainment, not income.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq6">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6-body">
-                                    Why did my booking code expire?
-                                </button>
-                            </h3>
-                            <div id="faq6-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Most bookmakers set their booking codes to expire once the first match on the slip kicks off. That's why we recommend loading codes as soon as you see them, especially for same-day games.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="faq7">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq7-body">
-                                    Do you offer predictions too?
-                                </button>
-                            </h3>
-                            <div id="faq7-body" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    Yes. In addition to booking codes, we publish match predictions on our <a href="https://surecodes24.com/direct-win-prediction/">Direct Win Prediction page</a> and betting analysis on our <a href="/blog/">blog</a>.
-                                </div>
-                            </div>
-                        </div>
-
-        
                     </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading3">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse3"
+                                    aria-expanded="false"
+                                    aria-controls="collapse3">
+                                Which betting platforms do your codes work on?
+                            </button>
+                        </h2>
+                        <div id="collapse3"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading3"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We publish codes for SportyBet, 1xBet, Bet9ja, BetWinner, and other
+                                major bookmakers popular in Africa and across the world. Each code in
+                                the table above shows which platform it belongs to — a SportyBet code
+                                won't work on 1xBet and vice versa.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading4">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse4"
+                                    aria-expanded="false"
+                                    aria-controls="collapse4">
+                                How often are new codes posted?
+                            </button>
+                        </h2>
+                        <div id="collapse4"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading4"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Fresh codes are added every day, usually in the morning. We also
+                                update throughout the day when high-value codes come in from our sources.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading5">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse5"
+                                    aria-expanded="false"
+                                    aria-controls="collapse5">
+                                Can I really win with sure bet codes?
+                            </button>
+                        </h2>
+                        <div id="collapse5"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading5"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                No one can guarantee a win — anyone who claims 100% accuracy is lying.
+                                What we can promise is that the codes we share are verified, come from
+                                tracked sources, and represent genuine betting slips rather than random
+                                fakes. Always bet responsibly and treat betting as entertainment,
+                                not income.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading6">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse6"
+                                    aria-expanded="false"
+                                    aria-controls="collapse6">
+                                Why did my booking code expire?
+                            </button>
+                        </h2>
+                        <div id="collapse6"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading6"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Most bookmakers set their booking codes to expire once the first match
+                                on the slip kicks off. That's why we recommend loading codes as soon
+                                as you see them, especially for same-day games.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading7">
+                            <button class="accordion-button collapsed"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse7"
+                                    aria-expanded="false"
+                                    aria-controls="collapse7">
+                                Do you offer predictions too?
+                            </button>
+                        </h2>
+                        <div id="collapse7"
+                             class="accordion-collapse collapse"
+                             aria-labelledby="heading7"
+                             data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes. In addition to booking codes, we publish match predictions on our
+                                <a href="{% url 'predictions' %}">Direct Win Prediction page</a>
+                                and betting analysis on our
+                                <a href="/blog/">blog</a>.
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+                     
 
     <!-- FAQ Schema Markup for Google Rich Results -->
     <script type="application/ld+json">
@@ -351,10 +427,10 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What are sure bet codes?",
+          "name": "What are bet codes?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sure bet codes — also called booking codes or bet slip codes — are short alphanumeric codes generated by a bookmaker that lets you load a pre-built betting slip instantly. Instead of selecting each game manually, you paste the code and the full slip appears, ready to stake. \"Sure\" there means it should have a high chance of winning so most punters just choose to call it that."
+            "text": "Bet codes — also called booking codes or bet slip codes — are short alphanumeric codes generated by a bookmaker that lets you load a pre-built betting slip instantly. Instead of selecting each game manually, you paste the code and the full slip appears, ready to stake. \"Sure\" there means it should have a high chance of winning so most punters just choose to call it that."
           }
         },
         {
