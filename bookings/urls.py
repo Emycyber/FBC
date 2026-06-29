@@ -9,7 +9,7 @@ def clean_robots_text_fallback(request):
     rules = (
         "User-agent: *\n"
         "Allow: /\n\n"
-        "Sitemap: https://surecodes24.com"  # FIXED: Pointing to exact file
+        "Sitemap: https://surecodes24.com/sitemap.xml"  # FIXED: Pointing to exact file
     )
     return HttpResponse(rules, content_type="text/plain")
 
