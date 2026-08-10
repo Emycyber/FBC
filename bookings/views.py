@@ -104,24 +104,6 @@ def sportybet(request):
         'today_year': date.today().year,
         'seo_title': 'Sportybet Booking Codes Today - SureCodes24',
         'seo_description': 'Get free daily verified Sportybet booking codes today.',
-        'faq': [
-            {
-                'question': 'How do I load a Sportybet booking code?',
-                'answer': 'Open your Sportybet app or website, go to the booking code section, enter the code and click load.'
-            },
-            {
-                'question': 'Are these Sportybet codes free?',
-                'answer': 'Yes! All codes on this page are completely free. We also offer VIP codes with higher odds for subscribers.'
-            },
-            {
-                'question': 'How often are Sportybet codes updated?',
-                'answer': 'Our team updates Sportybet codes daily before 10am.'
-            },
-            {
-                'question': 'What odds range are the Sportybet codes?',
-                'answer': 'Our free Sportybet codes range from 1.6 to 5.0 odds. VIP codes range from 1.8 to 2.5.'
-            },
-        ]
     }
     return render(request, 'bookings/sportybet.html', context)
 
@@ -140,24 +122,6 @@ def bet9ja(request):
         'today_year': date.today().year,
         'seo_title': 'Bet9ja Booking Codes Today - SureCodes24',
         'seo_description': 'Get free daily verified Bet9ja booking codes today.',
-        'faq': [
-            {
-                'question': 'How do I load a Bet9ja booking code?',
-                'answer': 'Visit bet9ja.com or open the app, click on booking code, enter the code and click load.'
-            },
-            {
-                'question': 'Are these Bet9ja codes free?',
-                'answer': 'Yes! All codes on this page are completely free. We also offer VIP codes with higher odds for subscribers.'
-            },
-            {
-                'question': 'How often are Bet9ja codes updated?',
-                'answer': 'Our team updates Bet9ja codes daily before 10am.'
-            },
-            {
-                'question': 'What odds range are the Bet9ja codes?',
-                'answer': 'Our free Bet9ja codes range from 1.6 to 5.0 odds. VIP codes range from 1.8 to 2.5.'
-            },
-        ]
     }
     return render(request, 'bookings/bet9ja.html', context)
 
@@ -176,24 +140,6 @@ def bet1xbet(request):
         'today_year': date.today().year,
         'seo_title': '1xBet Booking Codes Today - SureCodes24',
         'seo_description': 'Get free daily verified 1xBet booking codes today.',
-        'faq': [
-            {
-                'question': 'How do I load a 1xBet booking code?',
-                'answer': 'Login to your 1xBet account, go to the coupon section, enter the booking code and click apply.'
-            },
-            {
-                'question': 'Are these 1xBet codes free?',
-                'answer': 'Yes! All codes on this page are completely free. We also offer VIP codes with higher odds for subscribers.'
-            },
-            {
-                'question': 'How often are 1xBet codes updated?',
-                'answer': 'Our team updates 1xBet codes daily before 10am.'
-            },
-            {
-                'question': 'What odds range are the 1xBet codes?',
-                'answer': 'Our free 1xBet codes range from 1.6 to 5.0 odds. VIP codes range from 1.8 to 2.5.'
-            },
-        ]
     }
     return render(request, 'bookings/1xbet.html', context)
 
@@ -212,24 +158,6 @@ def betwinner(request):
         'today_year': date.today().year,
         'seo_title': 'Betwinner Booking Codes Today - SureCodes24',
         'seo_description': 'Get free daily verified Betwinner booking codes today.',
-        'faq': [
-            {
-                'question': 'How do I load a Betwinner booking code?',
-                'answer': 'Login to Betwinner, navigate to the booking code section, enter the code and click load.'
-            },
-            {
-                'question': 'Are these Betwinner codes free?',
-                'answer': 'Yes! All codes on this page are completely free. We also offer VIP codes with higher odds for subscribers.'
-            },
-            {
-                'question': 'How often are Betwinner codes updated?',
-                'answer': 'Our team updates Betwinner codes daily before 10am.'
-            },
-            {
-                'question': 'What odds range are the Betwinner codes?',
-                'answer': 'Our free Betwinner codes range from 1.6 to 5.0 odds. VIP codes range from 1.8 to 2.5.'
-            },
-        ]
     }
     return render(request, 'bookings/betwinner.html', context)
 
@@ -248,23 +176,5 @@ def msport(request):
         'today_year': date.today().year,
         'seo_title': 'Msport Booking Codes Today - SureCodes24',
         'seo_description': 'Get free daily verified Msport booking codes today.',
-        'faq': [
-            {
-                'question': 'How do I load an Msport booking code?',
-                'answer': 'Open Msport app or website, find the booking code option, enter the code and load.'
-            },
-            {
-                'question': 'Are these Msport codes free?',
-                'answer': 'Yes! All codes on this page are completely free. We also offer VIP codes with higher odds for subscribers.'
-            },
-            {
-                'question': 'How often are Msport codes updated?',
-                'answer': 'Our team updates Msport codes daily before 10am.'
-            },
-            {
-                'question': 'What odds range are the Msport codes?',
-                'answer': 'Our free Msport codes range from 1.6 to 5.0 odds. VIP codes range from 1.8 to 2.5.'
-            },
-        ]
     }
     return render(request, 'bookings/msport.html', context)
