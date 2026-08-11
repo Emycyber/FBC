@@ -51,7 +51,8 @@ class VIPCodeAdmin(admin.ModelAdmin):
 @admin.register(DirectWinPrediction)
 class DirectWinPredictionAdmin(admin.ModelAdmin):
     list_display = ['date', 'match', 'tip']
-    fields = ['date', 'match', 'tip']
+    fields = ['date', 'match', 'tip', 'analysis']
+    # added analysis field to the form
     list_filter = ['date']
     search_fields = ['match', 'tip']
     ordering = ['-date']

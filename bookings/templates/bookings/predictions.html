@@ -1,17 +1,13 @@
 {% extends 'bookings/base.html' %}
 {% load static %}
 
-{% block title %}Direct Win Prediction Today — Free Football Win Picks {{ selected_date|date:"M d, Y" }} | SureCodes24{% endblock %}
+{% block robots %}
+<meta name="robots" content="index, follow">
+{% endblock robots %}
 
-{% block meta_description %}Free direct win predictions for today's top football matches. Each pick names the winner — home or away — well-researched daily and updated by 7AM GMT.{% endblock %}
-
-{% block og_title %}Direct Win Prediction Today — Free Football Win Picks | SureCodes24{% endblock %}
-
-{% block og_description %}Free direct win predictions for today's top football matches. Each pick names the winner — home or away — well-researched daily and updated by 7AM GMT.{% endblock %}
-
-{% block og_title_twitter %}Direct Win Prediction Today — Free Football Win Picks | SureCodes24{% endblock %}
-
-{% block og_description_twitter %}Free direct win predictions for today's top football matches. Each pick names the winner — home or away — well-researched daily and updated by 7AM GMT.{% endblock %}
+{% block title %}
+Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
+{% endblock %}
 
 {% block content %}
 
@@ -19,7 +15,7 @@
 <section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
     <div class="container text-center py-4">
         <h1 class="display-6 fw-bold text-white mb-2">
-            Today's Direct Win Predictions
+            ⚽ Free Football Predictions
         </h1>
         <p class="text-secondary">
             Daily predictions across top leagues worldwide
@@ -46,389 +42,145 @@
     </div>
 </section>
 
-<!-- Predictions -->
-<section class="py-3">
+<!-- Prediction Cards -->
+<section class="py-4">
     <div class="container">
-
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
-                <div class="table-responsive shadow-sm rounded">
-                    <table class="table table-bordered table-hover mb-0 text-center">
-                        <thead style="background: #1a1a2e;">
-                            <tr>
-                                <th class="text-black py-3"> Date</th>
-                                <th class="text-black py-3"> Match</th>
-                                <th class="text-black py-3"> Tip</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if direct_predictions %}
-                                {% for prediction in direct_predictions %}
-                                    <tr>
-                                        <td class="py-3">
-                                            {{ prediction.date|date:"M d, Y" }}
-                                        </td>
-                                        <td class="py-3 fw-semibold">
-                                            {{ prediction.match }}
-                                        </td>
-                                        <td class="py-3">
-                                            <span class="badge bg-primary px-3 py-2">
-                                                {{ prediction.tip }}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            {% else %}
-                                <tr>
-                                    <td colspan="3" class="text-center text-muted py-4">
-                                        No predictions for {{ selected_date|date:"M d, Y" }}.
-                                        Check back soon!
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-    </div>
-</section>
+                {% if direct_predictions %}
+                    {% for prediction in direct_predictions %}
 
-<!-- Responsible Gambling Notice -->
-<div class="container my-3">
-    <div class="p-3 rounded" style="background-color: #1a1a2e; border-left: 4px solid #4f88e4;">
-        <p class="text-white small mb-0" style="line-height: 1.7;">
-            <strong>Responsible Gambling Notice:</strong>
-            Booking codes and predictions on this site are for informational
-            and entertainment purposes only. No outcome is guaranteed — the
-            word "sure" in our name reflects a common search term, not a
-            promise of winning. Never bet more than you can afford to lose.
-            If gambling is affecting you or someone you know, reach out for
-            help at
-            <a href="https://www.begambleaware.org"
-               target="_blank"
-               class="text-danger fw-bold text-decoration-none">
-                BeGambleAware.org
-            </a>
-            or call <strong class="text-white">0808 8020 133</strong>
-            (free, 24/7). You must be 18 or older to use this site.
-            <strong class="text-white">Please gamble responsibly.</strong>
-        </p>
-    </div>
-</div>
+                        <!-- Prediction Card -->
+                        <div class="card border-0 shadow-sm mb-3 overflow-hidden">
+                            <!--
+                                overflow-hidden: ensures rounded corners
+                                clip the coloured tip bar cleanly
+                            -->
 
-<!-- Author Bio Card -->
-<div class="container my-4">
-    <div class="p-4 rounded d-flex align-items-start gap-3"
-         style="background-color: #1a1a2e;">
-        <!--
-            d-flex align-items-start gap-3: places avatar
-            and text side by side with space between
-        -->
-
-        <!-- Avatar Circle -->
-        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-             style="width: 55px; height: 55px;
-                    background-color: #0d6efd;
-                    font-weight: 700; font-size: 1rem;
-                    color: white;">
-            EA
-            <!--
-                EA: initials of Emem Anietie
-                flex-shrink-0: prevents circle from shrinking
-                on small screens
-            -->
-        </div>
-
-        <!-- Author Info -->
-        <div>
-            <p class="fw-bold text-white mb-1">Emem Anietie</p>
-            <p class="mb-2" style="color: #0d6efd; font-size: 0.8rem;
-                                   font-weight: 600; letter-spacing: 0.5px;">
-                FOUNDER — SURECODES24
-            </p>
-            <p class="text-secondary small mb-2" style="line-height: 1.7;">
-                Emem is a football punter and web developer based in Lagos,
-                Nigeria, with several years of experience analysing betting
-                markets across West Africa. He is the founder of
-                SureCodes24 and
-                <a href="https://www.pooldrawresult.com"
-                   target="_blank"
-                   class="text-decoration-none"
-                   style="color: #0d6efd;">
-                    PooldrawResult.com
-                </a>
-                — two independently run platforms serving punters across
-                Nigeria and beyond. All booking codes and predictions
-                published on SureCodes24 are personally reviewed by Emem
-                before going live.
-            </p>
-            <a href="https://x.com/Emycybers"
-               target="_blank"
-               class="text-decoration-none small"
-               style="color: #0d6efd;">
-                𝕏 @Emycybers
-                <!--
-                    linking to X profile makes this verifiable
-                    Google can follow the link and confirm you exist
-                -->
-            </a>
-        </div>
-
-    </div>
-</div>
-
-
-<!-- What Is a Direct Win Prediction -->
-<section class="py-3" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <h2 class="fw-bold mb-4" style="color: #1a1a2e;">What Is a Direct Win Prediction?</h2>
-                <p>
-                    A direct win prediction is a football tip where the pick is simply <strong>who will win the match</strong> — either the home team or the away team. There's no scoreline to guess, no goal totals to call, no half-time/full-time combinations. Just the winner.
-                </p>
-                <p>
-                    In betting terms, this is also known as a "1 or 2" pick (1 = home win, 2 = away win). It's the most direct way to bet on football: you pick a side, the match is played, and your tip either wins or it doesn't. Draws are not in play — if the match ends level, the tip loses.
-                </p>
-                <p>
-                    Direct win predictions are the foundation of football betting because they're built on the simplest question in the sport: <em>which team is more likely to win this match?</em> Every prediction we publish on this page answers exactly that question, no more and no less.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Why Direct Win Picks -->
-<section class="py-3">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <h2 class="fw-bold mb-4" style="color: #1a1a2e;">Why Direct Win Picks Beat Complicated Bets</h2>
-                <p>
-                    Modern bookmakers offer dozens of market types — over/under goals, both teams to score, exact scoreline, corner totals, card counts, half-time results, and on and on. The variety can feel like opportunity, but for most punters, it's actually a trap.
-                </p>
-                <p>
-                    Direct win picks have three quiet advantages:
-                </p>
-                <ul>
-                    <li><strong>One variable, one decision.</strong> You only need to predict one thing: which team will win. That's far easier to research, reason about, and get right than predicting who wins <em>and</em> by how many goals <em>and</em> whether both teams will score.</li>
-                    <li><strong>Easier to track.</strong> Win or lose, the outcome is binary. Over time you can build a real record of how often your picks land — something that's much harder to measure across mixed bet types.</li>
-                    <li><strong>Less bookmaker margin.</strong> The 1X2 market (home/draw/away) typically has lower bookmaker margins than exotic markets, which means more value for the punter over the long run.</li>
-                </ul>
-                <p>
-                    This is why our predictions stick to direct wins. We're not trying to dazzle anyone with creative markets. We're trying to give you a pick you can actually evaluate, place, and learn from.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- How We Make Predictions -->
-<section class="py-3" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <h2 class="fw-bold mb-4" style="color: #1a1a2e;">How We Make Our Predictions</h2>
-                <p>
-                    Every direct win prediction on this page goes through the same research process before it's published. We're not posting random picks or pulling tips from anonymous Telegram groups.
-                </p>
-                <p>
-                    Our analysis considers:
-                </p>
-                <ul>
-                    <li><strong>Recent form.</strong> How both teams have performed in their last 5-10 matches. Form often tells you more than league position alone.</li>
-                    <li><strong>Head-to-head record.</strong> Some fixtures have historical patterns. Certain teams have one team's number, and that often carries forward.</li>
-                    <li><strong>Home vs. away performance.</strong> Many teams are vastly stronger at home. Picking a "home win" when the home side has won 8 of their last 10 at the stadium is a different kind of pick than backing them away.</li>
-                    <li><strong>Squad and injury news.</strong> A team missing its top scorer and starting goalkeeper is a different team. We factor in available team news before publishing.</li>
-                    <li><strong>Match context.</strong> Cup vs. league, end of season vs. mid-season, derby vs. routine fixture — context matters and we account for it.</li>
-                </ul>
-                <p>
-                    No prediction method is perfect. Football is unpredictable by nature — that's part of what makes it the world's most popular sport. But by sticking to a consistent research process, we aim for picks that win more often than they lose over the long run.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Best Strategy -->
-<section class="py-3">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <h2 class="fw-bold mb-4" style="color: #1a1a2e;">The Best Way to Use These Predictions</h2>
-                <p>
-                    Here's where many punters lose money even when their picks are good: <strong>they bet them the wrong way.</strong>
-                </p>
-                <p>
-                    A lot of people see a list of solid predictions and immediately combine them into one massive accumulator. Five picks become a 5-leg acca. Ten picks become a 10-leg slip with eye-watering odds. The dream is that all of them land at once and the small stake turns into a fortune.
-                </p>
-                <p>
-                    The math doesn't support this. Even if each pick has a 70% chance of winning, a 5-leg accumulator wins about 17% of the time. A 10-leg accumulator wins around 2%. The bigger the slip, the more your winning chances collapse — even when the individual picks are good.
-                </p>
-                <p>
-                    <strong>That's why we recommend playing our direct win predictions as singles.</strong> Pick the matches you have the most confidence in, place each one as its own bet, and let them stand or fall on their own merit. Yes, the individual payouts are smaller. But over a month of picks, singles produce far more cashes than chained accas, and your bankroll stays alive long enough to actually grow.
-                </p>
-                <p>
-                    If you absolutely want to combine picks, keep it to 2-3 selections maximum and stake conservatively. Anything beyond that is closer to a lottery ticket than a strategy.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Bankroll Management -->
-<section class="py-3" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <h2 class="fw-bold mb-4" style="color: #1a1a2e;">Bankroll Management Matters More Than Picks</h2>
-                <p>
-                    The best prediction in the world won't save a punter who stakes too much on every bet. Long-term profitability in football betting comes down to <strong>how you manage your money</strong> at least as much as how good your picks are.
-                </p>
-                <p>
-                    A simple rule that works for most punters: never stake more than 1-3% of your total bankroll on any single pick. If your bankroll is small, the individual stakes will feel small too — and that's the point. Small stakes survive losing streaks. Big stakes don't.
-                </p>
-                <p>
-                    Treat your bankroll like a separate budget that exists only for betting. Don't top it up emotionally after a loss. Don't double down to "win it back." Set a weekly or monthly limit, stick to it, and accept that some periods will be losing periods even with disciplined play. That's the nature of the game.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Why Trust Us -->
-<section class="py-3">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <h2 class="fw-bold mb-4" style="color: #1a1a2e;">Why Trust Our Direct Win Predictions</h2>
-                <p>
-                    Our team is led by Emem, who you can <a href="https://x.com/Emycybers">connect with on X</a>. We've been studying and publishing football predictions for years, and we approach each match the same way — research first, opinion second, transparency always.
-                </p>
-                <p>
-                    What sets us apart from random tipsters online:
-                </p>
-                <ul>
-                    <li><strong>We publish results.</strong> Every prediction on this page is marked as won, lost, or pending once the match finishes. You can see our track record by browsing past days using the date navigation at the top.</li>
-                    <li><strong>We don't sell guaranteed wins.</strong> No prediction service can promise 100% accuracy. Anyone who says otherwise is lying. We aim for a high strike rate over the long run, not impossible certainty.</li>
-                    <li><strong>We focus on one market.</strong> Direct win picks are our specialty. We don't water down our work with a hundred different bet types — we go deep on one thing.</li>
-                    <li><strong>Free for everyone.</strong> Every pick on this page is free. We do offer VIP picks for subscribers who want sharper analysis on selected matches, but the daily predictions here are always free.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ Section -->
-<section class="py-3" style="background-color: #f8f9fa;">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
-                <div class="text-center mb-4">
-                    <h2 class="fw-bold" style="color: #1a1a2e;">Frequently Asked Questions</h2>
-                    <p class="text-muted">Common questions about direct win predictions</p>
-                </div>
-
-                <div class="accordion" id="predictionsFaq">
-                    <div class="accordion-item">
-                        <h3 class="accordion-header" id="pfaq1">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pfaq1-body">
-                                When are predictions updated?
-                            </button>
-                        </h3>
-                        <div id="pfaq1-body" class="accordion-collapse collapse" data-bs-parent="#predictionsFaq">
-                            <div class="accordion-body">
-                                New predictions are published daily by 7AM GMT. If a match has late team news — injuries, lineup changes, suspensions — we may update or remove the pick before kick-off. Check back close to match time if you want the most current version of the pick.
+                            <!-- Card Header - Match Info -->
+                            <div class="card-header d-flex justify-content-between align-items-center py-3"
+                                 style="background-color: #1a1a2e;">
+                                <span class="text-white fw-semibold">
+                                    ⚽ {{ prediction.match }}
+                                    <!--
+                                        match: e.g "Arsenal vs Chelsea"
+                                        typed manually in admin
+                                    -->
+                                </span>
+                                <span class="text-secondary small">
+                                    {{ prediction.date|date:"M d, Y" }}
+                                </span>
                             </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body p-4">
+
+                                <!-- Tip Badge -->
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <span class="badge px-3 py-2"
+                                          style="background-color: #0d6efd;
+                                                 font-size: 0.9rem;
+                                                 letter-spacing: 0.5px;">
+                                        🎯 {{ prediction.tip }}
+                                        <!--
+                                            tip: e.g "Home Win", "Over 2.5"
+                                            typed manually in admin
+                                        -->
+                                    </span>
+                                    <span class="text-muted small">
+                                        Prediction
+                                    </span>
+                                </div>
+
+                                <!-- Analysis -->
+                                {% if prediction.analysis %}
+                                    <div class="p-3 rounded"
+                                         style="background-color: #f8f9fa;
+                                                border-left: 3px solid #0d6efd;">
+                                        <p class="text-muted small mb-0"
+                                           style="line-height: 1.7;">
+                                            {{ prediction.analysis }}
+                                            <!--
+                                                analysis: your written reasoning
+                                                for the prediction
+                                                this is what Google values most
+                                                for E-E-A-T on YMYL sites
+                                            -->
+                                        </p>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
                         </div>
+
+                    {% endfor %}
+
+                {% else %}
+                    <div class="text-center py-5">
+                        <div style="font-size: 3rem;">⚽</div>
+                        <h4 class="fw-bold mt-3" style="color: #1a1a2e;">
+                            No predictions available
+                        </h4>
+                        <p class="text-muted">
+                            No predictions for {{ selected_date|date:"M d, Y" }}.
+                            Check back soon or try a different date!
+                        </p>
                     </div>
+                {% endif %}
 
-                    <div class="accordion-item">
-                        <h3 class="accordion-header" id="pfaq2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pfaq2-body">
-                                What's the difference between a direct win and a 1X2 bet?
-                            </button>
-                        </h3>
-                        <div id="pfaq2-body" class="accordion-collapse collapse" data-bs-parent="#predictionsFaq">
-                            <div class="accordion-body">
-                                They're related but not the same. The 1X2 market gives you three options: home win (1), draw (X), or away win (2). A direct win prediction only ever picks 1 or 2 — we never tip a draw on this page. When loading our picks on a bookmaker that uses 1X2 format, select 1 for home wins and 2 for away wins as shown in our tips column.
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-                    <div class="accordion-item">
-                        <h3 class="accordion-header" id="pfaq3">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pfaq3-body">
-                                Can I see your past predictions?
-                            </button>
-                        </h3>
-                        <div id="pfaq3-body" class="accordion-collapse collapse" data-bs-parent="#predictionsFaq">
-                            <div class="accordion-body">
-                                Yes. Use the "← Yesterday" button at the top of the page to browse previous days. Every past prediction is marked as won, lost, or pending so you can review our track record before deciding whether to follow our tips.
-                            </div>
-                        </div>
-                    </div>
+<!-- About Section -->
+<section class="py-3" style="background-color: #f8f9fa;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm p-4">
+                    <h2 class="fw-bold mb-3" style="color: #1a1a2e; font-size: 1.3rem;">
+                        Direct Win Predictions
+                    </h2>
+                    <div class="text-muted about-content" style="line-height: 1.8;">
+                        <p>The idea to bring this page to you was simply because though
+                        the free bet codes on our
+                        <a href="{% url 'homepage' %}">homepage</a>
+                        is really helpful some of us would also want to see the games
+                        directly and maybe book them ourselves.</p>
 
-                    <div class="accordion-item">
-                        <h3 class="accordion-header" id="pfaq4">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pfaq4-body">
-                                Do you also publish booking codes?
-                            </button>
-                        </h3>
-                        <div id="pfaq4-body" class="accordion-collapse collapse" data-bs-parent="#predictionsFaq">
-                            <div class="accordion-body">
-                                Yes. Our <a href="https://surecodes24.com/">homepage</a> publishes daily booking codes for SportyBet, 1xBet, Bet9ja, BetWinner, and other major bookmakers. Booking codes are pre-built bet slips you load directly into your betting app. This page is different — it gives you individual match predictions you can place however and wherever you choose.
-                            </div>
-                        </div>
+                        <p>It could be home win or away win. Nonetheless, our predictions
+                        are well researched to give you an edge and put you in greens
+                        in the long run.</p>
+
+                        <p>Predictions are updated daily by 7GMT.</p>
+
+                        <h3>Why Trust Us</h3>
+                        <p>We are a team of punters headed by Emem you
+                            <a href="https://x.com/Emycybers">
+                                can connect with on X.
+                            </a>
+                            Predicting direct win often appears simple because most of
+                            the time a stronger team is easy to spot. But to be profitable
+                            you need a strategy — we have a special strategy to help you
+                            win more than you lose.
+                        </p>
+
+                        <h3>Best Strategy Here</h3>
+                        <p>A lot of people fancy the acca bets which promises a lot in
+                            return but it is hardly a good idea if you want to win
+                            consistently and keep a good record considering your bankroll.
+                            In this section we encourage punters to bet our games as
+                            Singles. That way you win and it is easy to not blow
+                            your account.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- FAQ Schema Markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "When are predictions updated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "New predictions are published daily by 7AM GMT. If a match has late team news — injuries, lineup changes, suspensions — we may update or remove the pick before kick-off."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What's the difference between a direct win and a 1X2 bet?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "They're related but not the same. The 1X2 market gives you three options: home win (1), draw (X), or away win (2). A direct win prediction only ever picks 1 or 2 — we never tip a draw on this page. When loading our picks on a bookmaker that uses 1X2 format, select 1 for home wins and 2 for away wins."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I see your past predictions?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Use the previous day button at the top of the page to browse previous days. Every past prediction is marked as won, lost, or pending so you can review our track record before deciding whether to follow our tips."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do you also publish booking codes?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Our homepage publishes daily booking codes for SportyBet, 1xBet, Bet9ja, BetWinner, and other major bookmakers. Booking codes are pre-built bet slips you load directly into your betting app. This page gives you individual match predictions you can place however and wherever you choose."
-      }
-    }
-  ]
-}
-</script>
 
 {% endblock content %}

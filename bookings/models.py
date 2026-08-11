@@ -149,6 +149,13 @@ class DirectWinPrediction(models.Model):
         max_length=200,
         help_text='e.g Home Win, Over 2.5, BTTS'
     )
+    analysis = models.TextField(
+        blank=True,
+        help_text='Write your match analysis here'
+        # blank=True: analysis is optional
+        # you can publish a prediction without analysis
+        # and add it later
+    )
 
     class Meta:
         ordering = ['-date']
