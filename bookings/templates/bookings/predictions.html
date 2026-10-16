@@ -6,8 +6,15 @@
 {% endblock robots %}
 
 {% block title %}
-Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
+Direct Win Predictions Today - Free Daily Football Tips | SureCodes24
 {% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Free daily direct win predictions from expert analysts at SureCodes24. Home win, away win and draw tips updated every morning by 7AM GMT. Bet as singles for consistent returns.">
+{% endblock meta_description %}
+
+{% block og_title %}Direct Win Predictions Today | SureCodes24{% endblock %}
+{% block og_description %}Free daily direct win predictions from SureCodes24. Home win, away win and draw tips updated every morning.{% endblock %}
 
 {% block content %}
 
@@ -15,10 +22,10 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
 <section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
     <div class="container text-center py-4">
         <h1 class="display-6 fw-bold text-white mb-2">
-            ⚽ Free Football Predictions
+            Direct Win Predictions Today
         </h1>
         <p class="text-secondary">
-            Daily predictions across top leagues worldwide
+            Free daily home win, away win and draw tips — updated every morning by 7AM GMT
         </p>
     </div>
 </section>
@@ -50,53 +57,58 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
 
                 {% if direct_predictions %}
                     {% for prediction in direct_predictions %}
-<div class="card border-0 mb-3 overflow-hidden"
-     style="border: 0.5px solid var(--border, #e5e5e5); border-radius: 12px;">
+                        <div class="card border-0 mb-3 overflow-hidden"
+                             style="border: 0.5px solid #e5e5e5 !important;
+                                    border-radius: 12px;">
 
-    <!-- Card Header -->
-    <div class="d-flex justify-content-between align-items-center px-3 py-3"
-         style="background-color: #1a1a2e;">
-        <span class="fw-500 text-white" style="font-size: 15px;">
-            ⚽ {{ prediction.match }}
-        </span>
-        <span class="text-secondary" style="font-size: 13px;">
-            {{ prediction.date|date:"M d, Y" }}
-        </span>
-    </div>
+                            <!-- Card Header -->
+                            <div class="d-flex justify-content-between align-items-center px-3 py-3"
+                                 style="background-color: #1a1a2e;">
+                                <span class="fw-semibold text-white"
+                                      style="font-size: 15px;">
+                                    ⚽ {{ prediction.match }}
+                                </span>
+                                <span class="text-secondary"
+                                      style="font-size: 13px;">
+                                    {{ prediction.date|date:"M d, Y" }}
+                                </span>
+                            </div>
 
-    <!-- Card Body -->
-    <div class="p-4">
+                            <!-- Card Body -->
+                            <div class="p-4">
 
-        <!-- Tip Badge -->
-        <div class="d-flex align-items-center gap-2 mb-3">
-            <span class="badge px-3 py-2"
-                  style="background-color: #e6f1fb;
-                         color: #185fa5;
-                         font-size: 12px;
-                         font-weight: 500;
-                         letter-spacing: 0.3px;">
-                🎯 {{ prediction.tip }}
-            </span>
-            <span class="text-muted" style="font-size: 12px;">Prediction</span>
-        </div>
+                                <!-- Tip Badge -->
+                                <div class="d-flex align-items-center gap-2 mb-3">
+                                    <span class="badge px-3 py-2"
+                                          style="background-color: #e6f1fb;
+                                                 color: #185fa5;
+                                                 font-size: 12px;
+                                                 font-weight: 600;
+                                                 letter-spacing: 0.3px;">
+                                        🎯 {{ prediction.tip }}
+                                    </span>
+                                    <span class="text-muted"
+                                          style="font-size: 12px;">
+                                        Prediction
+                                    </span>
+                                </div>
 
-        <!-- Analysis -->
-        {% if prediction.analysis %}
-        <div class="p-3"
-             style="background-color: #f8f9fa;
-                    border-left: 3px solid #185fa5;
-                    border-radius: 0;">
-            <p class="text-muted mb-0"
-               style="font-size: 13px; line-height: 1.7;">
-                {{ prediction.analysis }}
-            </p>
-        </div>
-        {% endif %}
+                                <!-- Analysis -->
+                                {% if prediction.analysis %}
+                                    <div class="p-3"
+                                         style="background-color: #f8f9fa;
+                                                border-left: 3px solid #185fa5;">
+                                        <p class="text-muted mb-0"
+                                           style="font-size: 13px;
+                                                  line-height: 1.7;">
+                                            {{ prediction.analysis }}
+                                        </p>
+                                    </div>
+                                {% endif %}
 
-    </div>
-</div>
-{% endfor %}
-                                
+                            </div>
+                        </div>
+                    {% endfor %}
 
                 {% else %}
                     <div class="text-center py-5">
@@ -122,41 +134,85 @@ Free Football Predictions {{ selected_date|date:"M d, Y" }} - SureCodes24
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
                 <div class="card border-0 shadow-sm p-4">
-                    <h2 class="fw-bold mb-3" style="color: #1a1a2e; font-size: 1.3rem;">
-                        Direct Win Predictions
+
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.3rem;">
+                        What Are Direct Win Predictions?
                     </h2>
-                    <div class="text-muted about-content" style="line-height: 1.8;">
-                        <p>The idea to bring this page to you was simply because though
-                        the free bet codes on our
-                        <a href="{% url 'homepage' %}">homepage</a>
-                        is really helpful some of us would also want to see the games
-                        directly and maybe book them ourselves.</p>
 
-                        <p>It could be home win or away win. Nonetheless, our predictions
-                        are well researched to give you an edge and put you in greens
-                        in the long run.</p>
+                    <div class="text-muted" style="line-height: 1.8;">
 
-                        <p>Predictions are updated daily by 7GMT.</p>
+                        <p>A direct win prediction is a tip on which team will win a
+                        football match outright — home win, away win or in some cases
+                        a draw. Unlike accumulator codes which bundle many games into
+                        one slip, direct win predictions let you assess each match
+                        individually and decide how much to stake on each one.</p>
 
-                        <h3>Why Trust Us</h3>
-                        <p>We are a team of punters headed by Emem you
-                            <a href="https://x.com/Emycybers">
-                                can connect with on X.
-                            </a>
-                            Predicting direct win often appears simple because most of
-                            the time a stronger team is easy to spot. But to be profitable
-                            you need a strategy — we have a special strategy to help you
-                            win more than you lose.
-                        </p>
+                        <p>At SureCodes24 we publish free direct win predictions every
+                        day covering matches from the Premier League, La Liga,
+                        Bundesliga, Serie A, Ligue 1 and other top football competitions
+                        worldwide. Each prediction comes with a short analysis explaining
+                        why we picked that outcome so you can make an informed decision
+                        before placing your bet.</p>
 
-                        <h3>Best Strategy Here</h3>
-                        <p>A lot of people fancy the acca bets which promises a lot in
-                            return but it is hardly a good idea if you want to win
-                            consistently and keep a good record considering your bankroll.
-                            In this section we encourage punters to bet our games as
-                            Singles. That way you win and it is easy to not blow
-                            your account.
-                        </p>
+                        <h3 class="fw-bold mt-4 mb-2"
+                            style="color: #1a1a2e; font-size: 1.1rem;">
+                            How We Pick Our Direct Win Tips
+                        </h3>
+
+                        <p>Our approach is grounded in research rather than guesswork.
+                        Before publishing any direct win prediction we look at recent
+                        form, head to head records, home and away performance, injury
+                        news and the importance of the match to each team. We only
+                        publish a tip when the evidence clearly points in one direction.
+                        If a match looks too close to call we leave it out entirely
+                        rather than publish a weak pick.</p>
+
+                        <p>We do not promise guaranteed wins — no honest prediction
+                        service can. Football is unpredictable and even the strongest
+                        favourites lose matches. What we do promise is that every tip
+                        on this page has been genuinely researched before it goes live.</p>
+
+                        <h3 class="fw-bold mt-4 mb-2"
+                            style="color: #1a1a2e; font-size: 1.1rem;">
+                            Why Bet Direct Win as Singles
+                        </h3>
+
+                        <p>Many punters chase accumulator bets because the potential
+                        returns look exciting. The problem is that every game you add
+                        to an accumulator multiplies your chance of losing. One
+                        unexpected result wipes out the entire slip regardless of how
+                        many games you got right.</p>
+
+                        <p>Betting direct win predictions as singles is a more
+                        disciplined approach. When a tip wins you collect your return
+                        and move on. When one loses you have not lost everything.
+                        Over time this method is far kinder to your bankroll and
+                        allows you to stay in the game long enough to profit
+                        consistently.</p>
+
+                        <p>This is the strategy we recommend to everyone who uses
+                        our direct win predictions — stake singles, manage your
+                        bankroll and think long term rather than chasing one big
+                        payout.</p>
+
+                        <h3 class="fw-bold mt-4 mb-2"
+                            style="color: #1a1a2e; font-size: 1.1rem;">
+                            When Are Predictions Updated?
+                        </h3>
+
+                        <p>We update our direct win predictions every morning by
+                        7:00 AM GMT. You can use the date navigation above to view
+                        predictions for yesterday or tomorrow. Results are updated
+                        on the same day after matches finish so you can track our
+                        record over time.</p>
+
+                        <p>For questions or feedback reach Emem directly on
+                        <a href="https://x.com/Emycybers"
+                           class="text-primary text-decoration-none">
+                            X @Emycybers
+                        </a>.</p>
+
                     </div>
                 </div>
             </div>

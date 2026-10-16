@@ -81,12 +81,14 @@ def predictions(request):
     )
 
     context = {
-        'direct_predictions': direct_predictions,
-        'selected_date': selected_date,
-        'yesterday': yesterday,
-        'tomorrow': tomorrow,
-        'today_year': date.today().year,
-    }
+    'direct_predictions': direct_predictions,
+    'selected_date': selected_date,
+    'yesterday': yesterday,
+    'tomorrow': tomorrow,
+    'today_year': date.today().year,
+    'seo_title': 'Direct Win Predictions Today - Free Daily Tips | SureCodes24',
+    'seo_description': 'Get free daily direct win predictions from expert analysts at SureCodes24. Home win, away win and draw tips updated every morning. Bet as singles for consistent returns.',
+}
     return render(request, 'bookings/predictions.html', context)
 
 
