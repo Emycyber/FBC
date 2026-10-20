@@ -82,9 +82,6 @@
             });
         </script>
 
-        <!-- Google Preferred Sources -->
-        <script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
-
     </head>
 
     <body style="background: #f8f9fa;">
@@ -170,6 +167,50 @@
         {% block content %}
         {% endblock content %}
 
+
+        <!-- Google Preferred Sources Banner -->
+<div id="preferred-source-banner" style="background: #fff; border-bottom: 1px solid #e5e5e5; padding: 12px 0; display: flex; align-items: center; justify-content: space-between;">
+    <div class="container d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+            <img src="https://www.google.com/favicon.ico" height="28" alt="Google" style="border-radius: 50%;">
+            <div>
+                <p class="mb-0 fw-bold" style="font-size: 14px; color: #1a1a2e;">
+                    See SureCodes24 first on Google
+                </p>
+                <p class="mb-0 text-muted" style="font-size: 12px;">
+                    Add us as a preferred source and our daily codes and predictions show up higher in your Google feed.
+                </p>
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <!-- 1. CORRECT ATTRIBUTE: Required anchor hook for the widget -->
+            <div google-add-preferred-source-btn data-theme="dark"></div>
+            
+            <button onclick="dismissBanner()" style="background: none; border: none; font-size: 18px; color: #888; cursor: pointer; line-height: 1;">
+                &times;
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 2. MISSING SCRIPT: Load Google's publisher script asynchronously -->
+<script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
+
+<script>
+    // Hide banner if user already dismissed it
+    if (localStorage.getItem('preferredSourceDismissed')) {
+        document.getElementById('preferred-source-banner').style.display = 'none';
+    }
+
+    function dismissBanner() {
+        document.getElementById('preferred-source-banner').style.display = 'none';
+        localStorage.setItem('preferredSourceDismissed', 'true');
+    }
+</script>
+
+
+        
+
         <!-- Footer -->
         <footer class="py-5 mt-5">
             <div class="container">
@@ -187,11 +228,8 @@
                             codes across all major betting platforms.
                             Fresh codes every day.
                         </p>
-                        <!-- Google Preferred Sources Button -->
-                        <div class="mt-2">
-                            <div data-preferred-sources-button=""></div>
-                        </div>
                     </div>
+                    
 
                     <!-- Column 2: Quick Links -->
                     <div class="col-12 col-sm-6 col-lg-3">
