@@ -92,6 +92,11 @@ def predictions(request):
     return render(request, 'bookings/predictions.html', context)
 
 
+def responsible_gambling(request):
+    context = {'today_year': date.today().year}
+    return render(request, 'bookings/responsible_gambling.html', context)
+
+
 def sportybet(request):
     booking_codes = BookingCode.objects.filter(
         company__name__icontains='sportybet'

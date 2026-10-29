@@ -23,6 +23,7 @@ urlpatterns = [
     path("partners/", views.partners, name="partners"),
     path("pricing/", views.pricing, name="pricing"),
     path("direct-win-prediction/", views.predictions, name="predictions"),
+    path('responsible-gambling/', views.responsible_gambling, name='responsible_gambling'),
     
     # Bookmaker filters
     path("sportybet-booking-codes/", views.sportybet, name="sportybet"),

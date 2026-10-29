@@ -20,6 +20,7 @@ class StaticViewSitemap(Sitemap):
             '1xbet',
             'betwinner',
             'msport',
+            'responsible_gambling',
         ]
 
     def location(self, item):
@@ -40,6 +41,7 @@ class StaticViewSitemap(Sitemap):
             'partners': 0.5,
             'disclaimer': 0.3,
             'privacy_policy': 0.3,
+            'responsible_gambling': 0.7,
         }
         return priorities.get(item, 0.5)
 
@@ -58,6 +60,7 @@ class StaticViewSitemap(Sitemap):
             'partners': 'weekly',
             'disclaimer': 'yearly',
             'privacy_policy': 'yearly',
+            'responsible_gambling': 'yearly',
         }
         return frequencies.get(item, 'weekly')
 
