@@ -55,33 +55,6 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=2">
 
-        <!-- OneSignal -->
-        <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
-                defer></script>
-        <script>
-            window.OneSignalDeferred = window.OneSignalDeferred || [];
-            OneSignalDeferred.push(async function(OneSignal) {
-                await OneSignal.init({
-                    appId: "YOUR-ONESIGNAL-APP-ID-HERE",
-                    notifyButton: { enable: false },
-                    promptOptions: {
-                        slidedown: {
-                            prompts: [{
-                                type: "push",
-                                autoPrompt: true,
-                                text: {
-                                    actionMessage: "Would you like to receive notifications for daily free booking codes?",
-                                    acceptButton: "YES",
-                                    cancelButton: "NOT YET",
-                                },
-                                delay: { pageViews: 1, timeDelay: 5 }
-                            }]
-                        }
-                    }
-                });
-            });
-        </script>
-
     </head>
 
     <body style="background: #f8f9fa;">
@@ -166,49 +139,6 @@
         <!-- Page Content -->
         {% block content %}
         {% endblock content %}
-
-
-        <!-- Google Preferred Sources Banner -->
-<div id="preferred-source-banner" style="background: #fff; border-bottom: 1px solid #e5e5e5; padding: 12px 0; display: flex; align-items: center; justify-content: space-between;">
-    <div class="container d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center gap-3">
-            <img src="https://www.google.com/favicon.ico" height="28" alt="Google" style="border-radius: 50%;">
-            <div>
-                <p class="mb-0 fw-bold" style="font-size: 14px; color: #1a1a2e;">
-                    See SureCodes24 first on Google
-                </p>
-                <p class="mb-0 text-muted" style="font-size: 12px;">
-                    Add us as a preferred source and our daily codes and predictions show up higher in your Google feed.
-                </p>
-            </div>
-        </div>
-        <div class="d-flex align-items-center gap-3">
-            <!-- 1. CORRECT ATTRIBUTE: Required anchor hook for the widget -->
-            <div google-add-preferred-source-btn data-theme="dark"></div>
-            
-            <button onclick="dismissBanner()" style="background: none; border: none; font-size: 18px; color: #888; cursor: pointer; line-height: 1;">
-                &times;
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- 2. MISSING SCRIPT: Load Google's publisher script asynchronously -->
-<script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
-
-<script>
-    // Hide banner if user already dismissed it
-    if (localStorage.getItem('preferredSourceDismissed')) {
-        document.getElementById('preferred-source-banner').style.display = 'none';
-    }
-
-    function dismissBanner() {
-        document.getElementById('preferred-source-banner').style.display = 'none';
-        localStorage.setItem('preferredSourceDismissed', 'true');
-    }
-</script>
-
-
         
 
         <!-- Footer -->
@@ -299,7 +229,7 @@
                             </li>
                             <li class="mb-2 text-secondary small">
                                 📞
-                                <a href="tel:+2348104094348"
+                                <a href="tel:+2349125265591"
                                    class="text-secondary text-decoration-none footer-link">
                                     +234 9125265591
                                 </a>
@@ -377,6 +307,7 @@
         {% block extra_js %}{% endblock %}
 
 
+        {% comment %} Clever ads {% endcomment %}
         <script data-cfasync="false" type="text/javascript" id="clever-core">
 /* <![CDATA[ */
     (function (document, window) {
