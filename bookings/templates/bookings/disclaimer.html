@@ -1,88 +1,209 @@
-{% extends 'bookings/base.html' %} {% block title %}Disclaimer - BetCodes
-{%endblock title %} {% block content %}
+{% extends 'bookings/base.html' %}
+
+{% block robots %}
+<meta name="robots" content="index, follow">
+{% endblock robots %}
+
+{% block title %}Disclaimer - SureCodes24{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Read the SureCodes24 disclaimer. Our booking codes and predictions are for entertainment purposes only. No winnings are guaranteed. Please bet responsibly.">
+{% endblock meta_description %}
+
+{% block content %}
 
 <!-- Hero -->
-<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)">
-  <div class="container text-center py-5">
-    <span class="badge bg-danger mb-3 px-3 py-2" style="letter-spacing: 1px">
-      ⚠️ DISCLAIMER
-    </span>
-    <h1 class="display-5 fw-bold text-white mb-3">Disclaimer</h1>
-    <p class="text-secondary fs-5">
-      Please read this carefully before using our service
-    </p>
-  </div>
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-5">
+        <h1 class="display-5 fw-bold text-white mb-3">Disclaimer</h1>
+        <p class="text-secondary fs-5">
+            Please read this carefully before using SureCodes24
+        </p>
+        <p class="text-secondary small">Last updated: October 2026</p>
+    </div>
 </section>
 
 <section class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-8">
-        <!-- Age Warning -->
-        <div
-          class="alert alert-danger d-flex align-items-center mb-4"
-          role="alert">
-          <!--
-                        alert-danger: red alert box for strong warnings
-                        d-flex align-items-center: aligns icon and text vertically
-                    -->
-          <span style="font-size: 1.5rem" class="me-3">🔞</span>
-          <div>
-            <strong>18+ Only.</strong> This website is strictly for users aged
-            18 and above. If you are under 18, please leave this site
-            immediately.
-          </div>
-        </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
 
-        <!-- Disclaimer Cards -->
-        <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
-          <h5 class="fw-bold mb-3" style="color: #1a1a2e">
-            No Guarantee of Winnings
-          </h5>
-          <p class="text-muted mb-0">
-            BetCodes provides booking codes for informational and entertainment
-            purposes only. We do not guarantee that any code will result in a
-            win. Sports betting outcomes are unpredictable and past performance
-            does not guarantee future results.
-          </p>
-        </div>
+                <!-- Age Warning -->
+                <div class="alert alert-danger d-flex align-items-start mb-4 p-4"
+                     role="alert">
+                    <div class="me-3" style="font-size: 1.8rem; line-height: 1;">18+</div>
+                    <div>
+                        <strong class="d-block mb-1">For Adults Only</strong>
+                        This website is strictly for users aged 18 and above.
+                        Gambling is not permitted for minors in any jurisdiction.
+                        If you are under 18 please leave this site immediately.
+                        If you are a parent or guardian please use parental
+                        controls to restrict access to gambling-related content.
+                    </div>
+                </div>
 
-        <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
-          <h5 class="fw-bold mb-3" style="color: #1a1a2e">Bet Responsibly</h5>
-          <p class="text-muted mb-0">
-            Never bet more than you can afford to lose. Gambling should be
-            treated as entertainment, not as a source of income. If you or
-            someone you know has a gambling problem, please seek help from a
-            professional organization immediately.
-          </p>
-        </div>
+                <!-- About the word Sure -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4"
+                     style="border-left: 4px solid #0d6efd !important;">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        About the Name "SureCodes24"
+                    </h5>
+                    <p class="text-muted mb-0">
+                        The word "sure" in our name and domain reflects a common
+                        search term used by bettors looking for booking codes —
+                        it does not imply that any outcome is guaranteed. No
+                        betting prediction or booking code can guarantee a win.
+                        Football and sports betting are inherently unpredictable.
+                        We chose this name for discoverability, not to mislead
+                        anyone about the nature of our service.
+                    </p>
+                </div>
 
-        <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
-          <h5 class="fw-bold mb-3" style="color: #1a1a2e">
-            Third Party Platforms
-          </h5>
-          <p class="text-muted mb-0">
-            BetCodes is not affiliated with Sportybet, Bet9ja, 1xBet, BetKing or
-            any other betting company. We simply curate and share booking codes.
-            Any issues with loading codes should be directed to the respective
-            betting platform.
-          </p>
-        </div>
+                <!-- No Guarantee -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        No Guarantee of Winnings
+                    </h5>
+                    <p class="text-muted mb-0">
+                        SureCodes24 provides booking codes and match predictions
+                        for informational and entertainment purposes only. We do
+                        not guarantee that any code or prediction will result in
+                        a financial return. Sports betting outcomes are
+                        unpredictable by nature. Past performance on our
+                        platform does not guarantee future results. Any winning
+                        rate we publish reflects historical data only and should
+                        not be treated as a promise of future performance.
+                    </p>
+                </div>
 
-        <div class="card border-0 shadow-sm p-4 p-md-5">
-          <h5 class="fw-bold mb-3" style="color: #1a1a2e">
-            Limitation of Liability
-          </h5>
-          <p class="text-muted mb-0">
-            BetCodes shall not be held liable for any financial losses incurred
-            as a result of using codes published on this website. By using this
-            site you agree to take full responsibility for your own betting
-            decisions.
-          </p>
+                <!-- Accuracy of Information -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        Accuracy of Information
+                    </h5>
+                    <p class="text-muted mb-0">
+                        While we make every effort to verify booking codes
+                        before publishing, we cannot guarantee that codes will
+                        remain valid at the time you attempt to load them.
+                        Booking codes can expire once the first match on a
+                        slip kicks off or if a bookmaker withdraws a market.
+                        Odds displayed alongside codes are indicative and
+                        may differ from what you see on a betting platform
+                        at the time of loading. Always confirm the current
+                        odds on your platform before staking.
+                    </p>
+                </div>
+
+                <!-- Responsible Gambling -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        Bet Responsibly
+                    </h5>
+                    <p class="text-muted mb-2">
+                        Never bet more than you can afford to lose. Gambling
+                        should be treated as entertainment, not as a source of
+                        income or a way to resolve financial difficulties.
+                        Set a budget before you bet and stick to it regardless
+                        of results.
+                    </p>
+                    <p class="text-muted mb-0">
+                        If you or someone you know shows signs of problem
+                        gambling — such as chasing losses, betting beyond
+                        your means or hiding gambling activity from family —
+                        please seek help immediately. Free confidential
+                        support is available at
+                        <a href="https://www.begambleaware.org"
+                           target="_blank"
+                           class="text-primary text-decoration-none">
+                            BeGambleAware.org
+                        </a>
+                        or by calling <strong>0808 8020 133</strong>
+                        (UK, free, 24/7).
+                    </p>
+                </div>
+
+                <!-- Third Party Platforms -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        Third Party Platforms
+                    </h5>
+                    <p class="text-muted mb-0">
+                        SureCodes24 is an independent website and is not
+                        affiliated with, endorsed by or in partnership with
+                        Sportybet, Bet9ja, 1xBet, Betwinner, Msport, Betway
+                        or any other betting company mentioned on this site.
+                        We simply curate and publish booking codes generated
+                        on these platforms. Any issues with loading codes,
+                        account queries or payment disputes should be directed
+                        to the relevant betting platform directly. We have no
+                        access to your betting accounts and cannot intervene
+                        on your behalf with any bookmaker.
+                    </p>
+                </div>
+
+                <!-- Limitation of Liability -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        Limitation of Liability
+                    </h5>
+                    <p class="text-muted mb-0">
+                        SureCodes24 and its operators shall not be held liable
+                        for any financial losses, damages or negative outcomes
+                        incurred as a result of using codes, predictions or any
+                        other content published on this website. By accessing
+                        and using this site you agree to take full personal
+                        responsibility for your betting decisions. You
+                        acknowledge that betting carries financial risk and
+                        that you are making your own independent choices.
+                    </p>
+                </div>
+
+                <!-- External Links -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        External Links
+                    </h5>
+                    <p class="text-muted mb-0">
+                        This site may contain links to third party websites
+                        including betting platforms and partner sites. These
+                        links are provided for convenience only. SureCodes24
+                        does not control the content of external sites and
+                        accepts no responsibility for their content, privacy
+                        policies or practices. Visiting external links is
+                        entirely at your own risk.
+                    </p>
+                </div>
+
+                <!-- Changes to Disclaimer -->
+                <div class="card border-0 shadow-sm p-4 p-md-5">
+                    <h5 class="fw-bold mb-3" style="color: #1a1a2e;">
+                        Changes to This Disclaimer
+                    </h5>
+                    <p class="text-muted mb-0">
+                        We reserve the right to update this disclaimer at any
+                        time without prior notice. The date at the top of this
+                        page reflects when it was last revised. Continued use
+                        of SureCodes24 after any changes constitutes your
+                        acceptance of the updated disclaimer. If you disagree
+                        with any part of this disclaimer please stop using
+                        the site immediately.
+                    </p>
+                </div>
+
+                <!-- Contact -->
+                <div class="text-center mt-5">
+                    <p class="text-muted small">
+                        Questions about this disclaimer? Contact us at
+                        <a href="mailto:contact@surecodes24.com"
+                           class="text-primary text-decoration-none">
+                            contact@surecodes24.com
+                        </a>
+                    </p>
+                </div>
+
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 {% endblock content %}
