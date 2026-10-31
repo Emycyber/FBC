@@ -1,163 +1,322 @@
-{% extends 'bookings/base.html' %} {% block title %}Privacy Policy - BetCodes{%endblock %} 
+{% extends 'bookings/base.html' %}
+
+{% block robots %}
+<meta name="robots" content="index, follow">
+{% endblock robots %}
+
+{% block title %}Privacy Policy - SureCodes24{% endblock %}
+
+{% block meta_description %}
+<meta name="description" content="Read the SureCodes24 privacy policy. Learn how we collect, use and protect your personal information when you use our site.">
+{% endblock meta_description %}
 
 {% block content %}
 
 <!-- Hero -->
-<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)">
-  <div class="container text-center py-5">
-    <span class="badge bg-primary mb-3 px-3 py-2" style="letter-spacing: 1px">
-      🔒 PRIVACY POLICY
-    </span>
-    <h1 class="display-5 fw-bold text-white mb-3">Privacy Policy</h1>
-    <p class="text-secondary fs-5">Last updated: March 2026</p>
-  </div>
+<section style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+    <div class="container text-center py-5">
+        <h1 class="display-5 fw-bold text-white mb-3">Privacy Policy</h1>
+        <p class="text-secondary fs-5">
+            How we collect, use and protect your information
+        </p>
+        <p class="text-secondary small">Last updated: October 2026</p>
+    </div>
 </section>
 
-<!-- Author Bio Card -->
-<div class="container my-4">
-    <div class="p-4 rounded d-flex align-items-start gap-3"
-         style="background-color: #1a1a2e;">
-        <!--
-            d-flex align-items-start gap-3: places avatar
-            and text side by side with space between
-        -->
-
-        <!-- Avatar Circle -->
-        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
-             style="width: 55px; height: 55px;
-                    background-color: #0d6efd;
-                    font-weight: 700; font-size: 1rem;
-                    color: white;">
-            EA
-            <!--
-                EA: initials of Emem Anietie
-                flex-shrink-0: prevents circle from shrinking
-                on small screens
-            -->
-        </div>
-
-        <!-- Author Info -->
-        <div>
-            <p class="fw-bold text-white mb-1">Emem Anietie</p>
-            <p class="mb-2" style="color: #0d6efd; font-size: 0.8rem;
-                                   font-weight: 600; letter-spacing: 0.5px;">
-                FOUNDER — SURECODES24
-            </p>
-            <p class="text-secondary small mb-2" style="line-height: 1.7;">
-                Emem is a football punter and web developer based in Lagos,
-                Nigeria, with several years of experience analysing betting
-                markets across West Africa. He is the founder of
-                SureCodes24 and
-                <a href="https://www.pooldrawresult.com"
-                   target="_blank"
-                   class="text-decoration-none"
-                   style="color: #0d6efd;">
-                    PooldrawResult.com
-                </a>
-                — two independently run platforms serving punters across
-                Nigeria and beyond. All booking codes and predictions
-                published on SureCodes24 are personally reviewed by Emem
-                before going live.
-            </p>
-            <a href="https://x.com/Emycybers"
-               target="_blank"
-               class="text-decoration-none small"
-               style="color: #0d6efd;">
-                𝕏 @Emycybers
-                <!--
-                    linking to X profile makes this verifiable
-                    Google can follow the link and confirm you exist
-                -->
-            </a>
-        </div>
-
-    </div>
-</div>
-
 <section class="py-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-8">
-        <div class="card border-0 shadow-sm p-4 p-md-5">
-          <div class="mb-4">
-            <h5 class="fw-bold" style="color: #1a1a2e">
-              1. Information We Collect
-            </h5>
-            <p class="text-muted">
-              We collect minimal information necessary to operate this website.
-              This may include your name and email address if you contact us
-              through our contact form. We do not collect payment information or
-              sensitive personal data.
-            </p>
-          </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
 
-          <hr class="my-3" />
-          <!-- hr: horizontal divider to separate each policy section -->
+                <!-- Opening Statement -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4"
+                     style="border-left: 4px solid #0d6efd !important;">
+                    <p class="text-muted mb-0" style="line-height: 1.9;">
+                        SureCodes24 is committed to protecting your privacy.
+                        This policy explains what information we collect when
+                        you visit our site, how we use it and what rights you
+                        have over your data. We do not sell your personal
+                        information to third parties. By using SureCodes24
+                        you agree to the practices described in this policy.
+                    </p>
+                </div>
 
-          <div class="mb-4">
-            <h5 class="fw-bold" style="color: #1a1a2e">
-              2. How We Use Your Information
-            </h5>
-            <p class="text-muted">
-              Any information you provide is used solely to respond to your
-              enquiries and improve our service. We do not sell, trade or share
-              your personal information with third parties without your consent.
-            </p>
-          </div>
+                <!-- Information We Collect -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        1. Information We Collect
+                    </h2>
+                    <p class="text-muted mb-3" style="line-height: 1.9;">
+                        We collect minimal information necessary to operate
+                        this website. Depending on how you interact with the
+                        site this may include:
+                    </p>
+                    <ul class="text-muted ps-3" style="line-height: 2.2;">
+                        <li>
+                            <strong>Contact information</strong> — your name
+                            and email address if you contact us through our
+                            contact form.
+                        </li>
+                        <li>
+                            <strong>Account information</strong> — your
+                            username and email address if you register for a
+                            VIP account on our site.
+                        </li>
+                        <li>
+                            <strong>Usage data</strong> — pages visited,
+                            time spent on the site, browser type and device
+                            information collected automatically through
+                            analytics tools.
+                        </li>
+                        <li>
+                            <strong>Cookie data</strong> — small files stored
+                            on your device that help us remember your
+                            preferences and improve your experience.
+                        </li>
+                        <li>
+                            <strong>Push notification preferences</strong> —
+                            if you subscribe to our push notifications through
+                            OneSignal, we store a device token to deliver
+                            those notifications.
+                        </li>
+                    </ul>
+                    <p class="text-muted mt-2 mb-0" style="line-height: 1.9;">
+                        We do not collect payment information. We do not
+                        collect sensitive personal data such as health
+                        information, financial account details or government
+                        identification numbers.
+                    </p>
+                </div>
 
-          <hr class="my-3" />
+                <!-- How We Use Information -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        2. How We Use Your Information
+                    </h2>
+                    <p class="text-muted mb-3" style="line-height: 1.9;">
+                        We use the information we collect for the following
+                        purposes:
+                    </p>
+                    <ul class="text-muted ps-3" style="line-height: 2.2;">
+                        <li>To respond to your enquiries and support requests.</li>
+                        <li>To deliver push notifications you have subscribed to.</li>
+                        <li>To manage your account if you have registered on our site.</li>
+                        <li>To understand how visitors use our site so we can improve it.</li>
+                        <li>To ensure the security and proper functioning of our website.</li>
+                    </ul>
+                    <p class="text-muted mt-2 mb-0" style="line-height: 1.9;">
+                        We will never use your information to send you
+                        unsolicited marketing from third parties or sell
+                        your data to advertisers.
+                    </p>
+                </div>
 
-          <div class="mb-4">
-            <h5 class="fw-bold" style="color: #1a1a2e">3. Cookies</h5>
-            <p class="text-muted">
-              This website may use cookies to improve your browsing experience.
-              Cookies are small files stored on your device. You can choose to
-              disable cookies in your browser settings, though this may affect
-              some functionality of the site.
-            </p>
-          </div>
+                <!-- Cookies -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        3. Cookies
+                    </h2>
+                    <p class="text-muted mb-3" style="line-height: 1.9;">
+                        This website uses cookies to improve your browsing
+                        experience. Cookies are small text files stored on
+                        your device. We use the following types of cookies:
+                    </p>
+                    <ul class="text-muted ps-3" style="line-height: 2.2;">
+                        <li>
+                            <strong>Essential cookies</strong> — required for
+                            the site to function correctly, including session
+                            management and security.
+                        </li>
+                        <li>
+                            <strong>Preference cookies</strong> — remember
+                            your settings such as whether you have dismissed
+                            our notification banner.
+                        </li>
+                        <li>
+                            <strong>Analytics cookies</strong> — help us
+                            understand how visitors interact with our site
+                            so we can improve it.
+                        </li>
+                    </ul>
+                    <p class="text-muted mt-2 mb-0" style="line-height: 1.9;">
+                        You can disable cookies in your browser settings at
+                        any time. However doing so may affect some
+                        functionality of the site.
+                    </p>
+                </div>
 
-          <hr class="my-3" />
+                <!-- Third Party Services -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        4. Third Party Services
+                    </h2>
+                    <p class="text-muted mb-3" style="line-height: 1.9;">
+                        We use a small number of trusted third party services
+                        to operate and improve SureCodes24:
+                    </p>
+                    <ul class="text-muted ps-3" style="line-height: 2.2;">
+                        <li>
+                            <strong>Cloudflare</strong> — provides security,
+                            performance and DDoS protection. Cloudflare may
+                            process your IP address and request data as part
+                            of this service.
+                        </li>
+                        <li>
+                            <strong>OneSignal</strong> — powers our push
+                            notification service. If you subscribe to
+                            notifications OneSignal stores a device token
+                            on your behalf. View their privacy policy at
+                            <a href="https://onesignal.com/privacy_policy"
+                               target="_blank"
+                               class="text-primary text-decoration-none">
+                                onesignal.com/privacy_policy
+                            </a>
+                        </li>
+                        <li>
+                            <strong>Cloudinary</strong> — hosts images
+                            uploaded to our site such as company logos.
+                        </li>
+                        <li>
+                            <strong>Railway</strong> — our hosting provider.
+                            Our site and database are hosted on Railway's
+                            infrastructure.
+                        </li>
+                    </ul>
+                    <p class="text-muted mt-2 mb-0" style="line-height: 1.9;">
+                        Each of these services has its own privacy policy
+                        governing how they handle data. We encourage you to
+                        review them independently.
+                    </p>
+                </div>
 
-          <div class="mb-4">
-            <h5 class="fw-bold" style="color: #1a1a2e">4. Third Party Links</h5>
-            <p class="text-muted">
-              Our website may contain links to third party betting platforms. We
-              are not responsible for the privacy practices of those websites.
-              We encourage you to read their privacy policies before providing
-              any personal information.
-            </p>
-          </div>
+                <!-- Third Party Links -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        5. Third Party Links
+                    </h2>
+                    <p class="text-muted mb-0" style="line-height: 1.9;">
+                        Our website contains links to third party betting
+                        platforms, partner sites and external resources.
+                        SureCodes24 is not responsible for the privacy
+                        practices or content of those sites. We encourage
+                        you to read the privacy policy of any external site
+                        you visit before providing personal information.
+                    </p>
+                </div>
 
-          <hr class="my-3" />
+                <!-- Data Retention -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        6. Data Retention
+                    </h2>
+                    <p class="text-muted mb-0" style="line-height: 1.9;">
+                        We retain personal information only for as long as
+                        necessary to fulfil the purposes for which it was
+                        collected. Contact form submissions are retained
+                        for up to 12 months. Account data is retained for
+                        as long as your account remains active. If you
+                        request deletion of your data we will remove it
+                        within 30 days unless we are required to retain it
+                        by law.
+                    </p>
+                </div>
 
-          <div class="mb-4">
-            <h5 class="fw-bold" style="color: #1a1a2e">5. Data Security</h5>
-            <p class="text-muted">
-              We take reasonable measures to protect any information submitted
-              through our site. However, no method of transmission over the
-              internet is 100% secure and we cannot guarantee absolute security.
-            </p>
-          </div>
+                <!-- Data Security -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        7. Data Security
+                    </h2>
+                    <p class="text-muted mb-0" style="line-height: 1.9;">
+                        We take reasonable technical and organisational
+                        measures to protect your personal information from
+                        unauthorised access, disclosure or loss. Our site
+                        uses HTTPS encryption, is protected by Cloudflare
+                        and our hosting infrastructure is maintained by
+                        Railway. However no method of transmission over
+                        the internet is completely secure and we cannot
+                        guarantee absolute security.
+                    </p>
+                </div>
 
-          <hr class="my-3" />
+                <!-- Your Rights -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        8. Your Rights
+                    </h2>
+                    <p class="text-muted mb-3" style="line-height: 1.9;">
+                        Depending on your location you may have the following
+                        rights regarding your personal data:
+                    </p>
+                    <ul class="text-muted ps-3" style="line-height: 2.2;">
+                        <li>The right to access the personal data we hold about you.</li>
+                        <li>The right to request correction of inaccurate data.</li>
+                        <li>The right to request deletion of your data.</li>
+                        <li>The right to withdraw consent where processing is based on consent.</li>
+                        <li>The right to object to processing of your personal data.</li>
+                    </ul>
+                    <p class="text-muted mt-2 mb-0" style="line-height: 1.9;">
+                        To exercise any of these rights please contact us at
+                        <a href="mailto:contact@surecodes24.com"
+                           class="text-primary text-decoration-none">
+                            contact@surecodes24.com
+                        </a>
+                        and we will respond within 30 days.
+                    </p>
+                </div>
 
-          <div class="mb-0">
-            <h5 class="fw-bold" style="color: #1a1a2e">6. Contact</h5>
-            <p class="text-muted mb-0">
-              If you have any questions about this Privacy Policy, please
-              contact us at
-              <a
-                href="mailto:info@betcodes.com"
-                class="text-primary text-decoration-none">
-                info@betcodes.com
-              </a>
-            </p>
-          </div>
+                <!-- Children -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        9. Children
+                    </h2>
+                    <p class="text-muted mb-0" style="line-height: 1.9;">
+                        SureCodes24 is not directed at children under the age
+                        of 18. We do not knowingly collect personal information
+                        from minors. If you believe a minor has provided us
+                        with personal information please contact us immediately
+                        and we will take steps to delete it.
+                    </p>
+                </div>
+
+                <!-- Changes to Policy -->
+                <div class="card border-0 shadow-sm p-4 p-md-5 mb-4">
+                    <h2 class="fw-bold mb-3"
+                        style="color: #1a1a2e; font-size: 1.2rem;">
+                        10. Changes to This Policy
+                    </h2>
+                    <p class="text-muted mb-0" style="line-height: 1.9;">
+                        We may update this privacy policy from time to time.
+                        The date at the top of this page reflects when it
+                        was last revised. We encourage you to review this
+                        policy periodically. Continued use of SureCodes24
+                        after any changes constitutes your acceptance of
+                        the updated policy.
+                    </p>
+                </div>
+
+                <!-- Contact -->
+                <div class="text-center mt-2 mb-4">
+                    <p class="text-muted small" style="line-height: 1.9;">
+                        Questions about this privacy policy? Contact us at
+                        <a href="mailto:contact@surecodes24.com"
+                           class="text-primary text-decoration-none">
+                            contact@surecodes24.com
+                        </a>
+                    </p>
+                </div>
+
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 
 {% endblock content %}
